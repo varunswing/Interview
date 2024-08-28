@@ -1,0 +1,4 @@
+Spring: 	https://whimsical.com/spring-framework-TVWwqkSZnFtBpnS629WueK
+DSA:            https://whimsical.com/3-2-dsa-roadmap-QCqSNojAv74BdPNSkQvNm5
+JAVA:		https://whimsical.com/java-full-stack-M1j8nDrfu2ecu8AJf5qV12
+SystemDesign:   https://whimsical.com/system-design-roadmap-31C9vnRRATGW5Q95Krdciu
