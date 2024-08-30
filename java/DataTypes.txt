@@ -1,0 +1,10 @@
+DataType	    DefaultValue	    Size	        Description
+byte	        0				    1 byte	        Stores whole numbers from -128 to 127
+short	        0				    2 bytes	        Stores whole numbers from -32,768 to 32,767
+int	            0				    4 bytes	        Stores whole numbers from -2,147,483,648 to 2,147,483,647
+long	        0l				    8 bytes	        Stores whole numbers from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+float	        0.0f			    4 bytes	        Stores fractional numbers. Sufficient for storing 6 to 7 decimal digits
+double	        0.0d			    8 bytes	        Stores fractional numbers. Sufficient for storing 15 decimal digits
+boolean	        false			    1 bit	        Stores true or false values
+char	        '\u0000'		    2 bytes	        Stores a single character/letter or ASCII values
+String(Object)  null                4 bytes         Stroes the maximum length of 0 to 2147483647
