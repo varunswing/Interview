@@ -1,3 +1,22 @@
+## Problem Statement: 
+    Design of a Hotel Booking System 
+    Requirements:
+	Hotels and Room Inventory:
+	Add new hotels with room types and availability.
+	Search hotels by location, dates, and amenities.
+	Booking and Reservations:
+	Allow users to book rooms for specific dates.
+	Handle cancellations and refunds.
+	Reviews and Ratings:
+	Users can leave reviews and ratings for hotels and rooms.
+	Aggregate ratings and display reviews.
+	Payment and Discounts:
+	Support secure payment gateways.
+	Apply discounts and promotional offers.
+	Admin and Reporting:
+	Admin panel for hotel management and reporting.
+	Monitor bookings, occupancy rates, and revenue.
+
 Designing a **Hotel Booking System** involves creating a comprehensive architecture that supports various functionalities such as hotel and room inventory management, user bookings, reviews, payments, and an admin interface. Below, I’ll provide a detailed design covering the required components, their interactions, and a database schema to meet these requirements.
 
 ## 1. Overview of Components 
