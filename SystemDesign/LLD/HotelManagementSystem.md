@@ -333,77 +333,77 @@ To support the components, we’ll design the following database tables:
 
 ### 3.2. RoomType Table
 
-|Column        |	Type   |	Description                     |
-|--------------|-----------|------------------------------------|
-room_type_id	VARCHAR	Primary key, unique ID for room
-hotel_id	VARCHAR	Foreign key to hotel table
-type	VARCHAR	Type of the room (Single, etc.)
-price_per_night	FLOAT	Price per night for the room
-max_occupancy	INT	Max occupancy for the room
+|Column         |	Type    |	Description                      |
+|---------------|-----------|------------------------------------|
+|room_type_id   |VARCHAR	|Primary key, unique ID for room     |
+|hotel_id	    |VARCHAR	|Foreign key to hotel table          |
+|type	        |VARCHAR	|Type of the room (Single, etc.)     |
+|price_per_night|FLOAT	    |Price per night for the room        |
+|max_occupancy  |	INT	    |Max occupancy for the room          |
 
 ### 3.3. RoomInventory Table
 
 |Column        |	Type   |	Description                     |
 |--------------|-----------|------------------------------------|
-room_type_id	VARCHAR	Foreign key to room_type table
-date	DATE	Date for room availability
-available_rooms	INT	Number of available rooms
+|room_type_id  |	VARCHAR|	Foreign key to room_type table
+|date	DATE   |	Date |for room availability
+|available_rooms|	INT	|Number of available rooms
 
 ### 3.4. Booking Table
 
 |Column        |	Type   |	Description                     |
 |--------------|-----------|------------------------------------|
-booking_id	VARCHAR	Primary key, unique booking ID
-user_id	VARCHAR	Foreign key to user table
-hotel_id	VARCHAR	Foreign key to hotel table
-room_type_id	VARCHAR	Foreign key to room_type table
-check_in_date	DATE	Check-in date
-check_out_date	DATE	Check-out date
-total_amount	FLOAT	Total booking cost
-status	ENUM	Booking status (Confirmed, etc.)
+|booking_id	|VARCHAR	|Primary key, unique booking ID
+|user_id	|VARCHAR	|Foreign key to user table
+|hotel_id	|VARCHAR	|Foreign key to hotel table
+|room_type_id|	VARCHAR	|Foreign key to room_type table
+|check_in_date|	DATE	|Check-in date
+|check_out_date|	DATE|	Check-out date
+|total_amount|	FLOAT	|Total booking cost
+|status	|ENUM	|Booking status (Confirmed, etc.)
 
 ### 3.5. User Table
 
 |Column        |	Type   |	Description                     |
 |--------------|-----------|------------------------------------|
-user_id	VARCHAR	Primary key, unique user ID
-name	VARCHAR	Name of the user
-email	VARCHAR	User email address
-password	VARCHAR	User password (hashed)
-phone_number	VARCHAR	User phone number
+|user_id	|VARCHAR|	Primary key, unique user ID
+|name	|VARCHAR|	Name of the user
+|email	|VARCHAR|	User email address
+|password	|VARCHAR|	User password (hashed)
+|phone_number	|VARCHAR|	User phone number
 
 ### 3.6. Review Table
 
 |Column        |	Type   |	Description                     |
 |--------------|-----------|------------------------------------|
-review_id	VARCHAR	Primary key, unique review ID
-user_id	VARCHAR	Foreign key to user table
-hotel_id	VARCHAR	Foreign key to hotel table
-room_type_id	VARCHAR	Foreign key to room_type table
-rating	INT	Rating given by the user (1-5)
-comment	TEXT	User's written review
-review_date	TIMESTAMP	Date of the review
+|review_id	|VARCHAR|	Primary key, unique review ID
+|user_id	|VARCHAR|	Foreign key to user table
+|hotel_id|	VARCHAR	|Foreign key to hotel table
+|room_type_id|	VARCHAR	|Foreign key to room_type table
+|rating	|INT	|Rating given by the user (1-5)
+|comment	|TEXT|	User's written review
+|review_date	|TIMESTAMP	|Date of the review
 
 ### 3.7. Payment Table
 
 |Column        |	Type   |	Description                     |
 |--------------|-----------|------------------------------------|
-payment_id	VARCHAR	Primary key, unique payment ID
-booking_id	VARCHAR	Foreign key to booking table
-method	ENUM	Payment method (Credit Card, etc.)
-status	ENUM	Payment status (Completed, etc.)
-amount	FLOAT	Total payment amount
-discount_applied	FLOAT	Discount applied to the payment
-payment_date	TIMESTAMP	Date of the payment
+|payment_id|	VARCHAR|	Primary key, unique payment ID
+|booking_id|	VARCHAR	|Foreign key to booking table
+|method|	ENUM|	Payment method (Credit Card, etc.)
+|status|	ENUM|	Payment status (Completed, etc.)
+|amount	|FLOAT	|Total payment amount
+|discount_applied	|FLOAT|	Discount applied to the payment
+|payment_date|	TIMESTAMP|	Date of the payment
 
 ### 3.8. Admin Table
 
 |Column        |	Type   |	Description                     |
 |--------------|-----------|------------------------------------|
-admin_id	VARCHAR	Primary key, unique admin ID
-name	VARCHAR	Name of the admin
-email	VARCHAR	Admin email address
-password	VARCHAR	Admin password (hashed)
+|admin_id	|VARCHAR|	Primary key, unique admin ID
+|name	|VARCHAR|	Name of the admin
+|email	|VARCHAR|	Admin email address
+|password	|VARCHAR	|Admin password (hashed)
 
 ## 4. Sequence Diagrams
 
