@@ -1,4 +1,8 @@
-Certainly, let's design a **Flash Sale System with** a focus on handling high traffic and ensuring strong consistency. We'll cover:
+## Problem Statement:
+
+Design Flash Sale type of system where a product will be available at a special rate for a given time period & fixed quantity. Focus was more on how will you be able to handle sudden spike of traffic when the sale will begin & how will you ensure strong consistency.
+
+Certainly, let's design a **Flash Sale System** with a focus on handling high traffic and ensuring strong consistency. We'll cover:
 
 Overview of Components
 
