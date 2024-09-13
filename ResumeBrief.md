@@ -8,10 +8,6 @@ I led the complex migration of our entire refund system, which involved moving c
 
 Throughout my journey, I had the opportunity to work across three different teams – Fastag, UPI Refund, and Passbook & Payment Combination. These roles exposed me to a wide range of systems like user and pass management, refunds, and payment screens. Managing these systems simultaneously allowed me to gain a deep understanding of each domain and sharpen my ability to switch contexts and adapt quickly to new challenges.
 
-**Jenkins and Deployments:**
-
-In my work with Jenkins, I learned how to build and deploy services across multiple environments—dev, stage, and production. By managing deployments end-to-end, I ensured smooth and efficient releases, and this hands-on experience gave me confidence in automating and streamlining deployment processes.
-
 **OnCall and Issue Resolution:**
 
 As an OnCall engineer for the 24/7 UPI system, I was responsible for monitoring live production issues, such as success rate drops, database lags, and Kafka consumer lags. My debugging skills improved significantly during this time, as I learned to troubleshoot effectively using Kibana logs, analyze code, monitor Grafana graphs, and diagnose database issues. This experience gave me a better understanding of complex, real-time systems and how to resolve issues under pressure.
@@ -19,6 +15,10 @@ As an OnCall engineer for the 24/7 UPI system, I was responsible for monitoring 
 **Cron Jobs and Kafka:**
 
 I implemented a series of cron jobs that increased our refund transaction success rate to 99.5% for an avg of 3-4Lack refund txns every day for around 80L merchant txns every Day. These jobs handled retries, reconciliation, and status checks. In addition, I worked with Kafka to manage fault-tolerant message delivery by implementing retry mechanisms for failed transactions, which gave me valuable insights into data pipelines and event-driven architectures.
+
+**DownStreamCallbacks and Latch (Async calls, MultiThreading):**
+
+Implemented downstream service callbacks using Spring Boot with both synchronous (RestTemplate) and asynchronous (WebClient) approaches to retrieve essential information for a passbook and payment combination system, fetching details such as sender/receiver information (VPA, account ID, bank details, etc.), ensuring smooth and accurate transaction processing.
 
 **MySQL Database Management:**
 
@@ -31,6 +31,10 @@ Using Grafana, I set up precise alerts and monitored system health, which helped
 **API Development and Testing:**
 
 I’ve developed and tested APIs across different teams, focusing on enhancing their functionality while making sure they met all business needs. I’m committed to rigorous testing and ensuring reliability, which helped me refine my RESTful API design skills.
+
+**Jenkins and Deployments:**
+
+In my work with Jenkins, I learned how to build and deploy services across multiple environments—dev, stage, and production. By managing deployments end-to-end, I ensured smooth and efficient releases, and this hands-on experience gave me confidence in automating and streamlining deployment processes.
 
 **Test-Driven Development and SonarQube:**
 
