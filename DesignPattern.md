@@ -2,6 +2,9 @@
 
 ## Creational Patterns
 
+**Purpose:** These patterns deal with object creation mechanisms, trying to create objects in a manner suitable for the situation. The emphasis is on how objects are created while hiding the instantiation logic.
+**Goal:** To make the system independent of how its objects are created, composed, and represented.
+
 ### Singleton
 * Expanded Definition: The Singleton pattern restricts the instantiation of a class to a single instance. This is useful when exactly one object is needed to coordinate actions across the system.
 * Detailed Analogy: Think of a school principal. A school typically has only one principal to manage administrative tasks and decisions. If anyone needs to interact with the principal, they interact with the same individual.
@@ -245,6 +248,9 @@ public class PrototypePatternDemo {
 ```
 
 ## Structural Patterns
+
+**Purpose:** These patterns deal with class and object composition. They are concerned with how classes and objects can be composed to form larger structures.
+**Goal:** To ensure that objects and classes can be organized and combined to form flexible, efficient, and scalable structures.
 
 ### Adapter
 * Expanded Definition: The Adapter pattern allows incompatible interfaces to work together by converting one interface into another that the client expects. This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces.
@@ -694,6 +700,9 @@ ProxyInternet: Acts as a proxy to control access to the real internet connection
 
 
 ## Behavioral Patterns
+
+**Purpose:** These patterns are concerned with communication between objects. They focus on how objects interact and how responsibility is divided among them.
+**Goal:** To help define how objects should communicate, increase flexibility in carrying out communication, and ensure good object collaboration.
 
 ### Chain of Responsibility
 * Expanded Definition: The Chain of Responsibility pattern allows a request to be passed through a chain of handlers. Each handler decides either to process the request or to pass it to the next handler in the chain.
