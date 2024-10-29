@@ -254,8 +254,8 @@ Max Consumers per Group = Number of Partitions in the Topic.
 Extra Consumers (more than partitions) will remain idle but can help with fault tolerance.
 For more scaling, consider increasing the number of partitions or using multiple consumer groups.
 
-[!Alt](images/KafkaTopics.png)
+![Alt](images/KafkaTopics.png)
 
-[!Alt](images/KafkaBrokers.png)
+![!Alt](images/KafkaBrokers.png)
 
-[!Alt](images/KafkaCluster.png)
+![!Alt](images/KafkaCluster.png)
