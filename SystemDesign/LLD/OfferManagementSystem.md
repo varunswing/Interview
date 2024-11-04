@@ -2,13 +2,26 @@
 
 Design Flash Sale type of system where a product will be available at a special rate for a given time period & fixed quantity. Focus was more on how will you be able to handle sudden spike of traffic when the sale will begin & how will you ensure strong consistency.
 
+1. Functional Requirements
+Product Availability: The system should offer a product at a discounted rate for a specific time and quantity.
+User Actions: Users can view, add to cart, and purchase the product during the sale.
+Inventory Management: The system must accurately track and decrement the product inventory.
+High Traffic Handling: The system must handle a massive spike in traffic when the sale begins.
+Consistency: Ensure that the product is not oversold.
+
+2. Non-Functional Requirements
+Scalability: Handle millions of users attempting to purchase simultaneously.
+Reliability: Ensure that the system remains operational during high traffic.
+Performance: Low latency for critical actions like adding to cart and checking out.
+Strong Consistency: Ensure no overselling occurs, even under high load.
+
 Certainly, let's design a **Flash Sale System** with a focus on handling high traffic and ensuring strong consistency. We'll cover:
 
-Overview of Components
+1. Overview of Components
+2. Class Diagrams and Definitions
+3. Database Schema Design
 
-1. Class Diagrams and Definitions
-2. Database Schema Design
-3. We'll use Java for the class implementations and SQL for the database schema.
+We'll use Java for the class implementations and SQL for the database schema.
 
 ## 1. Overview of Components
 
