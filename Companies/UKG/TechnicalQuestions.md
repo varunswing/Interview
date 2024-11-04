@@ -145,8 +145,7 @@ However, you can define a method with the same name in the child class, but this
 
 Example:
 
-java
-Copy code
+```java
 class Parent {
     private void display() {
         System.out.println("Parent display");
@@ -165,6 +164,7 @@ public class Test {
         // obj.display(); // This won't work because 'display' is private in both classes
     }
 }
+```
 In this case, both the parent and child classes have their own private display() methods, but they are not related by inheritance, so the child's display() method does not override the parent's method.
 
 
@@ -180,8 +180,7 @@ This ensures that the child class does not break the contract of the parent clas
 
 Example:
 
-java
-Copy code
+```java
 class Parent {
     public void show() {
         System.out.println("Parent show");
@@ -194,6 +193,8 @@ class Child extends Parent {
         System.out.println("Child show");
     }
 }
+```
+
 In this example, trying to override the public method show() in the parent class with a private method in the child class will result in a compile-time error.
 
 Rule:
@@ -227,7 +228,8 @@ When you create an instance of the child class, the constructors are executed in
 3. Child class's no-arg constructor (implicit or explicit)
 4. Child class's instance initialization blocks (if any)
 Example
-Java
+
+```Java
 public class Parent {
     { System.out.println("Parent instance init"); }
     public Parent() {
@@ -247,6 +249,7 @@ public class Main {
         Child child = new Child();
     }
 }
+```
 Output
 
 Parent instance init
@@ -290,7 +293,8 @@ In Java, when you create a child object, the child class's constructor is called
 Implicit Parent Class Construction
 The Java compiler automatically inserts a call to the parent class's no-arg constructor (if it exists) at the beginning of the child class's constructor. This ensures that the parent class is properly initialized before the child class is initialized.
 Example
-Java
+
+```Java
 public class Parent {
     public Parent() {
         System.out.println("Parent constructor");
@@ -308,6 +312,8 @@ public class Main {
         Child child = new Child();
     }
 }
+```
+
 Output
 Parent constructor
 Child constructor
@@ -321,7 +327,8 @@ Is-a Relationship
 The child object "is-a" parent object, meaning it has all the properties and behavior of the parent class, plus additional properties and behavior specific to the child class.
 Proof of Parent Object Creation
 To demonstrate that a parent object is created, consider the following example:
-Java
+
+```Java
 public class Parent {
     public Parent() {
         System.out.println("Parent constructor");
@@ -349,6 +356,8 @@ public class Main {
         Child child = new Child();
     }
 }
+```
+
 Output
 Parent constructor
 Child message
@@ -371,8 +380,7 @@ This is safe and automatic because the child class object is guaranteed to have 
 Upcasting is often used to take advantage of polymorphism, where a parent class reference can refer to any of its child objects.
 Example:
 
-java
-Copy code
+```java
 class Parent {
     void show() {
         System.out.println("Parent show");
@@ -391,6 +399,8 @@ public class Main {
         p.show();  // Output: Child show (due to method overriding)
     }
 }
+```
+
 In the example, a Child object is upcasted to a Parent reference. Even though the reference is of type Parent, the overridden show() method of the Child class is called. This is because of runtime polymorphism (dynamic method dispatch).
 2. Downcasting:
 Downcasting is the process of casting a parent class reference back to a child class reference.
@@ -398,8 +408,7 @@ This is not safe and requires an explicit cast because not all parent objects ar
 You should check the object type using the instanceof operator before performing a downcast to avoid this error.
 Example:
 
-java
-Copy code
+```java
 class Parent {
     void show() {
         System.out.println("Parent show");
@@ -423,6 +432,8 @@ public class Main {
         }
     }
 }
+```
+
 In this example, p is a Parent reference pointing to a Child object (via upcasting). Before downcasting it back to a Child, we check if p is an instance of Child using the instanceof operator to avoid ClassCastException. After downcasting, we can access the child-specific methods like childSpecificMethod().
 Key Differences:
 Feature	Upcasting	Downcasting
@@ -434,8 +445,7 @@ Polymorphism via Upcasting:
 One of the main reasons to use upcasting is to enable polymorphism, where you can treat objects of different classes uniformly through a parent class reference.
 
 Example Scenario:
-java
-Copy code
+```java
 class Animal {
     void sound() {
         System.out.println("Some sound");
@@ -464,6 +474,7 @@ public class Main {
         a.sound();  // Output: Meow
     }
 }
+```
 The method sound() behaves differently based on the actual object type (i.e., Dog or Cat) even though the reference is of type Animal (parent class). This is possible because of upcasting and method overriding.
 When to Use:
 Upcasting is useful when you want to treat multiple child classes as instances of the parent class for polymorphic behavior.
@@ -478,8 +489,7 @@ The reference is of the parent type, but the actual object is of the child type.
 You can only access the methods and fields defined in the parent class using the parent reference, even though the actual object is of the child class.
 If the child class has overridden any methods of the parent class, the overridden method in the child class will be called (due to runtime polymorphism).
 Example:
-java
-Copy code
+```java
 class Parent {
     void display() {
         System.out.println("Parent display");
@@ -505,9 +515,10 @@ public class Main {
         // obj.childMethod();  // Compile-time error: Parent reference cannot access Child-specific method
     }
 }
+```
+
 Output:
 arduino
-Copy code
 Child display
 Explanation:
 Parent obj = new Child();:
@@ -522,12 +533,13 @@ Child-specific methods or fields (like childMethod()) cannot be accessed using t
 Accessing Child-Specific Methods (Downcasting):
 If you want to access the Child-specific methods after upcasting, you can use downcasting:
 
-java
-Copy code
+```java
 if (obj instanceof Child) {
     Child childObj = (Child) obj;  // Downcasting
     childObj.childMethod();  // Now you can access child-specific methods
 }
+```
+
 Summary:
 Upcasting is when a child object is treated as a parent object, allowing you to leverage polymorphism.
 You can access only the methods and fields available in the parent class through the parent reference.
@@ -549,8 +561,7 @@ If the child class overrides the parent method, the child class's version of the
 Private methods in the parent class are not inherited and cannot be accessed directly from the child class.
 Example:
 Parent Method Accessible in Child Class (via inheritance):
-java
-Copy code
+```java
 class Parent {
     public void parentMethod() {
         System.out.println("Parent method");
@@ -570,9 +581,10 @@ public class Main {
         childObj.childMethod();   // Accessing child method
     }
 }
+```
+
 Output:
 sql
-Copy code
 Parent method
 Child method
 Explanation:
@@ -581,8 +593,7 @@ The child object childObj can directly access the parentMethod() because it's a 
 Upcasting Scenario:
 If you upcast the child object to a parent reference, you can still access the parent class methods, and if the method is overridden in the child class, the overridden version will be called.
 
-java
-Copy code
+```java
 class Parent {
     public void parentMethod() {
         System.out.println("Parent method");
@@ -608,9 +619,10 @@ public class Main {
         // parentRef.childMethod();  // Compile-time error: Cannot access child-specific method
     }
 }
+```
+
 Output:
 sql
-Copy code
 Overridden Child method
 Explanation:
 Parent parentRef = new Child(); is upcasting, meaning the Child object is referenced by a Parent type variable.
@@ -628,8 +640,7 @@ No, in the case of upcasting, a method that is defined only in the child class i
 The reason for this is that the parent class reference can only see the methods and fields defined in the parent class. If the method exists only in the child class, the parent reference won't know about it unless you downcast the reference back to the child class.
 
 Example:
-java
-Copy code
+```java
 class Parent {
     public void parentMethod() {
         System.out.println("Parent method");
@@ -650,6 +661,8 @@ public class Main {
         // parentRef.childMethod();  // Compile-time error: Parent reference can't see childMethod
     }
 }
+```
+
 Explanation:
 Parent parentRef = new Child(); — This is upcasting. The reference parentRef is of type Parent, even though it points to a Child object.
 The parentRef.parentMethod() works because parentMethod() is defined in the Parent class.
@@ -658,8 +671,7 @@ How to Access Child-Specific Methods?
 To access the child-specific method (e.g., childMethod()), you would need to downcast the parent reference back to the child type.
 
 Example with Downcasting:
-java
-Copy code
+```java
 class Parent {
     public void parentMethod() {
         System.out.println("Parent method");
@@ -684,9 +696,9 @@ public class Main {
         }
     }
 }
+```
 Output:
 sql
-Copy code
 Parent method
 Child-specific method
 Explanation:
@@ -705,8 +717,7 @@ In Java, there are several types of inner classes (or nested classes) that allow
 A member inner class is a non-static class that is defined inside another class. It has access to the instance variables and methods of the outer class, even private members.
 It requires an instance of the outer class to be created before creating an instance of the inner class.
 Example:
-java
-Copy code
+```java
 class Outer {
     private String message = "Hello from Outer class";
 
@@ -724,13 +735,14 @@ public class Main {
         inner.display();  // Output: Hello from Outer class
     }
 }
+```
+
 2. Static Nested Class
 A static nested class is a static class defined inside another class.
 It does not have access to the instance members of the outer class directly (it can only access the outer class's static members).
 You don't need an instance of the outer class to create an instance of the static nested class.
 Example:
-java
-Copy code
+```java
 class Outer {
     static String staticMessage = "Hello from Static Nested Class";
 
@@ -747,12 +759,13 @@ public class Main {
         nested.display();  // Output: Hello from Static Nested Class
     }
 }
+```
+
 3. Local Inner Class
 A local inner class is defined within a method or a block of code inside the outer class.
 It has access to the outer class's members and the local variables or parameters of the method, but only if those variables or parameters are final or effectively final (i.e., their values do not change after initialization).
 Example:
-java
-Copy code
+```java
 class Outer {
     void display() {
         final String localMessage = "Hello from Local Inner Class";
@@ -778,8 +791,7 @@ public class Main {
 An anonymous inner class is a class without a name and is used to create a one-time-use class, typically to implement an interface or extend a class. It's commonly used in situations where you need to provide a simple implementation of an interface or a class on the fly.
 You can create it as a part of method arguments or anywhere you need a class for short-term use.
 Example (Using an interface):
-java
-Copy code
+```java
 interface Greeting {
     void sayHello();
 }
@@ -797,9 +809,9 @@ public class Main {
         greeting.sayHello();  // Output: Hello from Anonymous Inner Class
     }
 }
+```
 Example (Extending a class):
-java
-Copy code
+```java
 class Animal {
     void sound() {
         System.out.println("Animal makes a sound");
@@ -819,6 +831,7 @@ public class Main {
         animal.sound();  // Output: Dog barks
     }
 }
+```
 
 [!Alt](images/InnerClass.png)
 
@@ -876,8 +889,7 @@ Set:
 Use Set when you need a collection that ensures no duplicates and order is not a concern (unless using LinkedHashSet or TreeSet).
 Example Code:
 List Example:
-java
-Copy code
+```java
 import java.util.*;
 
 public class ListExample {
@@ -890,9 +902,9 @@ public class ListExample {
         System.out.println(list.get(1));  // Output: Banana
     }
 }
+```
 Set Example:
-java
-Copy code
+```java
 import java.util.*;
 
 public class SetExample {
@@ -904,6 +916,7 @@ public class SetExample {
         System.out.println(set);  // Output: [Apple, Banana] (order may vary)
     }
 }
+```
 [!ALT](images/ListVsSet.png)
 Choose between List and Set based on your specific requirements related to order, duplicates, and access patterns.
 
@@ -927,8 +940,7 @@ Before adding an element, HashSet checks whether an element with the same hash c
 This check is performed using the equals() method. If the element already exists (based on equals()), the new element is not added.
 If the element is not present, it is added to the bucket.
 Example:
-java
-Copy code
+```java
 import java.util.HashSet;
 
 public class HashSetExample {
@@ -951,8 +963,7 @@ Uniqueness Check:
 
 The uniqueness is maintained using the same method as HashSet—by checking hash codes and using the equals() method.
 Example:
-java
-Copy code
+```java
 import java.util.LinkedHashSet;
 
 public class LinkedHashSetExample {
@@ -976,8 +987,7 @@ Uniqueness is maintained by comparing elements using the compareTo() method (if 
 When adding an element, TreeSet checks if an element that is considered equal (based on comparison) already exists in the tree.
 If an equal element is found, the new element is not added.
 Example:
-java
-Copy code
+```java
 import java.util.TreeSet;
 
 public class TreeSetExample {
@@ -990,11 +1000,25 @@ public class TreeSetExample {
         System.out.println(set);  // Output: [Apple, Banana]
     }
 }
-Summary of Uniqueness Maintenance:
-HashSet: Ensures uniqueness by computing hash codes and checking equality using equals() within the same bucket.
-LinkedHashSet: Maintains uniqueness similarly to HashSet but also maintains insertion order using a linked list.
-TreeSet: Ensures uniqueness by using comparisons via compareTo() or a Comparator to maintain sorted order.
-In all cases, the core principle is to check if an element already exists in the collection before adding it, ensuring that duplicates are not allowed.
+```
+
+### Comparison Summary
+
+| Feature              | HashSet            | LinkedHashSet        | TreeSet               |
+|----------------------|--------------------|----------------------|-----------------------|
+| **Ordering**         | Unordered          | Insertion order      | Sorted order          |
+| **Data Structure**   | Hash table         | Hash table + Linked list | Red-Black tree      |
+| **Performance**      | O(1)               | O(1)                 | O(log n)              |
+| **Null Values**      | Allows one `null`  | Allows one `null`    | Does not allow `null` |
+| **Use Case**         | Fast access        | Ordered insertion    | Sorted elements       |
+
+---
+
+### Summary
+
+- **`HashSet`**: Best for fast lookups and when order doesn’t matter.
+- **`LinkedHashSet`**: Ideal when you need insertion order preservation with `HashSet` performance.
+- **`TreeSet`**: Suitable for scenarios where elements need to be sorted, but with a performance trade-off.
 
 ## Que 14. HashMap
 
@@ -1033,21 +1057,23 @@ Since null keys are stored in a specific bucket, the performance for operations 
 
 ## Que 16. collision? how to handle collision
 
-In a HashMap, collisions occur when two or more keys produce the same hash code, resulting in them being assigned to the same bucket. Because HashMap uses an array of buckets to store key-value pairs, a collision means multiple entries are placed in the same bucket.
 
-How Collisions Are Handled in HashMap:
-There are two primary ways to handle collisions in a HashMap:
+In a `HashMap`, **collisions** occur when two or more keys produce the same hash code, resulting in them being assigned to the same bucket. Because `HashMap` uses an array of buckets to store key-value pairs, a collision means multiple entries are placed in the same bucket.
 
-Chaining (Linked List): The most common method. When multiple key-value pairs are mapped to the same bucket, they are stored in a linked list.
-Tree-Based Resolution (TreeMap): Starting with Java 8, when the number of collisions in a single bucket exceeds a certain threshold (8 by default), the linked list is replaced with a balanced binary search tree (usually a Red-Black Tree). This improves the lookup time from O(n) to O(log n) for that bucket.
-Detailed Collision Handling Process:
-1. Chaining (Linked List) Method:
-When multiple keys have the same hash, their entries are stored in the same bucket as a linked list of Entry objects. Each Entry object contains a key, value, hash, and a reference to the next Entry.
-Insertion Process: If a collision occurs, the new key-value pair is added at the end of the linked list in that bucket.
-Lookup Process: To retrieve a value, the HashMap will first calculate the hash and determine the bucket, then iterate through the linked list to find the correct key.
-Example:
-java
-Copy code
+### How Collisions Are Handled in `HashMap`:
+There are two primary ways to handle collisions in a `HashMap`:
+1. **Chaining (Linked List)**: The most common method. When multiple key-value pairs are mapped to the same bucket, they are stored in a linked list.
+2. **Tree-Based Resolution (TreeMap)**: Starting with Java 8, when the number of collisions in a single bucket exceeds a certain threshold (8 by default), the linked list is replaced with a balanced binary search tree (usually a Red-Black Tree). This improves the lookup time from O(n) to O(log n) for that bucket.
+
+### Detailed Collision Handling Process:
+
+#### 1. **Chaining (Linked List) Method:**
+- When multiple keys have the same hash, their entries are stored in the same bucket as a linked list of `Entry` objects. Each `Entry` object contains a key, value, hash, and a reference to the next `Entry`.
+- **Insertion Process**: If a collision occurs, the new key-value pair is added at the end of the linked list in that bucket.
+- **Lookup Process**: To retrieve a value, the `HashMap` will first calculate the hash and determine the bucket, then iterate through the linked list to find the correct key.
+
+#### Example:
+```java
 HashMap<String, Integer> map = new HashMap<>();
 
 // Adding elements
@@ -1056,88 +1082,131 @@ map.put("banana", 20);
 map.put("orange", 30);
 
 // Let's assume "apple" and "orange" result in the same hash value (collision)
-If the hash codes of "apple" and "orange" result in the same bucket, both entries are stored in a linked list. During a get() operation, the list is traversed to find the correct key.
+```
+If the hash codes of `"apple"` and `"orange"` result in the same bucket, both entries are stored in a linked list. During a `get()` operation, the list is traversed to find the correct key.
 
-2. Tree-Based Resolution (Balanced Trees) in Java 8 and Later:
-If the length of the linked list in a bucket grows beyond a certain threshold (default: 8), Java 8 replaces the linked list with a balanced tree.
-Why Trees? Balanced trees (such as Red-Black Trees) have a search time complexity of O(log n), which is much faster than O(n) for a linked list when dealing with many collisions.
-Thresholds: Once the number of entries in a bucket exceeds 8, the list is converted into a tree. If the number of entries falls below 6 (after removals), the tree is converted back into a linked list.
-Example of Tree-Based Resolution:
-Imagine we add enough elements with hash collisions in a single bucket that exceed the threshold of 8 entries. Internally, Java converts the bucket from a linked list to a tree, speeding up search and retrieval times.
-Custom Collision Resolution Strategies:
-Double Hashing: A technique where a second hash function is used if a collision occurs. Not used in HashMap, but an alternative strategy in other data structures.
-Linear Probing: Another collision resolution technique where, after a collision, the algorithm searches for the next available slot in the array. This method is not used in HashMap but is found in some other hash table implementations.
-How Java's HashMap Balances Performance:
-Default Load Factor: HashMap uses a default load factor of 0.75. This means that once the map is 75% full, it automatically resizes (doubles its capacity) to reduce the likelihood of collisions.
-Bucket Array Resizing: When the number of entries exceeds the capacity × load factor, the bucket array is resized to prevent further collisions.
-Conclusion:
-In Java 7 and earlier, HashMap handled collisions only using chaining (linked list).
-In Java 8 and later, HashMap still uses chaining, but it optimizes performance by converting linked lists to balanced trees when too many collisions occur.
-Illustration of the Linked List to Tree Conversion:
-Before Java 8: Suppose multiple keys hash to the same bucket; they are stored in a linked list.
-In Java 8+: After reaching the threshold of 8 entries, the linked list transforms into a balanced tree for faster lookups.
+#### 2. **Tree-Based Resolution (Balanced Trees) in Java 8 and Later:**
+- If the length of the linked list in a bucket grows beyond a certain threshold (default: 8), Java 8 replaces the linked list with a balanced tree.
+- **Why Trees?** Balanced trees (such as Red-Black Trees) have a search time complexity of O(log n), which is much faster than O(n) for a linked list when dealing with many collisions.
+- **Thresholds**: Once the number of entries in a bucket exceeds 8, the list is converted into a tree. If the number of entries falls below 6 (after removals), the tree is converted back into a linked list.
+
+#### Example of Tree-Based Resolution:
+- Imagine we add enough elements with hash collisions in a single bucket that exceed the threshold of 8 entries. Internally, Java converts the bucket from a linked list to a tree, speeding up search and retrieval times.
+
+### Custom Collision Resolution Strategies:
+- **Double Hashing**: A technique where a second hash function is used if a collision occurs. Not used in `HashMap`, but an alternative strategy in other data structures.
+- **Linear Probing**: Another collision resolution technique where, after a collision, the algorithm searches for the next available slot in the array. This method is not used in `HashMap` but is found in some other hash table implementations.
+
+### How Java's HashMap Balances Performance:
+1. **Default Load Factor**: `HashMap` uses a default load factor of 0.75. This means that once the map is 75% full, it automatically resizes (doubles its capacity) to reduce the likelihood of collisions.
+2. **Bucket Array Resizing**: When the number of entries exceeds the capacity × load factor, the bucket array is resized to prevent further collisions.
+
+### Conclusion:
+- **In Java 7 and earlier**, `HashMap` handled collisions only using **chaining** (linked list).
+- **In Java 8 and later**, `HashMap` still uses **chaining**, but it optimizes performance by converting linked lists to balanced trees when too many collisions occur.
+
+### Illustration of the Linked List to Tree Conversion:
+1. **Before Java 8**: Suppose multiple keys hash to the same bucket; they are stored in a linked list.
+2. **In Java 8+**: After reaching the threshold of 8 entries, the linked list transforms into a balanced tree for faster lookups.
+
+Would you like to dive deeper into any specific implementation or explore real-life implications of hash collisions in systems?
+
+
 
 ## Que 17. handling collision before java 8 or after
 
-Collision Handling Before Java 8 (Java 7 and Earlier):
-In Java 7 and earlier versions, HashMap handled collisions using separate chaining with linked lists. Here's a detailed explanation:
 
-Chaining with Linked Lists:
+### **Collision Handling Before Java 8 (Java 7 and Earlier):**
 
-When a collision occurred (i.e., two keys were hashed to the same bucket), the entries were stored in a linked list at that bucket. Each element of the linked list contained a key-value pair (and its hash code).
-When inserting a new key-value pair, if the hash led to a bucket that already contained elements, the new pair would be appended to the end of the linked list.
-Search/Access: When retrieving a value, the HashMap would traverse the linked list, comparing keys using the equals() method to find the correct one. In the worst case (if many collisions occurred), this could degrade performance to O(n), where n is the number of elements in that bucket.
-Resizing:
+In Java 7 and earlier versions, `HashMap` handled collisions using **separate chaining** with **linked lists**. Here's a detailed explanation:
 
-When the HashMap exceeded its load factor (default: 0.75), the array of buckets would be resized (typically doubled in size), and all entries would be rehashed into the new, larger array.
-This resizing operation was costly in terms of performance but reduced the likelihood of collisions as the number of available buckets increased.
-Rehashing During Resizing:
+1. **Chaining with Linked Lists**: 
+   - When a collision occurred (i.e., two keys were hashed to the same bucket), the entries were stored in a linked list at that bucket. Each element of the linked list contained a key-value pair (and its hash code).
+   - When inserting a new key-value pair, if the hash led to a bucket that already contained elements, the new pair would be appended to the end of the linked list.
+   - **Search/Access**: When retrieving a value, the `HashMap` would traverse the linked list, comparing keys using the `equals()` method to find the correct one. In the worst case (if many collisions occurred), this could degrade performance to **O(n)**, where **n** is the number of elements in that bucket.
 
-Java 7’s HashMap used the head insertion technique for adding nodes during resizing. This meant that when entries were rehashed and placed in the new bucket array, they were added to the front of the linked list.
-Concurrency Issues: This could lead to subtle bugs in multithreaded environments, where during a rehash, if two threads modified the HashMap concurrently, it could cause an infinite loop. Hence, HashMap in Java 7 was not thread-safe for concurrent modifications.
-Collision Handling After Java 8:
-Starting with Java 8, significant improvements were introduced to HashMap collision handling to enhance performance, especially in cases of high collisions:
+2. **Resizing**: 
+   - When the `HashMap` exceeded its load factor (default: 0.75), the array of buckets would be resized (typically doubled in size), and all entries would be **rehashed** into the new, larger array.
+   - This resizing operation was **costly** in terms of performance but reduced the likelihood of collisions as the number of available buckets increased.
 
-Chaining with Linked Lists (Same as Java 7):
+3. **Rehashing During Resizing**:
+   - Java 7’s `HashMap` used the **head insertion** technique for adding nodes during resizing. This meant that when entries were rehashed and placed in the new bucket array, they were added to the front of the linked list.
+   - **Concurrency Issues**: This could lead to subtle bugs in multithreaded environments, where during a rehash, if two threads modified the `HashMap` concurrently, it could cause an **infinite loop**. Hence, `HashMap` in Java 7 was **not thread-safe** for concurrent modifications.
 
-Initially, collisions are still handled by using linked lists in each bucket. This behavior is the same as in earlier versions, where multiple entries with the same hash are stored in a linked list at that bucket.
-Tree-Based Collision Handling (New in Java 8):
+### **Collision Handling After Java 8:**
 
-Threshold for Linked List to Tree Conversion: When the number of entries in a bucket exceeds a threshold (default: 8), Java 8 converts the linked list in that bucket into a balanced tree (specifically, a Red-Black Tree).
-Benefits of Red-Black Trees: In a tree, search, insertion, and deletion operations have a time complexity of O(log n), where n is the number of entries in the tree. This is significantly faster than the O(n) time complexity of a linked list, especially when the bucket has a large number of entries.
-Threshold for Tree to Linked List Conversion: If entries are removed and the number of nodes in the tree falls below a certain threshold (default: 6), the tree is converted back into a linked list to save memory and reduce complexity when few entries are present.
-Improved Resizing Mechanism:
+Starting with Java 8, significant improvements were introduced to `HashMap` collision handling to enhance performance, especially in cases of high collisions:
 
-Tail Insertion: In Java 8, the resizing mechanism changed from head insertion to tail insertion, which resolved the infinite loop problem present in multithreaded environments in Java 7.
-During resizing, entries were now rehashed into the new array, maintaining the order of the linked list and avoiding the concurrency bugs that plagued Java 7.
-Hash Function Improvement:
+1. **Chaining with Linked Lists (Same as Java 7)**:
+   - Initially, collisions are still handled by using linked lists in each bucket. This behavior is the same as in earlier versions, where multiple entries with the same hash are stored in a linked list at that bucket.
 
-Java 8 introduced improvements to the hash function to better distribute the hash values across the bucket array. This reduced the probability of collisions, even when poorly distributed hash codes were used by certain keys.
+2. **Tree-Based Collision Handling (New in Java 8)**:
+   - **Threshold for Linked List to Tree Conversion**: When the number of entries in a bucket exceeds a threshold (default: 8), Java 8 converts the linked list in that bucket into a **balanced tree** (specifically, a Red-Black Tree).
+   - **Benefits of Red-Black Trees**: In a tree, search, insertion, and deletion operations have a time complexity of **O(log n)**, where **n** is the number of entries in the tree. This is significantly faster than the **O(n)** time complexity of a linked list, especially when the bucket has a large number of entries.
+   - **Threshold for Tree to Linked List Conversion**: If entries are removed and the number of nodes in the tree falls below a certain threshold (default: 6), the tree is converted back into a linked list to save memory and reduce complexity when few entries are present.
 
-[!ALT](images/HashMapCollisionHandling.png)
+3. **Improved Resizing Mechanism**:
+   - **Tail Insertion**: In Java 8, the resizing mechanism changed from head insertion to **tail insertion**, which resolved the infinite loop problem present in multithreaded environments in Java 7.
+   - During resizing, entries were now rehashed into the new array, maintaining the order of the linked list and avoiding the concurrency bugs that plagued Java 7.
+
+4. **Hash Function Improvement**: 
+   - Java 8 introduced improvements to the hash function to better distribute the hash values across the bucket array. This reduced the probability of collisions, even when poorly distributed hash codes were used by certain keys.
+
+### **Summary of Key Differences Between Java 7 and Java 8:**
+
+| Feature/Version              | **Java 7 (and earlier)**                        | **Java 8 (and later)**                                      |
+|------------------------------|-------------------------------------------------|------------------------------------------------------------|
+| **Collision Handling**        | Chaining with linked lists                     | Chaining with linked lists, converted to Red-Black Trees after 8 entries |
+| **Time Complexity**           | O(n) in the worst case for collisions           | O(log n) in the worst case for collisions (after tree conversion) |
+| **Rehashing on Resize**       | Head insertion during rehashing (can cause loops) | Tail insertion during rehashing (prevents infinite loops)    |
+| **Thread Safety**             | Not thread-safe; prone to concurrency issues    | Still not thread-safe, but reduced risk of concurrency-related issues |
+| **Thresholds for Treeing**    | Not applicable                                 | Converts list to tree after 8 nodes, reverts to list below 6 nodes |
+
+### Example of Linked List vs. Tree in Java 8:
+```java
+HashMap<String, Integer> map = new HashMap<>();
+
+// Adding entries that cause collisions
+map.put("key1", 1);
+map.put("key2", 2);
+// Assume these keys result in the same hash code, so they end up in the same bucket
+
+// If more entries result in the same hash and bucket size exceeds 8,
+// HashMap will convert the bucket's linked list into a balanced Red-Black Tree for efficiency
+```
+
+### Key Takeaways:
+- **Before Java 8**, all collisions were handled by **linked lists**, leading to potential performance degradation in high-collision scenarios.
+- **After Java 8**, `HashMap` still uses **linked lists** for collisions but optimizes heavily by switching to **balanced trees** when collisions become excessive, thus improving performance from **O(n)** to **O(log n)** in such cases.
+
+If you have any further questions or would like to explore specific aspects in more depth, feel free to ask!
+
+
 
 ## Que 18. multithreading in java
 
-Multithreading in Java is a core concept that allows concurrent execution of two or more threads for maximum utilization of CPU. Java provides built-in support for multithreading through the Thread class and the Runnable interface.
 
-Key Concepts in Multithreading:
-Thread:
+Multithreading in Java is a core concept that allows concurrent execution of two or more threads for maximum utilization of CPU. Java provides built-in support for multithreading through the `Thread` class and the `Runnable` interface.
 
-A thread is a lightweight process. It is the smallest unit of a program that can execute concurrently with other parts of the program.
-Java allows the creation and management of threads via the Thread class and the Runnable interface.
-Multithreading:
+### Key Concepts in Multithreading:
 
-Multithreading refers to the concurrent execution of multiple threads, which allows better CPU utilization and improved application performance.
-Creating a Thread in Java:
+1. **Thread**:
+   - A thread is a lightweight process. It is the smallest unit of a program that can execute concurrently with other parts of the program.
+   - Java allows the creation and management of threads via the `Thread` class and the `Runnable` interface.
+
+2. **Multithreading**:
+   - Multithreading refers to the concurrent execution of multiple threads, which allows better CPU utilization and improved application performance.
+
+### Creating a Thread in Java:
 There are two main ways to create a thread in Java:
+1. **Extending the `Thread` Class**:
+   - You can create a class that extends `Thread` and overrides its `run()` method.
+   
+2. **Implementing the `Runnable` Interface**:
+   - Alternatively, you can create a class that implements the `Runnable` interface and provides the implementation for the `run()` method.
 
-Extending the Thread Class:
-You can create a class that extends Thread and overrides its run() method.
-Implementing the Runnable Interface:
-Alternatively, you can create a class that implements the Runnable interface and provides the implementation for the run() method.
-Example 1: Extending the Thread Class:
-java
-Copy code
+### Example 1: Extending the `Thread` Class:
+```java
 class MyThread extends Thread {
     public void run() {
         System.out.println("Thread is running...");
@@ -1150,9 +1219,10 @@ public class Main {
         thread.start();  // Starts a new thread and calls the run method
     }
 }
-Example 2: Implementing the Runnable Interface:
-java
-Copy code
+```
+
+### Example 2: Implementing the `Runnable` Interface:
+```java
 class MyRunnable implements Runnable {
     public void run() {
         System.out.println("Thread is running...");
@@ -1166,35 +1236,38 @@ public class Main {
         thread.start();  // Starts a new thread and calls the run method
     }
 }
-Key Methods of the Thread Class:
-start(): Starts the thread and invokes the run() method.
-run(): This is the entry point for the thread. When the thread is started, this method is executed.
-sleep(long millis): Causes the thread to pause for a specified duration (in milliseconds).
-join(): Waits for the thread to die. If one thread calls join() on another thread, it will wait until the target thread finishes execution.
-yield(): Pauses the currently executing thread to allow other threads of the same priority to execute.
-interrupt(): Interrupts a thread, causing it to stop its execution.
-Thread Life Cycle:
+```
+
+### Key Methods of the `Thread` Class:
+- **start()**: Starts the thread and invokes the `run()` method.
+- **run()**: This is the entry point for the thread. When the thread is started, this method is executed.
+- **sleep(long millis)**: Causes the thread to pause for a specified duration (in milliseconds).
+- **join()**: Waits for the thread to die. If one thread calls `join()` on another thread, it will wait until the target thread finishes execution.
+- **yield()**: Pauses the currently executing thread to allow other threads of the same priority to execute.
+- **interrupt()**: Interrupts a thread, causing it to stop its execution.
+
+### Thread Life Cycle:
 A thread in Java can exist in one of the following states:
+1. **New**: A thread that has been created but not yet started.
+2. **Runnable**: A thread that is ready to run and is waiting for CPU time.
+3. **Blocked/Waiting**: A thread that is blocked or waiting for some resource (like I/O or a lock) or another thread to complete its task.
+4. **Timed Waiting**: A thread that is waiting for a specific time interval (e.g., `sleep()`).
+5. **Terminated**: A thread that has completed execution or has been terminated.
 
-New: A thread that has been created but not yet started.
-Runnable: A thread that is ready to run and is waiting for CPU time.
-Blocked/Waiting: A thread that is blocked or waiting for some resource (like I/O or a lock) or another thread to complete its task.
-Timed Waiting: A thread that is waiting for a specific time interval (e.g., sleep()).
-Terminated: A thread that has completed execution or has been terminated.
-Multithreading Concepts:
-Concurrency:
+### Multithreading Concepts:
 
-Concurrency refers to the ability of multiple threads to run simultaneously, which can be achieved either by running on multiple cores (parallelism) or by time-slicing on a single core.
-Java provides built-in support for concurrent programming, making it easy to develop scalable applications.
-Synchronization:
+1. **Concurrency**:
+   - Concurrency refers to the ability of multiple threads to run simultaneously, which can be achieved either by running on multiple cores (parallelism) or by time-slicing on a single core.
+   - Java provides built-in support for concurrent programming, making it easy to develop scalable applications.
 
-Issue: When multiple threads access shared resources concurrently, it can lead to inconsistent data or corrupted states (known as race conditions).
-Solution: Java provides synchronization mechanisms to control thread access to shared resources.
-Synchronized Block/Method: Allows only one thread at a time to execute a block of code or method.
-Lock Objects: More sophisticated synchronization control via Lock and ReentrantLock classes from the java.util.concurrent.locks package.
-Example of Synchronization:
-java
-Copy code
+2. **Synchronization**:
+   - **Issue**: When multiple threads access shared resources concurrently, it can lead to inconsistent data or corrupted states (known as race conditions).
+   - **Solution**: Java provides synchronization mechanisms to control thread access to shared resources.
+     - **Synchronized Block/Method**: Allows only one thread at a time to execute a block of code or method.
+     - **Lock Objects**: More sophisticated synchronization control via `Lock` and `ReentrantLock` classes from the `java.util.concurrent.locks` package.
+
+### Example of Synchronization:
+```java
 class Counter {
     private int count = 0;
 
@@ -1237,11 +1310,13 @@ public class Main {
         System.out.println("Count: " + counter.getCount());  // Expected: 2000
     }
 }
-Inter-thread Communication:
-wait(), notify(), and notifyAll(): These methods allow threads to communicate with each other while using shared resources. These methods are used within synchronized blocks or methods.
-Example of wait() and notify():
-java
-Copy code
+```
+
+### Inter-thread Communication:
+- **wait(), notify(), and notifyAll()**: These methods allow threads to communicate with each other while using shared resources. These methods are used within synchronized blocks or methods.
+
+### Example of `wait()` and `notify()`:
+```java
 class SharedResource {
     private int value;
     private boolean available = false;
@@ -1290,18 +1365,19 @@ public class Main {
         consumer.start();
     }
 }
-Advanced Multithreading Concepts:
-Executor Framework: Java provides the ExecutorService interface in the java.util.concurrent package, which allows better management of thread pools and task execution.
+```
 
-ThreadPool: Manages a pool of worker threads. Instead of creating new threads every time, tasks are submitted to a pool of reusable threads.
-Fork/Join Framework: For parallelism, Java provides the ForkJoinPool to break tasks into smaller subtasks and process them in parallel.
+### Advanced Multithreading Concepts:
+1. **Executor Framework**: Java provides the `ExecutorService` interface in the `java.util.concurrent` package, which allows better management of thread pools and task execution.
+   - **ThreadPool**: Manages a pool of worker threads. Instead of creating new threads every time, tasks are submitted to a pool of reusable threads.
+   
+2. **Fork/Join Framework**: For parallelism, Java provides the `ForkJoinPool` to break tasks into smaller subtasks and process them in parallel.
+   
+3. **Concurrency Utilities**:
+   - Java also provides other concurrency utilities like `CountDownLatch`, `CyclicBarrier`, `Semaphore`, and `ConcurrentHashMap` for more sophisticated concurrent programming.
 
-Concurrency Utilities:
-
-Java also provides other concurrency utilities like CountDownLatch, CyclicBarrier, Semaphore, and ConcurrentHashMap for more sophisticated concurrent programming.
-Example of ExecutorService:
-java
-Copy code
+### Example of `ExecutorService`:
+```java
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -1320,32 +1396,38 @@ public class Main {
         executor.shutdown();
     }
 }
-Conclusion:
+```
+
+### Conclusion:
 Multithreading is a powerful concept in Java that allows for better CPU utilization, improved performance, and responsive applications. However, it requires careful synchronization and coordination to avoid issues like race conditions and deadlocks.
 
 If you'd like to dive deeper into any specific multithreading topic, feel free to ask!
 
+
 ## Que 19. in executor what is thread pulling
 
-In Java's Executor framework, thread pooling refers to the reuse of a fixed number of threads to execute multiple tasks, instead of creating new threads for every task. This helps manage resources efficiently and improves the performance of multithreaded applications.
 
-What is Thread Pooling?
+In Java's `Executor` framework, **thread pooling** refers to the reuse of a fixed number of threads to execute multiple tasks, instead of creating new threads for every task. This helps manage resources efficiently and improves the performance of multithreaded applications.
+
+### What is Thread Pooling?
 Thread pooling is a technique where a pool (or collection) of threads is created beforehand and kept ready to execute tasks as they come. Once a thread completes its task, it becomes available to execute another task, rather than being destroyed.
 
-The Executor framework in Java provides built-in thread pooling mechanisms through the ExecutorService interface and the Executors utility class.
+The `Executor` framework in Java provides built-in thread pooling mechanisms through the `ExecutorService` interface and the `Executors` utility class.
 
-Key Benefits of Thread Pooling:
-Improved Performance: Avoids the overhead of creating a new thread for every task. Creating and destroying threads are expensive operations in terms of time and system resources.
-Resource Management: Limits the number of concurrent threads, preventing the system from being overwhelmed by too many threads running simultaneously.
-Task Queueing: When all threads in the pool are busy, incoming tasks are placed in a queue and are executed once a thread becomes available.
-How Thread Pooling Works:
-When you submit a task to a thread pool, the task is placed in a queue if no threads are available at that moment.
-As soon as a thread in the pool becomes available, it pulls the task from the queue and starts executing it.
-After the task is completed, the thread does not terminate. Instead, it returns to the pool, waiting for the next task.
-This reuse of threads reduces the cost associated with thread creation and destruction.
-Example of Thread Pooling using ExecutorService:
-java
-Copy code
+### Key Benefits of Thread Pooling:
+1. **Improved Performance**: Avoids the overhead of creating a new thread for every task. Creating and destroying threads are expensive operations in terms of time and system resources.
+2. **Resource Management**: Limits the number of concurrent threads, preventing the system from being overwhelmed by too many threads running simultaneously.
+3. **Task Queueing**: When all threads in the pool are busy, incoming tasks are placed in a queue and are executed once a thread becomes available.
+
+### How Thread Pooling Works:
+- When you submit a task to a thread pool, the task is placed in a **queue** if no threads are available at that moment.
+- As soon as a thread in the pool becomes available, it pulls the task from the queue and starts executing it.
+- After the task is completed, the thread does not terminate. Instead, it returns to the pool, waiting for the next task.
+- This reuse of threads reduces the cost associated with thread creation and destruction.
+
+### Example of Thread Pooling using `ExecutorService`:
+
+```java
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -1371,46 +1453,54 @@ public class Main {
         threadPool.shutdown();
     }
 }
-Explanation:
-ExecutorService: This is the main interface for managing and controlling the execution of asynchronous tasks using thread pools.
-Executors.newFixedThreadPool(3): Creates a thread pool with 3 reusable threads.
-submit(): Submits tasks to the thread pool. If all threads are busy, the tasks will be queued.
-shutdown(): Initiates an orderly shutdown where previously submitted tasks are executed but no new tasks are accepted.
-Types of Thread Pools:
-Fixed Thread Pool: A thread pool with a fixed number of threads. If all threads are busy, tasks are queued until a thread becomes available.
+```
 
-java
-Copy code
-ExecutorService fixedPool = Executors.newFixedThreadPool(4);
-Cached Thread Pool: A thread pool that creates new threads as needed but will reuse previously created threads when available. It is ideal for executing many short-lived tasks.
+### Explanation:
+- **`ExecutorService`**: This is the main interface for managing and controlling the execution of asynchronous tasks using thread pools.
+- **`Executors.newFixedThreadPool(3)`**: Creates a thread pool with 3 reusable threads.
+- **`submit()`**: Submits tasks to the thread pool. If all threads are busy, the tasks will be queued.
+- **`shutdown()`**: Initiates an orderly shutdown where previously submitted tasks are executed but no new tasks are accepted.
 
-java
-Copy code
-ExecutorService cachedPool = Executors.newCachedThreadPool();
-Single Thread Executor: A thread pool with only one thread. All tasks are executed sequentially.
+### Types of Thread Pools:
+1. **Fixed Thread Pool**: A thread pool with a fixed number of threads. If all threads are busy, tasks are queued until a thread becomes available.
+   ```java
+   ExecutorService fixedPool = Executors.newFixedThreadPool(4);
+   ```
 
-java
-Copy code
-ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-Scheduled Thread Pool: A thread pool designed for scheduling tasks to execute after a certain delay or repeatedly at fixed intervals.
+2. **Cached Thread Pool**: A thread pool that creates new threads as needed but will reuse previously created threads when available. It is ideal for executing many short-lived tasks.
+   ```java
+   ExecutorService cachedPool = Executors.newCachedThreadPool();
+   ```
 
-java
-Copy code
-ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(2);
-Benefits of Using Thread Pools:
-Prevents Thread Overhead: Thread pools reduce the overhead of creating new threads for each task, allowing tasks to start executing faster.
-Controls the Number of Active Threads: Helps manage the number of concurrent threads in the application, preventing thread explosion.
-Task Queueing: When no threads are available, tasks are queued, ensuring they will be executed once a thread is free.
-Improved Resource Management: Limits system resource consumption (like CPU and memory) by controlling the number of threads.
-When to Use Thread Pools:
-When you have multiple tasks that can be executed concurrently, and you want to avoid the overhead of creating and destroying threads repeatedly.
-When you want to limit the number of concurrent threads to prevent overwhelming the system.
-When tasks are short-lived, making thread creation and destruction for every task inefficient.
-Conclusion:
-Thread pooling is a powerful technique in Java multithreading to improve performance, manage resources, and provide better control over concurrent task execution. The ExecutorService interface and the Executors utility class make it easy to implement thread pooling and manage tasks efficiently in multithreaded applications.
+3. **Single Thread Executor**: A thread pool with only one thread. All tasks are executed sequentially.
+   ```java
+   ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+   ```
+
+4. **Scheduled Thread Pool**: A thread pool designed for scheduling tasks to execute after a certain delay or repeatedly at fixed intervals.
+   ```java
+   ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(2);
+   ```
+
+### Benefits of Using Thread Pools:
+- **Prevents Thread Overhead**: Thread pools reduce the overhead of creating new threads for each task, allowing tasks to start executing faster.
+- **Controls the Number of Active Threads**: Helps manage the number of concurrent threads in the application, preventing thread explosion.
+- **Task Queueing**: When no threads are available, tasks are queued, ensuring they will be executed once a thread is free.
+- **Improved Resource Management**: Limits system resource consumption (like CPU and memory) by controlling the number of threads.
+
+### When to Use Thread Pools:
+- When you have multiple tasks that can be executed concurrently, and you want to avoid the overhead of creating and destroying threads repeatedly.
+- When you want to limit the number of concurrent threads to prevent overwhelming the system.
+- When tasks are short-lived, making thread creation and destruction for every task inefficient.
+
+### Conclusion:
+Thread pooling is a powerful technique in Java multithreading to improve performance, manage resources, and provide better control over concurrent task execution. The `ExecutorService` interface and the `Executors` utility class make it easy to implement thread pooling and manage tasks efficiently in multithreaded applications.
+
 
 
 ## Que 20. 10 threads created, all have been consumed, what will happen
+
+
 
 If you have created a thread pool with 10 threads and all 10 threads are currently executing tasks (i.e., they are busy), and new tasks are submitted to the thread pool, the behavior will depend on the type of thread pool and its task queueing mechanism.
 
@@ -1473,24 +1563,28 @@ DiscardOldestPolicy: Discards the oldest unexecuted task in the queue and adds t
 Conclusion:
 When all threads in a thread pool are busy, new tasks are placed in the task queue until threads become available. The tasks will be executed sequentially as threads complete their work. In cached thread pools, additional threads are created to handle the load. However, in a fixed thread pool, the number of threads is constant, so tasks must wait until a thread finishes its task.
 
+
 ## Que 21. use of await and notify method in thread
 
-The wait() and notify() methods in Java are used for inter-thread communication, allowing threads to communicate with each other while coordinating their execution, particularly when working with shared resources. They are part of the Object class and must be used within a synchronized context.
 
-Purpose of wait() and notify():
-wait(): Causes the current thread to wait until another thread invokes notify() or notifyAll() on the same object.
-notify(): Wakes up one of the threads that are waiting on the object's monitor (the object that called wait()).
-notifyAll(): Wakes up all the threads that are waiting on the object's monitor.
-These methods are primarily used to implement cooperation between threads where one thread needs to wait until some condition is met or until another thread signals that a certain operation is complete.
 
-Example Use Case:
+The `wait()` and `notify()` methods in Java are used for **inter-thread communication**, allowing threads to communicate with each other while coordinating their execution, particularly when working with shared resources. They are part of the `Object` class and must be used within a **synchronized** context.
+
+### Purpose of `wait()` and `notify()`:
+- **`wait()`**: Causes the current thread to wait until another thread invokes `notify()` or `notifyAll()` on the same object.
+- **`notify()`**: Wakes up one of the threads that are waiting on the object's monitor (the object that called `wait()`).
+- **`notifyAll()`**: Wakes up all the threads that are waiting on the object's monitor.
+
+These methods are primarily used to implement **cooperation between threads** where one thread needs to wait until some condition is met or until another thread signals that a certain operation is complete.
+
+### Example Use Case:
 Imagine a producer-consumer scenario where one thread (producer) generates data and another thread (consumer) consumes it. The producer should stop when there’s no space available (buffer full), and the consumer should stop when there’s nothing to consume (buffer empty).
 
-Here's an example using wait() and notify():
+Here's an example using `wait()` and `notify()`:
 
-Producer-Consumer Example:
-java
-Copy code
+### Producer-Consumer Example:
+
+```java
 class SharedResource {
     private int data;
     private boolean available = false;
@@ -1548,188 +1642,403 @@ public class Main {
         consumer.start();
     }
 }
-Explanation:
-produce():
+```
 
-The producer thread tries to produce a value.
-If the available flag is true, it means that the consumer hasn't consumed the previous value yet. The producer will call wait() and release the lock on the object, allowing the consumer to proceed.
-Once the consumer has consumed the data and notified the producer, the producer proceeds to produce a new value.
-consume():
+### Explanation:
+1. **`produce()`**:
+   - The producer thread tries to produce a value.
+   - If the `available` flag is `true`, it means that the consumer hasn't consumed the previous value yet. The producer will call `wait()` and release the lock on the object, allowing the consumer to proceed.
+   - Once the consumer has consumed the data and notified the producer, the producer proceeds to produce a new value.
 
-The consumer thread tries to consume a value.
-If the available flag is false, it means that the producer hasn't produced a value yet. The consumer will call wait() and release the lock, allowing the producer to proceed.
-Once the producer has produced data and notified the consumer, the consumer proceeds to consume the value.
-Synchronization:
+2. **`consume()`**:
+   - The consumer thread tries to consume a value.
+   - If the `available` flag is `false`, it means that the producer hasn't produced a value yet. The consumer will call `wait()` and release the lock, allowing the producer to proceed.
+   - Once the producer has produced data and notified the consumer, the consumer proceeds to consume the value.
 
-wait() and notify() must be called within synchronized blocks or methods because they rely on the monitor of the object (the lock) to ensure proper coordination between threads.
-When wait() is called, the current thread releases the lock and waits until it is notified. After being notified, the thread reacquires the lock and continues execution.
-notify() vs notifyAll():
+3. **Synchronization**:
+   - `wait()` and `notify()` must be called within synchronized blocks or methods because they rely on the **monitor** of the object (the lock) to ensure proper coordination between threads.
+   - When `wait()` is called, the current thread releases the lock and waits until it is notified. After being notified, the thread reacquires the lock and continues execution.
 
-notify(): Wakes up one waiting thread. The specific thread chosen to be woken up depends on the JVM implementation.
-notifyAll(): Wakes up all threads waiting on the object's monitor. This is useful when you have multiple threads waiting for a condition to change, and you want all of them to be reconsidered for execution.
-Key Points to Remember:
-wait(), notify(), and notifyAll() are methods of the Object class, meaning they can be called on any object.
-wait() causes the current thread to release the lock and wait until notify() or notifyAll() is called.
-notify() wakes up one waiting thread, while notifyAll() wakes up all waiting threads.
-These methods must be called within synchronized code blocks or methods to ensure proper access to the shared resource.
-wait() should always be called inside a loop that checks the condition on which the thread is waiting. This prevents issues caused by spurious wakeups (a thread being awakened without any notify() or notifyAll() being called).
-Spurious Wakeup Issue:
-Java threads can wake up from the wait() method without being notified. This is called a spurious wakeup. That's why wait() is typically used in a loop:
+4. **`notify()` vs `notifyAll()`**:
+   - `notify()`: Wakes up **one** waiting thread. The specific thread chosen to be woken up depends on the JVM implementation.
+   - `notifyAll()`: Wakes up **all** threads waiting on the object's monitor. This is useful when you have multiple threads waiting for a condition to change, and you want all of them to be reconsidered for execution.
 
-java
-Copy code
+### Key Points to Remember:
+- `wait()`, `notify()`, and `notifyAll()` are methods of the `Object` class, meaning they can be called on any object.
+- `wait()` causes the current thread to release the lock and wait until `notify()` or `notifyAll()` is called.
+- `notify()` wakes up one waiting thread, while `notifyAll()` wakes up all waiting threads.
+- These methods must be called within synchronized code blocks or methods to ensure proper access to the shared resource.
+- `wait()` should always be called inside a loop that checks the condition on which the thread is waiting. This prevents issues caused by spurious wakeups (a thread being awakened without any `notify()` or `notifyAll()` being called).
+
+### Spurious Wakeup Issue:
+Java threads can wake up from the `wait()` method without being notified. This is called a **spurious wakeup**. That's why `wait()` is typically used in a loop:
+
+```java
 while (!condition) {
     wait();
 }
+```
+
 This ensures that once the thread wakes up, it rechecks the condition and goes back to waiting if necessary.
 
-Conclusion:
-wait() and notify() provide mechanisms for inter-thread communication and cooperation.
-They are especially useful in scenarios where one thread needs to wait for another thread to signal that a particular condition is met or a task is complete.
-Proper usage requires careful synchronization and handling of shared resources to avoid issues like deadlock or data corruption.
+### Conclusion:
+- `wait()` and `notify()` provide mechanisms for inter-thread communication and cooperation.
+- They are especially useful in scenarios where one thread needs to wait for another thread to signal that a particular condition is met or a task is complete.
+- Proper usage requires careful synchronization and handling of shared resources to avoid issues like deadlock or data corruption.
+
+
 
 ## Que 22. custom exceptions
 
-Custom exceptions are user-defined exceptions that allow developers to handle specific error conditions in their applications.
-Why Use Custom Exceptions?
-Improved Error Handling: Handle specific errors elegantly.
-Better Code Organization: Separate error handling from business logic.
-Clearer Error Messages: Provide meaningful error messages.
-Key Components of Custom Exceptions
-Exception Class: Define a class extending Exception or RuntimeException.
-Constructor: Initialize exception with relevant data.
-Message: Provide a clear error message.
-Example Code
-Java
-// Custom exception class
-public class InsufficientBalanceException extends Exception {
-    public InsufficientBalanceException(String message) {
+
+
+**Custom exceptions** in Java are user-defined exceptions that allow you to create more meaningful, domain-specific error handling in your applications. Java provides several built-in exceptions like `NullPointerException`, `ArrayIndexOutOfBoundsException`, etc., but in some cases, they may not fully represent the errors occurring in your application. This is where custom exceptions are useful.
+
+### Why Create Custom Exceptions?
+
+Custom exceptions:
+- Provide more meaningful and specific error messages.
+- Make your code more readable by clearly stating the problem through exception names.
+- Enhance debugging by categorizing exceptions based on the specific problem domain (e.g., validation issues, security breaches, etc.).
+- Allow you to handle exceptions in a controlled way specific to your application's needs.
+
+### Steps to Create a Custom Exception:
+
+1. **Extend the Exception Class**: You can either extend `Exception` (checked exception) or `RuntimeException` (unchecked exception).
+2. **Create Constructors**: Add constructors to pass custom messages and/or cause of the exception.
+3. **Optional: Override Methods**: You can override methods like `toString()` or `getMessage()` to provide custom behavior.
+
+### Example of a Custom Checked Exception:
+
+Checked exceptions need to be either caught or declared to be thrown using the `throws` keyword.
+
+```java
+// Custom checked exception
+class InvalidUserException extends Exception {
+    public InvalidUserException(String message) {
         super(message);
     }
 }
 
-public class BankAccount {
-    private double balance;
-
-    public void withdraw(double amount) throws InsufficientBalanceException {
-        if (amount > balance) {
-            throw new InsufficientBalanceException("Insufficient balance");
+public class UserService {
+    public void validateUser(String userName) throws InvalidUserException {
+        if (userName == null || userName.isEmpty()) {
+            throw new InvalidUserException("User name cannot be null or empty");
         }
-        balance -= amount;
+        // Validation logic here...
     }
-}
 
-public class Main {
     public static void main(String[] args) {
-        BankAccount account = new BankAccount();
+        UserService service = new UserService();
         try {
-            account.withdraw(100);
-        } catch (InsufficientBalanceException e) {
-            System.out.println(e.getMessage());
+            service.validateUser("");  // This will throw the custom exception
+        } catch (InvalidUserException e) {
+            System.out.println("Caught custom exception: " + e.getMessage());
         }
     }
 }
-Best Practices
-Extend Exception or RuntimeException: Choose the correct base class.
-Provide Clear Error Messages: Help users understand the error.
-Use Meaningful Exception Names: Clearly indicate the error.
+```
+
+### Example of a Custom Unchecked Exception:
+
+Unchecked exceptions do not need to be explicitly declared in method signatures or caught.
+
+```java
+// Custom unchecked exception
+class InvalidAgeException extends RuntimeException {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+public class AgeValidator {
+    public void validateAge(int age) {
+        if (age < 18) {
+            throw new InvalidAgeException("Age must be at least 18");
+        }
+        // Validation logic here...
+    }
+
+    public static void main(String[] args) {
+        AgeValidator validator = new AgeValidator();
+        try {
+            validator.validateAge(16);  // This will throw the custom exception
+        } catch (InvalidAgeException e) {
+            System.out.println("Caught custom unchecked exception: " + e.getMessage());
+        }
+    }
+}
+```
+
+### Key Points:
+1. **Checked vs. Unchecked Exceptions**:
+   - **Checked exceptions**: Extend `Exception`. These must be caught or declared to be thrown.
+   - **Unchecked exceptions**: Extend `RuntimeException`. These do not need to be caught or declared to be thrown.
+
+2. **Custom Constructors**: You can create multiple constructors in your custom exception to pass messages or causes.
+
+```java
+public class MyCustomException extends Exception {
+    public MyCustomException() {
+        super();
+    }
+
+    public MyCustomException(String message) {
+        super(message);
+    }
+
+    public MyCustomException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+```
+
+3. **Custom Logic**: You can override methods like `toString()` to provide more detailed information about your custom exception.
+
+### Example with Custom Logic:
+
+```java
+class InvalidTransactionException extends Exception {
+    private int transactionId;
+
+    public InvalidTransactionException(String message, int transactionId) {
+        super(message);
+        this.transactionId = transactionId;
+    }
+
+    @Override
+    public String toString() {
+        return "InvalidTransactionException: " + getMessage() + " for Transaction ID: " + transactionId;
+    }
+}
+
+public class TransactionService {
+    public void processTransaction(int transactionId) throws InvalidTransactionException {
+        if (transactionId <= 0) {
+            throw new InvalidTransactionException("Transaction ID must be positive", transactionId);
+        }
+        // Transaction processing logic here...
+    }
+
+    public static void main(String[] args) {
+        TransactionService service = new TransactionService();
+        try {
+            service.processTransaction(-100);  // This will throw the custom exception
+        } catch (InvalidTransactionException e) {
+            System.out.println(e);
+        }
+    }
+}
+```
+
+### Conclusion:
+- Custom exceptions improve the clarity and quality of error handling in your application by giving more context-specific information.
+- Choose **checked exceptions** for recoverable conditions and **unchecked exceptions** for programming errors or conditions that the program should not try to recover from.
+- Always provide meaningful messages and custom logic where necessary to make exception handling as informative as possible.
+
+
 
 ## Que 23. controller advise in spring boot
 
-Controller Advice is a feature in Spring that allows you to define global exception handling, controller-level advice, and data binding initialization.
-Annotations:
-@ControllerAdvice: Defines a controller advice class.
-@ExceptionHandler: Handles specific exceptions.
-@InitBinder: Initializes data binders.
-@ModelAttribute: Adds model attributes.
-Benefits:
-Global Exception Handling: Handle exceptions across controllers.
-Controller-Level Advice: Apply advice to specific controllers.
-Reduced Boilerplate Code: Simplify exception handling.
+
+
+In Spring Boot, **@ControllerAdvice** is a powerful annotation used for global exception handling, model enhancement, and data binding across multiple controllers. It allows you to define a class that can handle exceptions and bind models for multiple controllers without repeating the same logic in each controller.
+
+### Key Features of `@ControllerAdvice`:
+
+1. **Global Exception Handling**: You can handle exceptions thrown by any controller method in a centralized way.
+2. **Global Model Attributes**: You can add common attributes to the model for all controller methods.
+3. **Global Data Binding**: You can configure binding rules for all controllers.
+
+### Usage of `@ControllerAdvice`:
+
+Here’s a breakdown of how to use `@ControllerAdvice` for various purposes:
+
+#### 1. Global Exception Handling
+
+You can create a global exception handler using `@ExceptionHandler` within a class annotated with `@ControllerAdvice`. This way, you can catch exceptions thrown by any controller and handle them accordingly.
+
+**Example**:
+
+```java
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(InvalidUserException.class)
+    public ResponseEntity<String> handleInvalidUserException(InvalidUserException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)  // Catch-all for other exceptions
+    public ResponseEntity<String> handleGeneralException(Exception ex) {
+        return new ResponseEntity<>("An error occurred: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+```
+
+In this example:
+- The `handleInvalidUserException` method handles `InvalidUserException` thrown from any controller and returns a `400 Bad Request` response.
+- The `handleGeneralException` method serves as a catch-all for other exceptions.
+
+#### 2. Adding Global Model Attributes
+
+You can add common attributes to the model using the `@ModelAttribute` annotation.
+
+**Example**:
+
+```java
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+@ControllerAdvice
+public class GlobalModelAttributes {
+
+    @ModelAttribute("appName")
+    public String appName() {
+        return "My Application";
+    }
+}
+```
+
+In this example, the `appName` attribute will be available in all model views across different controllers.
+
+#### 3. Global Data Binding Configuration
+
+You can also customize the data binding process globally using `@InitBinder`.
+
+**Example**:
+
+```java
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.InitBinder;
+
+@ControllerAdvice
+public class GlobalDataBinding {
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        // Add custom editors or validation logic here
+        // For example, to trim strings
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    }
+}
+```
+
+### Summary of Benefits:
+- **Centralized Exception Handling**: Reduces code duplication by consolidating exception handling logic in one place.
+- **Common Model Attributes**: Ensures that common data is available across different controllers, promoting DRY principles.
+- **Flexible Data Binding**: Allows customization of the binding process for all controllers.
+
+### Conclusion:
+Using `@ControllerAdvice` in Spring Boot enhances the modularity and maintainability of your application by reducing redundancy in exception handling and model management. This feature is particularly useful in large applications where consistency and code organization are essential.
+
+
 
 ## Que 24. diff b/w checked and unchecked exceptions, which class need to be extended?
 
-Checked vs Unchecked Exceptions in Java
-Checked Exceptions:
-Checked at Compile-Time: Compiler checks for exception handling.
-Extend Exception Class: Must extend Exception class (excluding RuntimeException).
-Must be Handled or Declared: Using try-catch or throws clause.
-Unchecked Exceptions:
-Checked at Runtime: JVM checks for exception handling.
-Extend RuntimeException Class: Must extend RuntimeException class.
-No Mandatory Handling: Not required to handle or declare.
-Key Differences:
-Checked Exceptions	Unchecked Exceptions
-Checked	Compile-time	Runtime
-Extend	Exception	RuntimeException
-Handling	Mandatory	Optional
-Exception Hierarchy:
-Throwable
-Exception (checked)
-IOException
-SQLException
-RuntimeException (unchecked)
-NullPointerException
-IndexOutOfBoundsException
-Example Code:
-Checked Exception:
-Java
-public class MyCheckedException extends Exception {
-    public MyCheckedException(String message) {
+
+In Java, exceptions are divided into two main categories: **checked exceptions** and **unchecked exceptions**. Here’s a breakdown of their differences and the classes you need to extend for each type:
+
+### 1. Checked Exceptions
+
+- **Definition**: Checked exceptions are exceptions that must be either caught or declared in the method signature using the `throws` keyword. These exceptions are checked at compile-time.
+  
+- **Use Cases**: They are used when a method might fail due to external circumstances that the calling code can reasonably expect to handle (e.g., file not found, network issues).
+
+- **Inheritance**: Checked exceptions must extend the `Exception` class (but not `RuntimeException`). This means that any exception class that you create as a checked exception should directly or indirectly extend `Exception`.
+
+#### Example:
+```java
+// Custom checked exception
+class InvalidInputException extends Exception {
+    public InvalidInputException(String message) {
         super(message);
     }
 }
 
-public class MyClass {
-    public void myMethod() throws MyCheckedException {
-        throw new MyCheckedException("Error occurred");
+// Method declaration with checked exception
+public void processInput(String input) throws InvalidInputException {
+    if (input == null || input.isEmpty()) {
+        throw new InvalidInputException("Input cannot be null or empty");
     }
 }
-Unchecked Exception:
-Java
-public class MyUncheckedException extends RuntimeException {
-    public MyUncheckedException(String message) {
+```
+
+### 2. Unchecked Exceptions
+
+- **Definition**: Unchecked exceptions are exceptions that do not need to be caught or declared. These exceptions are not checked at compile-time and occur at runtime.
+
+- **Use Cases**: They usually indicate programming errors that could have been avoided (e.g., accessing an out-of-bounds array index, null pointer access).
+
+- **Inheritance**: Unchecked exceptions must extend the `RuntimeException` class, which is a subclass of `Exception`. You can also extend `Error`, but generally, you should not create custom exceptions extending `Error`.
+
+#### Example:
+```java
+// Custom unchecked exception
+class InvalidAgeException extends RuntimeException {
+    public InvalidAgeException(String message) {
         super(message);
     }
 }
 
-public class MyClass {
-    public void myMethod() {
-        throw new MyUncheckedException("Error occurred");
+// Method using unchecked exception
+public void validateAge(int age) {
+    if (age < 0) {
+        throw new InvalidAgeException("Age cannot be negative");
     }
 }
-Best Practices:
-Use Checked Exceptions: For predictable, recoverable errors.
-Use Unchecked Exceptions: For unpredictable, programming errors.
-Document Exceptions: Clearly document exceptions and handling.
+```
+
+### Summary of Differences:
+
+| Feature                        | Checked Exceptions                               | Unchecked Exceptions                          |
+|--------------------------------|-------------------------------------------------|----------------------------------------------|
+| **Checked at**                 | Compile-time                                    | Runtime                                      |
+| **Need to be handled**         | Yes, must be caught or declared                 | No, not required to be caught                |
+| **Extends**                    | `Exception` (not `RuntimeException`)            | `RuntimeException`                           |
+| **Use Cases**                  | Recoverable situations (I/O errors, etc.)      | Programming errors (NullPointerException, etc.) |
+
+### Conclusion:
+- **Checked exceptions** should be used when you want to force the caller to handle potential error conditions that are recoverable.
+- **Unchecked exceptions** should be used for programming errors that are not expected to be handled at runtime. They provide flexibility in how exceptions are managed within your code.
+
 
 ## Que 25. throws keyword use
 
-In Java, the throws keyword is used in method declarations to specify that a method can throw certain exceptions. It indicates to the caller of the method that it must handle the exceptions, either by catching them in a try-catch block or by declaring them further up the call stack using throws.
+In Java, the `throws` keyword is used in method declarations to specify that a method can throw certain exceptions. It indicates to the caller of the method that it must handle the exceptions, either by catching them in a `try-catch` block or by declaring them further up the call stack using `throws`.
 
-Key Points about throws:
-Checked vs. Unchecked Exceptions:
+### Key Points about `throws`:
 
-throws is primarily used with checked exceptions. These are exceptions that are not subclasses of RuntimeException and must be either caught or declared.
-Unchecked exceptions (subclasses of RuntimeException) do not require the use of throws because they are not checked at compile time.
-Syntax: The syntax for using throws in a method declaration is as follows:
+1. **Checked vs. Unchecked Exceptions**:
+   - `throws` is primarily used with **checked exceptions**. These are exceptions that are not subclasses of `RuntimeException` and must be either caught or declared.
+   - **Unchecked exceptions** (subclasses of `RuntimeException`) do not require the use of `throws` because they are not checked at compile time.
 
-java
-Copy code
-returnType methodName(parameters) throws ExceptionType1, ExceptionType2 {
-    // method implementation
-}
-Here, ExceptionType1, ExceptionType2, etc., are the exceptions that the method can throw.
+2. **Syntax**:
+   The syntax for using `throws` in a method declaration is as follows:
+   ```java
+   returnType methodName(parameters) throws ExceptionType1, ExceptionType2 {
+       // method implementation
+   }
+   ```
+   Here, `ExceptionType1`, `ExceptionType2`, etc., are the exceptions that the method can throw.
 
-Multiple Exceptions: A method can declare multiple exceptions by separating them with commas.
+3. **Multiple Exceptions**:
+   A method can declare multiple exceptions by separating them with commas.
 
-Propagation: When a method declares an exception using throws, it propagates the exception to the caller, which then must handle it appropriately.
+4. **Propagation**:
+   When a method declares an exception using `throws`, it propagates the exception to the caller, which then must handle it appropriately.
 
-Example of Using throws:
-Here’s a practical example demonstrating the use of the throws keyword:
+### Example of Using `throws`:
 
-java
-Copy code
+Here’s a practical example demonstrating the use of the `throws` keyword:
+
+```java
 // Custom checked exception
 class InvalidInputException extends Exception {
     public InvalidInputException(String message) {
@@ -1758,111 +2067,193 @@ public class Calculator {
         }
     }
 }
-Explanation of the Example:
-Custom Exception: We create a custom checked exception, InvalidInputException, which extends Exception.
-Method Declaration: The divide method declares that it can throw an InvalidInputException using the throws keyword.
-Throwing an Exception: Inside the divide method, we check if the divisor b is zero. If it is, we throw an InvalidInputException.
-Handling the Exception: In the main method, we call the divide method within a try block. If the exception is thrown, it is caught in the corresponding catch block, where we handle it appropriately.
-When to Use throws:
-Use throws when you want to propagate an exception from a method without handling it inside the method.
-It helps in keeping your method implementation clean and allows the caller to decide how to handle the exception.
-It is also useful for methods that may have a variety of error conditions that can be handled differently by different callers.
+```
+
+### Explanation of the Example:
+
+1. **Custom Exception**: We create a custom checked exception, `InvalidInputException`, which extends `Exception`.
+2. **Method Declaration**: The `divide` method declares that it can throw an `InvalidInputException` using the `throws` keyword.
+3. **Throwing an Exception**: Inside the `divide` method, we check if the divisor `b` is zero. If it is, we throw an `InvalidInputException`.
+4. **Handling the Exception**: In the `main` method, we call the `divide` method within a `try` block. If the exception is thrown, it is caught in the corresponding `catch` block, where we handle it appropriately.
+
+### When to Use `throws`:
+
+- Use `throws` when you want to propagate an exception from a method without handling it inside the method.
+- It helps in keeping your method implementation clean and allows the caller to decide how to handle the exception.
+- It is also useful for methods that may have a variety of error conditions that can be handled differently by different callers.
+
+### Conclusion:
+
+The `throws` keyword is an important aspect of Java's exception handling mechanism, particularly for checked exceptions. It allows developers to signal potential error conditions to method callers, promoting a clear and structured approach to error handling in Java applications.
+
 
 ## Que 26. SpringBoot, its web or standalone
 
-Spring Boot is a framework that is primarily used for building web applications, but it can also be used to create standalone applications. Here’s a breakdown of its capabilities:
 
-Spring Boot as a Web Application Framework
-Embedded Servers: Spring Boot allows you to run web applications directly with embedded servers like Tomcat, Jetty, or Undertow. This means you can package your application as a JAR file and run it without needing to deploy it to a separate web server.
+Spring Boot is a framework that is primarily used for building **web applications**, but it can also be used to create **standalone applications**. Here’s a breakdown of its capabilities:
 
-RESTful APIs: Spring Boot makes it easy to create RESTful web services using the Spring MVC framework. You can define controllers, request mappings, and response formats quickly and efficiently.
+### Spring Boot as a Web Application Framework
 
-Spring MVC Integration: It integrates seamlessly with Spring MVC, providing a comprehensive set of tools for developing web applications, including support for views (Thymeleaf, JSP, etc.), form handling, and data binding.
+1. **Embedded Servers**: Spring Boot allows you to run web applications directly with embedded servers like Tomcat, Jetty, or Undertow. This means you can package your application as a JAR file and run it without needing to deploy it to a separate web server.
 
-Dependency Management: Spring Boot uses Spring Boot Starter dependencies to simplify the configuration of web applications. For example, including spring-boot-starter-web adds all necessary dependencies for building web applications.
+2. **RESTful APIs**: Spring Boot makes it easy to create RESTful web services using the Spring MVC framework. You can define controllers, request mappings, and response formats quickly and efficiently.
 
-Microservices Architecture: Spring Boot is widely used in building microservices, which are independently deployable services that can communicate with each other over HTTP.
+3. **Spring MVC Integration**: It integrates seamlessly with Spring MVC, providing a comprehensive set of tools for developing web applications, including support for views (Thymeleaf, JSP, etc.), form handling, and data binding.
 
-Spring Boot as a Standalone Application Framework
-Standalone Applications: You can also build standalone applications with Spring Boot. These applications may not necessarily have a web interface or may serve as background services (e.g., batch jobs, data processing tasks).
+4. **Dependency Management**: Spring Boot uses **Spring Boot Starter** dependencies to simplify the configuration of web applications. For example, including `spring-boot-starter-web` adds all necessary dependencies for building web applications.
 
-Spring Boot CLI: The Spring Boot Command Line Interface (CLI) allows you to run Spring Boot applications directly from the command line without packaging them into a JAR file.
+5. **Microservices Architecture**: Spring Boot is widely used in building microservices, which are independently deployable services that can communicate with each other over HTTP.
 
-Easy Configuration: Spring Boot provides a simplified configuration mechanism through application properties or YAML files, making it easy to manage application settings for standalone applications.
+### Spring Boot as a Standalone Application Framework
 
-Auto-Configuration: The auto-configuration feature in Spring Boot can automatically configure your application based on the dependencies you include. This is useful for both web and standalone applications.
+1. **Standalone Applications**: You can also build standalone applications with Spring Boot. These applications may not necessarily have a web interface or may serve as background services (e.g., batch jobs, data processing tasks).
+
+2. **Spring Boot CLI**: The Spring Boot Command Line Interface (CLI) allows you to run Spring Boot applications directly from the command line without packaging them into a JAR file.
+
+3. **Easy Configuration**: Spring Boot provides a simplified configuration mechanism through application properties or YAML files, making it easy to manage application settings for standalone applications.
+
+4. **Auto-Configuration**: The auto-configuration feature in Spring Boot can automatically configure your application based on the dependencies you include. This is useful for both web and standalone applications.
+
+### Conclusion
+
+- **Web Application**: Spring Boot is a powerful framework for developing web applications, providing tools and libraries to build RESTful APIs and web interfaces efficiently.
+- **Standalone Application**: It can also be used to develop standalone applications, leveraging its configuration management and dependency management features.
+
+In summary, Spring Boot is versatile and can be used for both web and standalone applications, making it a popular choice for developers building modern applications.
+
 
 ## Que 27. ioc container
 
-In Spring (and Spring Boot), the IoC (Inversion of Control) Container is the core concept that manages the life cycle and dependencies of the objects (or beans). IoC is a design principle that reverses the control flow in a program by allowing the framework (Spring) to manage the creation, configuration, and dependency resolution of objects, rather than the programmer manually doing so.
 
-Key Concepts of IoC Container:
-Inversion of Control (IoC):
-IoC refers to the shift in control where the creation and management of objects are handled by the framework, rather than the application code. Instead of the objects controlling their dependencies, the framework (IoC container) injects the required dependencies into the objects.
+In Spring (and Spring Boot), the **IoC (Inversion of Control) Container** is the core concept that manages the life cycle and dependencies of the objects (or beans). IoC is a design principle that reverses the control flow in a program by allowing the framework (Spring) to manage the creation, configuration, and dependency resolution of objects, rather than the programmer manually doing so.
 
-Dependency Injection (DI):
-IoC is achieved in Spring through Dependency Injection. This is where objects (dependencies) are provided to a class through constructor injection, setter injection, or field injection.
+### Key Concepts of IoC Container:
 
-Types of IoC Containers in Spring:
+1. **Inversion of Control (IoC)**:  
+   IoC refers to the shift in control where the creation and management of objects are handled by the framework, rather than the application code. Instead of the objects controlling their dependencies, the framework (IoC container) injects the required dependencies into the objects.
+
+2. **Dependency Injection (DI)**:  
+   IoC is achieved in Spring through **Dependency Injection**. This is where objects (dependencies) are provided to a class through constructor injection, setter injection, or field injection.
+
+### Types of IoC Containers in Spring:
+
 Spring provides two main types of IoC containers:
 
-BeanFactory:
+1. **BeanFactory**:  
+   - It is the basic container in Spring.  
+   - It lazily initializes beans, meaning beans are created only when they are requested.  
+   - BeanFactory is used in scenarios where lightweight container usage is required with minimal overhead.
 
-It is the basic container in Spring.
-It lazily initializes beans, meaning beans are created only when they are requested.
-BeanFactory is used in scenarios where lightweight container usage is required with minimal overhead.
-ApplicationContext:
+2. **ApplicationContext**:  
+   - It is a more feature-rich container than `BeanFactory`.
+   - It eagerly initializes beans by default at the startup of the application.
+   - It provides several additional features such as event propagation, declarative mechanisms to create a bean, and more.
+   - Common implementations of `ApplicationContext` are:
+     - `ClassPathXmlApplicationContext`: Loads context definition from an XML file located in the classpath.
+     - `FileSystemXmlApplicationContext`: Loads context definition from an XML file located in the filesystem.
+     - `AnnotationConfigApplicationContext`: Loads context using Java annotations.
 
-It is a more feature-rich container than BeanFactory.
-It eagerly initializes beans by default at the startup of the application.
-It provides several additional features such as event propagation, declarative mechanisms to create a bean, and more.
-Common implementations of ApplicationContext are:
-ClassPathXmlApplicationContext: Loads context definition from an XML file located in the classpath.
-FileSystemXmlApplicationContext: Loads context definition from an XML file located in the filesystem.
-AnnotationConfigApplicationContext: Loads context using Java annotations.
-Working of IoC Container:
+### Working of IoC Container:
+
 The IoC container in Spring performs the following tasks:
 
-Creation: It creates objects (beans) as defined in the configuration (either XML or annotations).
-Wiring: It injects dependencies into the beans using constructor injection, setter injection, or field injection.
-Lifecycle Management: It manages the entire life cycle of beans, from instantiation to destruction.
-Scope: It manages the scope of the beans (singleton, prototype, etc.).
-How the IoC Container Works:
-Bean Definition: You define your beans in a Spring configuration file (XML, annotations, or Java-based configurations).
-IoC Container Reads Configurations: Spring's IoC container reads these configurations and creates the necessary objects.
-Dependency Injection: The container automatically injects the required dependencies into these beans based on their configuration.
-Lifecycle Management: Spring manages the lifecycle of beans, which includes instantiating the beans, injecting dependencies, and, if necessary, destroying them when the application shuts down.
-Example of IoC in Spring with Annotations:
+- **Creation**: It creates objects (beans) as defined in the configuration (either XML or annotations).
+- **Wiring**: It injects dependencies into the beans using constructor injection, setter injection, or field injection.
+- **Lifecycle Management**: It manages the entire life cycle of beans, from instantiation to destruction.
+- **Scope**: It manages the scope of the beans (singleton, prototype, etc.).
+
+### How the IoC Container Works:
+
+1. **Bean Definition**: You define your beans in a Spring configuration file (XML, annotations, or Java-based configurations).
+2. **IoC Container Reads Configurations**: Spring's IoC container reads these configurations and creates the necessary objects.
+3. **Dependency Injection**: The container automatically injects the required dependencies into these beans based on their configuration.
+4. **Lifecycle Management**: Spring manages the lifecycle of beans, which includes instantiating the beans, injecting dependencies, and, if necessary, destroying them when the application shuts down.
+
+### Example of IoC in Spring with Annotations:
+
 Here’s how IoC works in Spring Boot using annotations:
 
-Explanation:
-@Component Annotation: Marks a class as a Spring-managed bean. The IoC container will create and manage instances of the class.
-@Autowired Annotation: Tells the IoC container to inject the Service dependency into the Client class.
-ApplicationContext: The Spring Boot IoC container (ApplicationContext) creates the beans (Client and Service) and injects the dependencies at runtime.
-Summary:
-IoC in Spring enables the inversion of control, meaning that the framework controls the creation and lifecycle of objects (beans) instead of the application code.
-Spring’s IoC container uses dependency injection (DI) to inject dependencies into objects.
-The two main types of IoC containers are BeanFactory and ApplicationContext, with ApplicationContext being the more feature-rich option.
-The use of IoC makes Spring applications more modular, easier to maintain, and testable.
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+// A simple service class (dependent object)
+@Component
+class Service {
+    public void serve() {
+        System.out.println("Service is running...");
+    }
+}
+
+// The dependent class that requires the service
+@Component
+public class Client {
+    private Service service;
+
+    // Constructor-based dependency injection
+    @Autowired
+    public Client(Service service) {
+        this.service = service;
+    }
+
+    public void doWork() {
+        service.serve();
+    }
+}
+
+// Main application class
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class SpringBootIoCExample {
+
+    public static void main(String[] args) {
+        ApplicationContext context = SpringApplication.run(SpringBootIoCExample.class, args);
+        
+        // Retrieve the client bean and call its method
+        Client client = context.getBean(Client.class);
+        client.doWork();
+    }
+}
+```
+
+### Explanation:
+
+1. **`@Component` Annotation**: Marks a class as a Spring-managed bean. The IoC container will create and manage instances of the class.
+2. **`@Autowired` Annotation**: Tells the IoC container to inject the `Service` dependency into the `Client` class.
+3. **ApplicationContext**: The Spring Boot IoC container (`ApplicationContext`) creates the beans (`Client` and `Service`) and injects the dependencies at runtime.
+
+### Summary:
+
+- **IoC** in Spring enables the inversion of control, meaning that the framework controls the creation and lifecycle of objects (beans) instead of the application code.
+- Spring’s IoC container uses **dependency injection (DI)** to inject dependencies into objects.
+- The two main types of IoC containers are `BeanFactory` and `ApplicationContext`, with `ApplicationContext` being the more feature-rich option.
+- The use of IoC makes Spring applications more modular, easier to maintain, and testable.
+
+
 
 ## Que 28. how does IOC understand the dependencies req
 
-The Spring IoC (Inversion of Control) container understands the dependencies required by a bean through Dependency Injection (DI), which is configured using metadata such as annotations, XML configurations, or Java-based configurations. Here’s how Spring understands and resolves the dependencies:
 
-1. Annotations-Based Configuration (Most Common in Spring Boot)
+The Spring IoC (Inversion of Control) container understands the dependencies required by a bean through **Dependency Injection (DI)**, which is configured using metadata such as annotations, XML configurations, or Java-based configurations. Here’s how Spring understands and resolves the dependencies:
+
+### 1. **Annotations-Based Configuration** (Most Common in Spring Boot)
+
 Spring Boot primarily uses annotations to wire dependencies. Here’s how Spring understands the dependencies:
 
-@Autowired: This annotation tells Spring that a particular field, constructor, or setter method requires dependency injection. The IoC container then checks its registry of beans to find the appropriate bean to inject. If it finds one, it injects it automatically.
+- **`@Autowired`**: This annotation tells Spring that a particular field, constructor, or setter method requires dependency injection. The IoC container then checks its registry of beans to find the appropriate bean to inject. If it finds one, it injects it automatically.
+  
+- **`@ComponentScan`**: This annotation tells the IoC container where to search for `@Component`, `@Service`, `@Repository`, and other annotated beans. When the container starts, it scans these packages and registers the beans. These beans are made available for dependency injection.
 
-@ComponentScan: This annotation tells the IoC container where to search for @Component, @Service, @Repository, and other annotated beans. When the container starts, it scans these packages and registers the beans. These beans are made available for dependency injection.
+- **Constructor Injection**: Spring can inject dependencies through a constructor. When the constructor has parameters, Spring matches the required types to the available beans and injects them.
 
-Constructor Injection: Spring can inject dependencies through a constructor. When the constructor has parameters, Spring matches the required types to the available beans and injects them.
+- **Setter Injection**: The IoC container can inject dependencies through setter methods, similarly matching the method parameters with available beans.
 
-Setter Injection: The IoC container can inject dependencies through setter methods, similarly matching the method parameters with available beans.
+### Example:
 
-Example:
-java
-Copy code
+```java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -1887,28 +2278,34 @@ class ServiceB {
         serviceA.serve();
     }
 }
-In this example, ServiceB depends on ServiceA. Spring identifies this dependency via the @Autowired annotation and injects an instance of ServiceA when creating ServiceB.
+```
 
-2. XML-Based Configuration (Legacy Approach)
+In this example, `ServiceB` depends on `ServiceA`. Spring identifies this dependency via the `@Autowired` annotation and injects an instance of `ServiceA` when creating `ServiceB`.
+
+### 2. **XML-Based Configuration** (Legacy Approach)
+
 In older Spring configurations, dependencies were specified using XML. The IoC container reads the XML file and maps dependencies.
 
-Example XML Configuration:
-xml
-Copy code
+### Example XML Configuration:
+
+```xml
 <beans>
     <bean id="serviceA" class="com.example.ServiceA"/>
     <bean id="serviceB" class="com.example.ServiceB">
         <constructor-arg ref="serviceA"/>
     </bean>
 </beans>
-In this configuration, the IoC container reads the XML, understands that serviceB requires serviceA through constructor injection, and wires them together.
+```
 
-3. Java-Based Configuration (Modern Approach)
-Java-based configuration using @Configuration and @Bean annotations can also define and wire dependencies.
+In this configuration, the IoC container reads the XML, understands that `serviceB` requires `serviceA` through constructor injection, and wires them together.
 
-Example Java-Based Configuration:
-java
-Copy code
+### 3. **Java-Based Configuration** (Modern Approach)
+
+Java-based configuration using `@Configuration` and `@Bean` annotations can also define and wire dependencies.
+
+### Example Java-Based Configuration:
+
+```java
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -1925,29 +2322,32 @@ public class AppConfig {
         return new ServiceB(serviceA);
     }
 }
-Here, Spring calls the serviceB method and automatically passes the serviceA bean as a parameter, because the method signature indicates that ServiceB requires a ServiceA bean.
+```
 
-4. How IoC Resolves Dependencies:
-Bean Creation: During the startup of the application, the IoC container creates beans either eagerly (by default) or lazily (on demand).
+Here, Spring calls the `serviceB` method and automatically passes the `serviceA` bean as a parameter, because the method signature indicates that `ServiceB` requires a `ServiceA` bean.
 
-Bean Definition: The container checks for bean definitions either in the annotations (@Component, @Service, etc.), XML configuration, or Java configuration. It also determines the scope (e.g., singleton, prototype) of the beans.
+### 4. **How IoC Resolves Dependencies**:
 
-Dependency Matching:
+- **Bean Creation**: During the startup of the application, the IoC container creates beans either eagerly (by default) or lazily (on demand).
+  
+- **Bean Definition**: The container checks for bean definitions either in the annotations (`@Component`, `@Service`, etc.), XML configuration, or Java configuration. It also determines the scope (e.g., singleton, prototype) of the beans.
+  
+- **Dependency Matching**:
+  - **By Type**: The IoC container checks the types of dependencies declared in the constructor or method and matches them with available beans of that type.
+  - **By Name** (Optional): The IoC container can match beans by name if specified, or using `@Qualifier` annotations to resolve ambiguities when multiple beans of the same type exist.
 
-By Type: The IoC container checks the types of dependencies declared in the constructor or method and matches them with available beans of that type.
-By Name (Optional): The IoC container can match beans by name if specified, or using @Qualifier annotations to resolve ambiguities when multiple beans of the same type exist.
-Injection: Once the container resolves the dependencies, it injects them into the dependent objects using constructor injection, setter injection, or field injection.
+- **Injection**: Once the container resolves the dependencies, it injects them into the dependent objects using constructor injection, setter injection, or field injection.
 
-5. Handling Ambiguities:
+### 5. **Handling Ambiguities**:
 When there are multiple candidates of the same type, Spring may face ambiguity in resolving dependencies. In such cases:
 
-@Primary: You can mark one bean as primary, indicating that it should be preferred when resolving a dependency.
+- **`@Primary`**: You can mark one bean as primary, indicating that it should be preferred when resolving a dependency.
 
-@Qualifier: This annotation helps specify which particular bean should be injected when multiple beans of the same type are available.
+- **`@Qualifier`**: This annotation helps specify which particular bean should be injected when multiple beans of the same type are available.
 
-Example of Ambiguity Resolution:
-java
-Copy code
+### Example of Ambiguity Resolution:
+
+```java
 @Component
 class ServiceA {
     public void serve() {
@@ -1977,93 +2377,99 @@ class ServiceB {
         serviceA.serve();
     }
 }
-In this example, @Primary marks ServiceAImpl1 as the default choice, but in ServiceB, we explicitly use @Qualifier("serviceAImpl2") to inject ServiceAImpl2.
+```
 
-Summary:
-IoC Container identifies dependencies via annotations (@Autowired, @Component), XML, or Java configurations.
-Dependency Injection is achieved by matching the required types and injecting them either through constructors, setters, or fields.
-The IoC container manages the bean lifecycle and resolves dependencies during bean creation.
-Ambiguities are resolved using annotations like @Primary or @Qualifier when multiple beans of the same type exist.
+In this example, `@Primary` marks `ServiceAImpl1` as the default choice, but in `ServiceB`, we explicitly use `@Qualifier("serviceAImpl2")` to inject `ServiceAImpl2`.
+
+### Summary:
+
+- **IoC Container** identifies dependencies via annotations (`@Autowired`, `@Component`), XML, or Java configurations.
+- **Dependency Injection** is achieved by matching the required types and injecting them either through constructors, setters, or fields.
+- The IoC container manages the bean lifecycle and resolves dependencies during bean creation.
+- Ambiguities are resolved using annotations like `@Primary` or `@Qualifier` when multiple beans of the same type exist.
+
 Spring’s IoC container thus allows developers to focus on business logic, while it handles the creation and management of dependencies, making applications more modular and easier to maintain.
+
+
 
 ## Que 29. deafult Bean scope
 
-In Spring Framework, the default bean scope is singleton.
 
-**Singleton Scope**
+In Spring, the **default bean scope** is **`singleton`**. This means that by default, Spring IoC container creates and manages only one instance (or object) of the bean per Spring IoC container. All requests for that bean will return the same instance throughout the lifecycle of the application.
 
-> One instance per application context.
-> Shared across all requests and sessions.
-> Created when the application context starts.
-> Destroyed when the application context closes.
+### Explanation of the Default Scope (`singleton`):
 
-Other available bean scopes in Spring:
+- **Singleton Scope**: In the singleton scope, Spring ensures that only one instance of the bean is created and shared across the entire application context. Every time the bean is requested (via dependency injection, direct lookup, etc.), the same instance is returned.
 
-**Request Scope**
+- **Behavior**: If a bean is defined with singleton scope, Spring creates the bean instance during the initialization of the application context (eager initialization) and keeps it for the entire runtime. If lazy initialization is used, the bean will be created when it is first requested.
 
-> One instance per HTTP request.
-> Created for each request.
-> Destroyed after request completion.
+### Example:
 
-**Session Scope**
-
-> One instance per HTTP session.
-> Created when a session starts.
-> Destroyed when the session ends.
-
-**Prototype Scope**
-
-> New instance created every time the bean is requested.
-> No caching or re-use.
-
-**Application Scope**
-> Similar to singleton scope but with more flexibility.
-
-**Websocket Scope**
-
-> Scoped to a WebSocket connection.
-
-To specify a scope for a bean:
-
-**XML Configuration**
-```XML
-<bean id="myBean" class="com.example.MyBean" scope="singleton"/>
-Annotation-Based Configuration
-```
-
-```Java
-@Bean
-@Scope("singleton")
-public MyBean myBean() {
-    return new MyBean();
-}
-Or
-Java
+```java
 @Component
-@Scope("singleton")
-public class MyBean {
-    // ...
+public class MyService {
+    // This is a singleton-scoped bean by default
 }
 ```
 
-You can change the default scope to a different scope if needed, but singleton is the most commonly used scope in Spring applications.
+Here, `MyService` is a singleton-scoped bean by default. Even if you inject `MyService` into multiple classes, Spring will always provide the same instance.
+
+### Other Scopes Available in Spring:
+
+Apart from `singleton`, Spring provides several other scopes:
+
+1. **`prototype`**: A new instance of the bean is created every time it is requested.
+2. **`request`** (Web Applications): A new instance is created for each HTTP request.
+3. **`session`** (Web Applications): A new instance is created for each HTTP session.
+4. **`application`** (Web Applications): A new instance is created per ServletContext.
+5. **`websocket`** (WebSocket Applications): A new instance is created for each WebSocket session.
+
+### Setting a Different Scope:
+
+If you want to change the scope of a bean, you can use the `@Scope` annotation:
+
+```java
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("prototype")
+public class MyService {
+    // This bean will have a prototype scope, meaning a new instance will be created each time it is requested
+}
+```
+
+In this case, every time `MyService` is requested, a new instance will be created.
+
+### Summary:
+
+- **Default Scope**: `singleton` (One instance per Spring IoC container).
+- **Other Scopes**: `prototype`, `request`, `session`, `application`, and `websocket` are some of the other scopes supported by Spring.
+
+For most use cases, the `singleton` scope is sufficient, but in scenarios where you need a new instance for each request or specific context, you can configure a different scope.
+
 
 ## Que 30. what is singleton?
 
-Singleton is a design pattern that ensures a class has only one instance and provides a global point of access to that instance.
 
-Key Features of Singleton:
-Single Instance: Only one instance of the class is created, ensuring that no matter how many times the class is requested, the same instance is returned.
-Global Access: The single instance is globally accessible throughout the application.
-Singleton in Java:
+
+**Singleton** is a design pattern that ensures a class has only one instance and provides a global point of access to that instance.
+
+### Key Features of Singleton:
+1. **Single Instance**: Only one instance of the class is created, ensuring that no matter how many times the class is requested, the same instance is returned.
+2. **Global Access**: The single instance is globally accessible throughout the application.
+
+### Singleton in Java:
+
 To implement a singleton in Java, you typically follow these steps:
 
-Private Constructor: Ensure that the constructor is private so that no other class can instantiate the singleton class directly.
-Static Instance: Create a static instance of the class that is globally accessible.
-Static Method: Provide a static method (often named getInstance()) that returns the single instance of the class.
-Example of Singleton Pattern in Java:
-java
-Copy code
+1. **Private Constructor**: Ensure that the constructor is private so that no other class can instantiate the singleton class directly.
+2. **Static Instance**: Create a static instance of the class that is globally accessible.
+3. **Static Method**: Provide a static method (often named `getInstance()`) that returns the single instance of the class.
+
+### Example of Singleton Pattern in Java:
+
+```java
 public class Singleton {
     // Private static variable that stores the single instance
     private static Singleton instance;
@@ -2084,9 +2490,11 @@ public class Singleton {
         System.out.println("Hello, I am a Singleton!");
     }
 }
-Usage:
+```
+
+### Usage:
+
 ```java
-Copy code
 public class Main {
     public static void main(String[] args) {
         // Get the only instance of Singleton
@@ -2097,14 +2505,15 @@ public class Main {
     }
 }
 ```
-In this example:
 
-Singleton.getInstance() will always return the same instance, and the instance is lazily initialized (i.e., created when it's needed for the first time).
-Singleton in Spring Framework:
-In Spring, the singleton scope for beans is similar to the singleton pattern but is managed by the Spring container. The Spring container creates a single instance of a bean with the singleton scope and reuses that instance across the entire context.
+In this example:
+- `Singleton.getInstance()` will always return the same instance, and the instance is lazily initialized (i.e., created when it's needed for the first time).
+
+### Singleton in Spring Framework:
+
+In Spring, the **singleton scope** for beans is similar to the singleton pattern but is managed by the Spring container. The Spring container creates a single instance of a bean with the `singleton` scope and reuses that instance across the entire context.
 
 ```java
-Copy code
 @Configuration
 public class AppConfig {
 
@@ -2115,194 +2524,37 @@ public class AppConfig {
 }
 ```
 
-Here, myService() returns the same MyService instance across the entire Spring application by default because the bean is in singleton scope.
+Here, `myService()` returns the same `MyService` instance across the entire Spring application by default because the bean is in singleton scope.
 
-Key Differences:
-Java Singleton: You explicitly control the instance in your code using the singleton pattern.
-Spring Singleton Bean: Spring controls the creation and management of the singleton bean instance within its container.
-Conclusion:
+### Key Differences:
+- **Java Singleton**: You explicitly control the instance in your code using the singleton pattern.
+- **Spring Singleton Bean**: Spring controls the creation and management of the singleton bean instance within its container.
+
+### Conclusion:
 A singleton ensures that only one instance of a class exists, providing a single point of access. In Java, this is a pattern that you implement in code, while in Spring, the framework manages it for you by default for beans.
 
 
-#TYPES OF SINGLETON
-
-There are several types of singleton implementations in Java, each with different characteristics to suit various needs, such as thread safety, lazy initialization, and performance. Below are the most common types of singleton implementations:
-
-1. Eager Initialization Singleton
-This is the simplest form of singleton where the instance is created at the time of class loading.
-
-Example:
-java
-Copy code
-public class EagerSingleton {
-    // Instance is created at the time of class loading
-    private static final EagerSingleton instance = new EagerSingleton();
-
-    // Private constructor to prevent instantiation
-    private EagerSingleton() {}
-
-    // Method to return the instance
-    public static EagerSingleton getInstance() {
-        return instance;
-    }
-}
-Pros: Simple, thread-safe by default because the instance is created when the class is loaded.
-Cons: Instance is created even if it might not be used, which can lead to unnecessary resource usage.
-2. Lazy Initialization Singleton
-In lazy initialization, the singleton instance is created only when it is needed, i.e., when the getInstance() method is first called.
-
-Example:
-java
-Copy code
-public class LazySingleton {
-    private static LazySingleton instance;
-
-    // Private constructor
-    private LazySingleton() {}
-
-    // Method to return the instance with lazy initialization
-    public static LazySingleton getInstance() {
-        if (instance == null) {
-            instance = new LazySingleton();
-        }
-        return instance;
-    }
-}
-Pros: The instance is created only when it's needed, saving resources if it's never used.
-Cons: Not thread-safe. Multiple threads could potentially create multiple instances in a multithreaded environment.
-3. Thread-Safe Singleton (Synchronized Method)
-This version ensures thread safety by synchronizing the getInstance() method, so only one thread can access it at a time.
-
-Example:
-java
-Copy code
-public class ThreadSafeSingleton {
-    private static ThreadSafeSingleton instance;
-
-    private ThreadSafeSingleton() {}
-
-    // Synchronized method to ensure thread safety
-    public static synchronized ThreadSafeSingleton getInstance() {
-        if (instance == null) {
-            instance = new ThreadSafeSingleton();
-        }
-        return instance;
-    }
-}
-Pros: Thread-safe, ensuring that only one instance is created even in multithreaded environments.
-Cons: Synchronization has a performance cost due to locking, especially if the method is frequently accessed.
-4. Double-Checked Locking Singleton
-This approach minimizes the cost of synchronization by first checking if the instance is null before locking the code block, ensuring that synchronization happens only once when the instance is created.
-
-Example:
-java
-Copy code
-public class DoubleCheckedLockingSingleton {
-    private static volatile DoubleCheckedLockingSingleton instance;
-
-    private DoubleCheckedLockingSingleton() {}
-
-    public static DoubleCheckedLockingSingleton getInstance() {
-        if (instance == null) {
-            synchronized (DoubleCheckedLockingSingleton.class) {
-                if (instance == null) {
-                    instance = new DoubleCheckedLockingSingleton();
-                }
-            }
-        }
-        return instance;
-    }
-}
-Pros: Thread-safe and performs better than the synchronized method approach.
-Cons: More complex, and volatile is required to ensure the instance is correctly initialized across threads.
-5. Bill Pugh Singleton (Static Inner Class)
-This is a modern and efficient implementation of the singleton pattern using a static inner class. The instance is created when the inner class is loaded, which happens only when it is referenced.
-
-Example:
-java
-Copy code
-public class BillPughSingleton {
-    private BillPughSingleton() {}
-
-    // Static inner class responsible for holding the singleton instance
-    private static class SingletonHelper {
-        private static final BillPughSingleton INSTANCE = new BillPughSingleton();
-    }
-
-    // Method to return the singleton instance
-    public static BillPughSingleton getInstance() {
-        return SingletonHelper.INSTANCE;
-    }
-}
-Pros: Thread-safe, lazy initialization, efficient and does not require synchronization.
-Cons: None, it's considered one of the best practices for implementing the singleton pattern.
-6. Enum Singleton
-The enum singleton is considered the most effective approach as it is thread-safe, provides serialization protection, and guarantees a single instance even with reflection.
-
-Example:
-java
-Copy code
-public enum EnumSingleton {
-    INSTANCE;
-
-    public void someMethod() {
-        // Your code here
-    }
-}
-Pros: Provides protection against multiple instances during serialization and reflection. Thread-safe by default.
-Cons: Limited to singletons that don't need lazy initialization and might not be suitable in all use cases.
-7. Serializable Singleton
-When implementing a singleton that needs to be serializable, it's important to handle deserialization correctly because deserialization can create a new instance of the class. To prevent this, implement the readResolve method.
-
-Example:
-java
-Copy code
-import java.io.Serializable;
-
-public class SerializableSingleton implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private static final SerializableSingleton instance = new SerializableSingleton();
-
-    private SerializableSingleton() {}
-
-    public static SerializableSingleton getInstance() {
-        return instance;
-    }
-
-    // Ensure the same instance is returned during deserialization
-    protected Object readResolve() {
-        return getInstance();
-    }
-}
-Pros: Handles serialization correctly.
-Cons: More complex, but necessary for certain use cases.
-Summary of Singleton Types:
-Eager Initialization: Simple, instance created at class loading.
-Lazy Initialization: Instance created on-demand but not thread-safe.
-Thread-Safe Singleton: Ensures thread safety with synchronization.
-Double-Checked Locking: Thread-safe with reduced synchronization overhead.
-Bill Pugh Singleton: Efficient and thread-safe using static inner class.
-Enum Singleton: Simplest and safest method for singleton, prevents issues with serialization and reflection.
-Serializable Singleton: Special handling for serializable singletons.
-Each type has its own use case depending on the requirements (e.g., thread safety, performance, serialization, etc.). The Bill Pugh and Enum implementations are considered the most effective and modern approaches for implementing singletons in Java.
 
 ## Que 31. what's qualifier? use of qualifier
 
-In Spring Framework, the @Qualifier annotation is used to resolve the ambiguity that arises when there are multiple beans of the same type, and you need to specify exactly which bean should be injected into a particular dependency.
 
-Why is @Qualifier Needed?
+
+In Spring Framework, the `@Qualifier` annotation is used to resolve the ambiguity that arises when there are multiple beans of the same type, and you need to specify exactly which bean should be injected into a particular dependency.
+
+### Why is `@Qualifier` Needed?
+
 By default, Spring's dependency injection resolves beans by type. However, if more than one bean of the same type is available in the Spring container, Spring doesn't know which one to inject, and you get an error like this:
 
-vbnet
-Copy code
+```
 NoUniqueBeanDefinitionException: expected single matching bean but found 2
-In such scenarios, @Qualifier helps specify which exact bean to use when injecting dependencies.
+```
 
-Example without @Qualifier (Multiple Beans Problem):
-Consider that you have two beans of the same type Car.
+In such scenarios, `@Qualifier` helps specify which exact bean to use when injecting dependencies.
 
-java
-Copy code
+### Example without `@Qualifier` (Multiple Beans Problem):
+Consider that you have two beans of the same type `Car`.
+
+```java
 @Component
 public class BMW implements Car {
     // BMW specific logic
@@ -2322,13 +2574,14 @@ public class CarService {
         this.car = car;
     }
 }
-In this scenario, Spring will be confused because both BMW and Audi implement Car, and Spring will not know which one to inject into CarService.
+```
+In this scenario, Spring will be confused because both `BMW` and `Audi` implement `Car`, and Spring will not know which one to inject into `CarService`.
 
-Resolving Ambiguity with @Qualifier:
-By using @Qualifier, you can tell Spring explicitly which bean to inject:
+### Resolving Ambiguity with `@Qualifier`:
 
-java
-Copy code
+By using `@Qualifier`, you can tell Spring explicitly which bean to inject:
+
+```java
 @Component
 public class CarService {
     private Car car;
@@ -2338,18 +2591,21 @@ public class CarService {
         this.car = car;
     }
 }
-Here, the @Qualifier("audi") tells Spring to inject the Audi bean. The name provided in @Qualifier must match the name of the bean (by default, the bean's name is the class name in camel case, i.e., audi for the Audi class).
+```
 
-Full Example with @Qualifier:
-Car Interface:
-java
-Copy code
+Here, the `@Qualifier("audi")` tells Spring to inject the `Audi` bean. The name provided in `@Qualifier` must match the name of the bean (by default, the bean's name is the class name in camel case, i.e., `audi` for the `Audi` class).
+
+### Full Example with `@Qualifier`:
+
+#### Car Interface:
+```java
 public interface Car {
     void drive();
 }
-BMW Class:
-java
-Copy code
+```
+
+#### BMW Class:
+```java
 @Component
 public class BMW implements Car {
     @Override
@@ -2357,9 +2613,10 @@ public class BMW implements Car {
         System.out.println("Driving BMW");
     }
 }
-Audi Class:
-java
-Copy code
+```
+
+#### Audi Class:
+```java
 @Component
 public class Audi implements Car {
     @Override
@@ -2367,9 +2624,10 @@ public class Audi implements Car {
         System.out.println("Driving Audi");
     }
 }
-CarService Class with @Qualifier:
-java
-Copy code
+```
+
+#### CarService Class with `@Qualifier`:
+```java
 @Component
 public class CarService {
     private Car car;
@@ -2383,9 +2641,10 @@ public class CarService {
         car.drive();
     }
 }
-Main Application:
-java
-Copy code
+```
+
+#### Main Application:
+```java
 @SpringBootApplication
 public class CarApplication {
     public static void main(String[] args) {
@@ -2394,82 +2653,127 @@ public class CarApplication {
         carService.performService();  // Output: Driving Audi
     }
 }
-In this example:
+```
 
-The @Qualifier("audi") ensures that the Audi bean is injected into CarService, even though there are two beans (BMW and Audi) implementing Car.
-When to Use @Qualifier:
-Multiple Implementations: When you have more than one bean of the same type and want to specify which one should be injected.
-Custom Annotations: You can also create custom qualifiers by defining your own annotations that act like a @Qualifier to inject beans.
-Method-Level Injection: You can use @Qualifier on setter methods or on fields to resolve ambiguities during injection.
-Summary:
-@Qualifier is used in Spring to differentiate between multiple beans of the same type.
-It works with @Autowired to specify which exact bean should be injected when there are multiple candidates.
-It ensures that Spring injects the correct bean into the appropriate class, preventing NoUniqueBeanDefinitionException.
-Conclusion:
-The @Qualifier annotation provides a mechanism to specify which exact bean should be used in a situation where multiple beans of the same type exist, ensuring more precise and error-free dependency injection in Spring applications.
+In this example:
+- The `@Qualifier("audi")` ensures that the `Audi` bean is injected into `CarService`, even though there are two beans (`BMW` and `Audi`) implementing `Car`.
+
+### When to Use `@Qualifier`:
+1. **Multiple Implementations**: When you have more than one bean of the same type and want to specify which one should be injected.
+2. **Custom Annotations**: You can also create custom qualifiers by defining your own annotations that act like a `@Qualifier` to inject beans.
+3. **Method-Level Injection**: You can use `@Qualifier` on setter methods or on fields to resolve ambiguities during injection.
+
+### Summary:
+
+- `@Qualifier` is used in Spring to differentiate between multiple beans of the same type.
+- It works with `@Autowired` to specify which exact bean should be injected when there are multiple candidates.
+- It ensures that Spring injects the correct bean into the appropriate class, preventing `NoUniqueBeanDefinitionException`.
+
+### Conclusion:
+The `@Qualifier` annotation provides a mechanism to specify which exact bean should be used in a situation where multiple beans of the same type exist, ensuring more precise and error-free dependency injection in Spring applications.
+
 
 
 ## Que 32. u need to create api to download file what is mediaType
 
+In the context of creating an API to download a file, `MediaType` represents the content type of the file being downloaded. It informs the client about the type of data that the server is returning, so the client can handle it appropriately (e.g., opening it with the right program or saving it as the correct file type).
 
-When creating an API to download files, specifying the correct media type (also known as MIME type) is crucial. Media types help the client (e.g., web browser or mobile app) understand the file format and handle it accordingly.
-Common Media Types:
-Here are some examples of media types for popular file formats:
-File Format	Media Type
-PDF	application/pdf
-Image (JPEG)	image/jpeg
-Image (PNG)	image/png
-Video (MP4)	video/mp4
-Audio (MP3)	audio/mpeg
-MS Word (.docx)	application/vnd.openxmlformats-officedocument.wordprocessingml.document
-MS Excel (.xlsx)	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-ZIP	application/zip
-Text (TXT)	text/plain
-API Response Headers:
-When sending a file in an API response, include the following headers:
-Content-Type: specifies the media type (e.g., application/pdf)
-Content-Disposition: specifies the file name and download behavior (e.g., attachment; filename="example.pdf")
-Example HTTP Response:
-HTTP/1.1 200 OK
-Content-Type: application/pdf
-Content-Disposition: attachment; filename="example.pdf"
-Content-Length: 102400
-API Endpoint Example:
-Here's an example API endpoint using Java and Spring Boot:
-Java
-@GetMapping("/download/{fileId}")
-public ResponseEntity<byte[]> downloadFile(@PathVariable Long fileId) {
-    File file = fileService.getFile(fileId);
-    String mediaType = fileService.getMediaType(fileId);
-    
-    return ResponseEntity.ok()
-            .contentType(MediaType.valueOf(mediaType))
-            .header("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"")
-            .body(FileUtils.readFileToByteArray(file));
+In Spring Boot, the `MediaType` class is used to specify the media (MIME) type of the response, such as `application/pdf`, `application/json`, `image/png`, etc.
+
+### Example: File Download API using Spring Boot
+
+Here’s an example of how to create an API for downloading a file with the correct `MediaType`.
+
+```java
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+@RestController
+public class FileDownloadController {
+
+    @GetMapping("/download/{fileName}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+        try {
+            Path filePath = Paths.get("path/to/your/files/" + fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists()) {
+                // Determine the file's content type
+                String contentType = "application/octet-stream"; // default if unknown
+                if (fileName.endsWith(".pdf")) {
+                    contentType = MediaType.APPLICATION_PDF_VALUE;
+                } else if (fileName.endsWith(".png")) {
+                    contentType = MediaType.IMAGE_PNG_VALUE;
+                } // Add other file types as needed
+
+                // Set the headers and return the file as a response
+                return ResponseEntity.ok()
+                        .contentType(MediaType.parseMediaType(contentType))
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                        .body(resource);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } catch (MalformedURLException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }
-Best Practices:
-Use standard media types.
-Specify Content-Type and Content-Disposition headers.
-Consider using HTTP caching (e.g., ETag, Last-Modified) for optimized file downloads.
-By specifying the correct media type and following best practices, you'll ensure a seamless file download experience for your API clients.
+```
+
+### Explanation:
+- **`MediaType.parseMediaType()`**: This is used to specify the MIME type of the file, so the client knows how to handle it.
+- **`HttpHeaders.CONTENT_DISPOSITION`**: This header is used to indicate that the content should be downloaded as an attachment.
+- **File Content-Type**: You can specify `MediaType` based on the file type. Some common `MediaType` values are:
+  - `MediaType.APPLICATION_PDF_VALUE` (`application/pdf`)
+  - `MediaType.IMAGE_PNG_VALUE` (`image/png`)
+  - `MediaType.APPLICATION_OCTET_STREAM_VALUE` (generic for binary data, `application/octet-stream`).
+
+### Common Media Types:
+- **`application/json`**: For JSON data.
+- **`application/pdf`**: For PDF files.
+- **`image/jpeg`**: For JPEG images.
+- **`image/png`**: For PNG images.
+- **`text/plain`**: For plain text files.
+- **`application/octet-stream`**: For generic binary files.
+
+### Conclusion:
+In a file download API, `MediaType` specifies the type of file being returned (e.g., PDF, image, text), ensuring the client can handle the file properly upon download. Using `MediaType` allows the server to provide the correct content type based on the file being served.
+
 
 ## Que 33. diff bw @RestController and @component
 
-Both @RestController and @Component are annotations used in Spring Framework, but they serve different purposes. Here’s a breakdown of their differences:
 
-1. Purpose:
-@RestController: This annotation is a specialized version of @Controller used specifically for RESTful web services. It combines the functionality of @Controller and @ResponseBody. A class annotated with @RestController will have its methods return data directly as JSON or XML (or other formats), rather than returning a view.
-@Component: This is a generic stereotype annotation used to mark a class as a Spring-managed bean. It is a general-purpose annotation that indicates the class is a component to be automatically detected by Spring during classpath scanning.
-2. Use Case:
-@RestController: Used for defining REST API endpoints that return data (e.g., JSON or XML) instead of views. It is typically used in web applications where you want to expose resources via HTTP endpoints.
-@Component: Used to define any general-purpose bean in the Spring container. It’s more commonly used for service, repository, or helper classes that don't have a specialized role like controllers.
-3. Returned Data:
-@RestController: Methods inside a class annotated with @RestController will return data directly to the client. The response body is automatically serialized into JSON, XML, or another specified format.
-@Component: There is no automatic serialization to the response body because @Component is not tied to web requests. Classes annotated with @Component are typically used for business logic or other application services, not for handling HTTP requests directly.
-4. Example:
-@RestController Example:
-java
-Copy code
+Both `@RestController` and `@Component` are annotations used in Spring Framework, but they serve different purposes. Here’s a breakdown of their differences:
+
+### 1. **Purpose**:
+   - **`@RestController`**: This annotation is a specialized version of `@Controller` used specifically for RESTful web services. It combines the functionality of `@Controller` and `@ResponseBody`. A class annotated with `@RestController` will have its methods return data directly as JSON or XML (or other formats), rather than returning a view.
+   - **`@Component`**: This is a generic stereotype annotation used to mark a class as a Spring-managed bean. It is a general-purpose annotation that indicates the class is a component to be automatically detected by Spring during classpath scanning.
+
+### 2. **Use Case**:
+   - **`@RestController`**: Used for defining REST API endpoints that return data (e.g., JSON or XML) instead of views. It is typically used in web applications where you want to expose resources via HTTP endpoints.
+   - **`@Component`**: Used to define any general-purpose bean in the Spring container. It’s more commonly used for service, repository, or helper classes that don't have a specialized role like controllers.
+
+### 3. **Returned Data**:
+   - **`@RestController`**: Methods inside a class annotated with `@RestController` will return data directly to the client. The response body is automatically serialized into JSON, XML, or another specified format.
+   - **`@Component`**: There is no automatic serialization to the response body because `@Component` is not tied to web requests. Classes annotated with `@Component` are typically used for business logic or other application services, not for handling HTTP requests directly.
+
+### 4. **Example**:
+
+#### `@RestController` Example:
+```java
 @RestController
 public class MyRestController {
 
@@ -2478,10 +2782,11 @@ public class MyRestController {
         return "Hello, World!";
     }
 }
-In this case, the sayHello() method will return the string "Hello, World!" as a response body, typically in JSON format. The annotation indicates that this class is a REST controller.
-@Component Example:
-java
-Copy code
+```
+- In this case, the `sayHello()` method will return the string `"Hello, World!"` as a response body, typically in JSON format. The annotation indicates that this class is a REST controller.
+
+#### `@Component` Example:
+```java
 @Component
 public class MyComponent {
 
@@ -2489,26 +2794,35 @@ public class MyComponent {
         return "Service logic executed!";
     }
 }
-Here, MyComponent is just a bean that can be injected and used elsewhere in the application. It performs some logic, but it doesn't handle HTTP requests or return responses.
-5. Specialization:
-@RestController: A specialized component meant for handling web requests and responding with data. It is designed specifically for RESTful web services.
-@Component: A more generic annotation that can be used for various types of beans that do not necessarily interact with web requests (e.g., services, repositories, utilities).
-6. Relationship:
-@RestController: Technically, @RestController is also a @Component. Spring treats @RestController as a @Component, meaning it can be picked up during component scanning. However, it has the additional functionality of handling HTTP requests and returning data.
-@Component: It is the most general stereotype annotation for a Spring-managed component and serves as the parent to other specialized annotations like @Service, @Repository, and @Controller (and by extension, @RestController).
+```
+- Here, `MyComponent` is just a bean that can be injected and used elsewhere in the application. It performs some logic, but it doesn't handle HTTP requests or return responses.
+
+### 5. **Specialization**:
+   - **`@RestController`**: A specialized component meant for handling web requests and responding with data. It is designed specifically for RESTful web services.
+   - **`@Component`**: A more generic annotation that can be used for various types of beans that do not necessarily interact with web requests (e.g., services, repositories, utilities).
+
+### 6. **Relationship**:
+   - **`@RestController`**: Technically, `@RestController` is also a `@Component`. Spring treats `@RestController` as a `@Component`, meaning it can be picked up during component scanning. However, it has the additional functionality of handling HTTP requests and returning data.
+   - **`@Component`**: It is the most general stereotype annotation for a Spring-managed component and serves as the parent to other specialized annotations like `@Service`, `@Repository`, and `@Controller` (and by extension, `@RestController`).
+
+### Conclusion:
+- **`@RestController`** is used for building RESTful web services and is a specialized component for handling HTTP requests, returning responses in formats like JSON or XML.
+- **`@Component`** is a general-purpose annotation to register a class as a Spring bean. It is more suitable for non-web components like services, repositories, or utility classes.
+
 
 ## Que 34. Database JPA
+
 
 Java Persistence API (JPA) is a specification in Java that defines how to manage relational data in applications using Java objects. JPA is part of the Jakarta EE specification but can be used independently in Java SE and in conjunction with Spring Boot. JPA provides a way to map Java objects (entities) to database tables using annotations or XML configurations. JPA simplifies database operations and abstracts the complexity of interacting directly with SQL.
 
 Here’s a detailed overview of JPA and its usage in a database context:
 
-1. Entities and Entity Annotations
-Entities: In JPA, an entity represents a table in a database, and each instance of an entity corresponds to a row in the table.
-Annotations: JPA uses annotations to map Java objects to database tables.
-Example of an Entity:
-java
-Copy code
+### 1. **Entities and Entity Annotations**
+   - **Entities**: In JPA, an entity represents a table in a database, and each instance of an entity corresponds to a row in the table.
+   - **Annotations**: JPA uses annotations to map Java objects to database tables.
+
+#### Example of an Entity:
+```java
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -2525,27 +2839,32 @@ public class User {
     
     // Getters and Setters
 }
-@Entity: Marks the class as a JPA entity, meaning it will be mapped to a database table.
-@Id: Specifies the primary key field.
-@GeneratedValue: Specifies how the primary key should be generated, in this case, auto-incremented by the database.
-2. Repositories
-Repositories are responsible for interacting with the database. In Spring Data JPA, you can create a repository by extending the JpaRepository interface.
-Example of a Repository:
-java
-Copy code
+```
+- `@Entity`: Marks the class as a JPA entity, meaning it will be mapped to a database table.
+- `@Id`: Specifies the primary key field.
+- `@GeneratedValue`: Specifies how the primary key should be generated, in this case, auto-incremented by the database.
+
+### 2. **Repositories**
+   - Repositories are responsible for interacting with the database. In Spring Data JPA, you can create a repository by extending the `JpaRepository` interface.
+
+#### Example of a Repository:
+```java
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     // Custom query methods can be added here
     User findByUsername(String username);
 }
-JpaRepository: Provides CRUD operations and additional methods for pagination and sorting.
-Custom query methods like findByUsername can be automatically implemented by Spring Data JPA based on method naming conventions.
-3. Persistence Context and EntityManager
-The EntityManager is responsible for the lifecycle of entities, such as persisting, removing, finding, and merging entities in the database. The persistence context is like a cache that manages entities’ state.
-Example of EntityManager usage:
-java
-Copy code
+```
+
+- `JpaRepository`: Provides CRUD operations and additional methods for pagination and sorting.
+- Custom query methods like `findByUsername` can be automatically implemented by Spring Data JPA based on method naming conventions.
+
+### 3. **Persistence Context and EntityManager**
+   - The **EntityManager** is responsible for the lifecycle of entities, such as persisting, removing, finding, and merging entities in the database. The persistence context is like a cache that manages entities’ state.
+
+#### Example of EntityManager usage:
+```java
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
@@ -2563,11 +2882,13 @@ public class UserService {
         return entityManager.find(User.class, id);  // Find a user by ID
     }
 }
-4. Transactions
-In JPA, database operations are wrapped in transactions to ensure atomicity and consistency. In Spring, transactions can be managed declaratively using the @Transactional annotation.
-Example of Transactions:
-java
-Copy code
+```
+
+### 4. **Transactions**
+   - In JPA, database operations are wrapped in transactions to ensure atomicity and consistency. In Spring, transactions can be managed declaratively using the `@Transactional` annotation.
+
+#### Example of Transactions:
+```java
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -2581,12 +2902,14 @@ public class UserService {
         // Transaction is committed automatically when the method completes
     }
 }
-@Transactional: Manages transactions. If an exception is thrown, the transaction is rolled back.
-5. JPQL (Java Persistence Query Language)
-JPA provides a query language called JPQL, which is similar to SQL but operates on Java objects instead of tables.
-Example of JPQL Query:
-java
-Copy code
+```
+- `@Transactional`: Manages transactions. If an exception is thrown, the transaction is rolled back.
+
+### 5. **JPQL (Java Persistence Query Language)**
+   - JPA provides a query language called **JPQL**, which is similar to SQL but operates on Java objects instead of tables.
+
+#### Example of JPQL Query:
+```java
 import javax.persistence.Query;
 
 public List<User> getUsersByEmailDomain(String domain) {
@@ -2595,11 +2918,13 @@ public List<User> getUsersByEmailDomain(String domain) {
     query.setParameter("domain", "%" + domain);
     return query.getResultList();
 }
-6. Relationships Between Entities
-JPA supports relationships between entities such as OneToOne, OneToMany, ManyToOne, and ManyToMany.
-Example of a OneToMany Relationship:
-java
-Copy code
+```
+
+### 6. **Relationships Between Entities**
+   - JPA supports relationships between entities such as `OneToOne`, `OneToMany`, `ManyToOne`, and `ManyToMany`.
+
+#### Example of a `OneToMany` Relationship:
+```java
 @Entity
 public class User {
     @Id
@@ -2628,24 +2953,28 @@ public class Order {
 
     // Getters and Setters
 }
-@OneToMany: Specifies a one-to-many relationship (e.g., one user can have many orders).
-@ManyToOne: Specifies a many-to-one relationship (e.g., many orders belong to one user).
-7. Advantages of JPA
-Object-Relational Mapping (ORM): JPA abstracts the complexity of SQL and allows developers to work with Java objects.
-Database Independence: JPA can work with different databases without changing the code (only the database driver and dialect change).
-Automatic Query Generation: JPA can generate queries based on method names in repositories, reducing boilerplate code.
-8. Spring Boot with JPA
-Spring Boot simplifies JPA integration with built-in support and configuration. With Spring Boot, you just need to include the required dependencies and configure your database connection.
-Example of Spring Boot JPA Dependency:
-xml
-Copy code
+```
+- `@OneToMany`: Specifies a one-to-many relationship (e.g., one user can have many orders).
+- `@ManyToOne`: Specifies a many-to-one relationship (e.g., many orders belong to one user).
+
+### 7. **Advantages of JPA**
+   - **Object-Relational Mapping (ORM)**: JPA abstracts the complexity of SQL and allows developers to work with Java objects.
+   - **Database Independence**: JPA can work with different databases without changing the code (only the database driver and dialect change).
+   - **Automatic Query Generation**: JPA can generate queries based on method names in repositories, reducing boilerplate code.
+
+### 8. **Spring Boot with JPA**
+   - Spring Boot simplifies JPA integration with built-in support and configuration. With Spring Boot, you just need to include the required dependencies and configure your database connection.
+
+#### Example of Spring Boot JPA Dependency:
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-jpa</artifactId>
 </dependency>
-Example of Spring Boot Configuration:
-yaml
-Copy code
+```
+
+#### Example of Spring Boot Configuration:
+```yaml
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/mydb
@@ -2655,32 +2984,36 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-9. Common JPA Annotations
-@Entity: Marks a class as a JPA entity.
-@Table: Specifies the table name in the database.
-@Id: Denotes the primary key.
-@GeneratedValue: Specifies the strategy for primary key generation.
-@OneToOne, @OneToMany, @ManyToOne, @ManyToMany: Define relationships between entities.
-@JoinColumn: Specifies the foreign key column.
-@Column: Maps a field to a specific column in a database table.
-Summary
+```
+
+### 9. **Common JPA Annotations**
+- `@Entity`: Marks a class as a JPA entity.
+- `@Table`: Specifies the table name in the database.
+- `@Id`: Denotes the primary key.
+- `@GeneratedValue`: Specifies the strategy for primary key generation.
+- `@OneToOne`, `@OneToMany`, `@ManyToOne`, `@ManyToMany`: Define relationships between entities.
+- `@JoinColumn`: Specifies the foreign key column.
+- `@Column`: Maps a field to a specific column in a database table.
+
+### Summary
 JPA is a powerful abstraction layer over databases, simplifying the interaction with relational data by allowing developers to work directly with Java objects. It reduces boilerplate code and provides a standardized way to manage database entities, relationships, and transactions. When combined with Spring Boot, JPA becomes even easier to use, offering quick configuration and seamless integration for building scalable and maintainable applications.
 
 
 ## Que 35. use of @Repository
 
-The @Repository annotation in Spring is used to indicate that the class is a Data Access Object (DAO) or a mechanism for encapsulating the access to a database. It is a specialization of the @Component annotation, meaning that classes annotated with @Repository are automatically detected by Spring’s classpath scanning and are registered as Spring beans.
 
-Here's a detailed explanation of the @Repository annotation and its use:
+The `@Repository` annotation in Spring is used to indicate that the class is a Data Access Object (DAO) or a mechanism for encapsulating the access to a database. It is a specialization of the `@Component` annotation, meaning that classes annotated with `@Repository` are automatically detected by Spring’s classpath scanning and are registered as Spring beans.
 
-Purpose of @Repository
-Encapsulation of Database Logic: The @Repository annotation is used to define a repository that handles CRUD (Create, Read, Update, Delete) operations for a particular domain object (or entity). It encapsulates the interaction with the database, making the code more modular and easier to manage.
+Here's a detailed explanation of the `@Repository` annotation and its use:
 
-Exception Translation: One of the key roles of @Repository is to enable automatic exception translation. When a @Repository-annotated class interacts with the database and an exception occurs (like SQLException), Spring translates these low-level database exceptions into Spring’s DataAccessException hierarchy. This allows the application to handle database-related exceptions in a more consistent and manageable way.
+### Purpose of `@Repository`
+- **Encapsulation of Database Logic**: The `@Repository` annotation is used to define a repository that handles CRUD (Create, Read, Update, Delete) operations for a particular domain object (or entity). It encapsulates the interaction with the database, making the code more modular and easier to manage.
+  
+- **Exception Translation**: One of the key roles of `@Repository` is to enable automatic exception translation. When a `@Repository`-annotated class interacts with the database and an exception occurs (like `SQLException`), Spring translates these low-level database exceptions into Spring’s `DataAccessException` hierarchy. This allows the application to handle database-related exceptions in a more consistent and manageable way.
 
-Example Usage of @Repository
-java
-Copy code
+### Example Usage of `@Repository`
+
+```java
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -2689,59 +3022,69 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // Custom query method
     User findByUsername(String username);
 }
-Repository Definition: The UserRepository interface extends JpaRepository (which is part of Spring Data JPA), and the @Repository annotation indicates that this interface is a repository that will interact with the User entity.
+```
 
-Custom Query Methods: You can define custom query methods like findByUsername(String username) that Spring Data JPA will automatically implement based on method naming conventions.
+- **Repository Definition**: The `UserRepository` interface extends `JpaRepository` (which is part of Spring Data JPA), and the `@Repository` annotation indicates that this interface is a repository that will interact with the `User` entity.
+  
+- **Custom Query Methods**: You can define custom query methods like `findByUsername(String username)` that Spring Data JPA will automatically implement based on method naming conventions.
 
-Benefits of Using @Repository
-Automatic Bean Registration: Classes or interfaces annotated with @Repository are automatically picked up by Spring's component scanning and registered as beans in the application context. This eliminates the need to manually declare them in configuration files.
+### Benefits of Using `@Repository`
 
-Exception Translation: As mentioned earlier, the @Repository annotation enables exception translation. For example, SQL exceptions are translated into Spring’s DataAccessException, making it easier to handle exceptions consistently in the service layer. This is particularly useful when working with JDBC or any lower-level database APIs.
+1. **Automatic Bean Registration**: Classes or interfaces annotated with `@Repository` are automatically picked up by Spring's component scanning and registered as beans in the application context. This eliminates the need to manually declare them in configuration files.
 
-Example:
+2. **Exception Translation**: As mentioned earlier, the `@Repository` annotation enables exception translation. For example, SQL exceptions are translated into Spring’s `DataAccessException`, making it easier to handle exceptions consistently in the service layer. This is particularly useful when working with JDBC or any lower-level database APIs.
 
-java
-Copy code
-try {
-    userRepository.save(user);
-} catch (DataAccessException e) {
-    // Handle Spring's DataAccessException
-}
-Logical Layering: The @Repository annotation helps define a clear separation between layers in your application. By marking a class as a repository, you make the architecture more understandable by clearly defining that the class is responsible for data persistence.
+   Example:
+   ```java
+   try {
+       userRepository.save(user);
+   } catch (DataAccessException e) {
+       // Handle Spring's DataAccessException
+   }
+   ```
 
-Cleaner Code: @Repository allows you to encapsulate all the database interaction code in one place, keeping the business logic in the service layer clean and focused on domain logic rather than database operations.
+3. **Logical Layering**: The `@Repository` annotation helps define a clear separation between layers in your application. By marking a class as a repository, you make the architecture more understandable by clearly defining that the class is responsible for data persistence.
 
-When to Use @Repository
-You should use @Repository in any class that is responsible for database access. This includes classes that handle CRUD operations, queries, or any other form of data manipulation. Typically, this annotation is used with DAO or repository interfaces that interact with entities and perform data access tasks.
+4. **Cleaner Code**: `@Repository` allows you to encapsulate all the database interaction code in one place, keeping the business logic in the service layer clean and focused on domain logic rather than database operations.
+
+### When to Use `@Repository`
+
+You should use `@Repository` in any class that is responsible for database access. This includes classes that handle CRUD operations, queries, or any other form of data manipulation. Typically, this annotation is used with DAO or repository interfaces that interact with entities and perform data access tasks.
 
 For example:
+- In JPA, it is used with interfaces that extend `JpaRepository` or `CrudRepository`.
+- In traditional JDBC-based applications, it can be used with classes that contain the database access logic using `JdbcTemplate`.
 
-In JPA, it is used with interfaces that extend JpaRepository or CrudRepository.
-In traditional JDBC-based applications, it can be used with classes that contain the database access logic using JdbcTemplate.
-Comparison to Other Stereotype Annotations
-@Component: A generic stereotype annotation for any Spring-managed component. It is a general-purpose annotation.
-@Service: A specialization of @Component used to indicate service layer components. It is typically used for business logic.
-@Repository: A specialization of @Component used to indicate data access components (DAOs or repositories).
+### Comparison to Other Stereotype Annotations
 
+- **`@Component`**: A generic stereotype annotation for any Spring-managed component. It is a general-purpose annotation.
+- **`@Service`**: A specialization of `@Component` used to indicate service layer components. It is typically used for business logic.
+- **`@Repository`**: A specialization of `@Component` used to indicate data access components (DAOs or repositories).
+
+### Conclusion
+
+The `@Repository` annotation in Spring is crucial for data access logic. It not only makes classes eligible for Spring’s component scanning but also provides database exception translation, improving the handling of database-related exceptions. It encourages a clean separation between the persistence layer and the business logic, leading to a more maintainable and organized application.
 
 
 ## Que 36. is it possible to connect two different kind of database in spring
+
 
 Yes, it is possible to connect to two or more different types of databases in a Spring Boot application. Spring Boot provides excellent support for managing multiple datasources, allowing you to work with different databases (e.g., MySQL, PostgreSQL, MongoDB, etc.) within the same application. This is useful for cases where you may need to integrate with different data sources or work with heterogeneous databases.
 
 Here’s how you can achieve this:
 
-1. Define Multiple DataSource Beans
-To connect to multiple databases, you need to define multiple DataSource beans in your configuration. You would typically use @Primary to mark one DataSource as the default.
+### 1. **Define Multiple DataSource Beans**
 
-Example: Connecting to Two Relational Databases (MySQL and PostgreSQL)
+To connect to multiple databases, you need to define multiple `DataSource` beans in your configuration. You would typically use `@Primary` to mark one `DataSource` as the default. 
+
+### Example: Connecting to Two Relational Databases (MySQL and PostgreSQL)
+
 Here’s an example of how to configure two different relational databases in Spring Boot:
 
-Step 1: Add Dependencies to pom.xml
-Make sure you have the necessary dependencies in your pom.xml for the databases you want to connect to, e.g., MySQL and PostgreSQL:
+### Step 1: Add Dependencies to `pom.xml`
+Make sure you have the necessary dependencies in your `pom.xml` for the databases you want to connect to, e.g., MySQL and PostgreSQL:
 
-xml
-Copy code
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -2756,11 +3099,13 @@ Copy code
     <groupId>org.postgresql</groupId>
     <artifactId>postgresql</artifactId>
 </dependency>
-Step 2: Configure Multiple DataSources
-You need to define multiple DataSource beans in your configuration class. One DataSource will be the primary, and the others will be secondary or specific to certain operations.
+```
 
-java
-Copy code
+### Step 2: Configure Multiple DataSources
+
+You need to define multiple `DataSource` beans in your configuration class. One `DataSource` will be the primary, and the others will be secondary or specific to certain operations.
+
+```java
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -2791,12 +3136,15 @@ public class DataSourceConfig {
                 .build();
     }
 }
-Step 3: Configure EntityManagers and TransactionManagers
-You’ll need to configure separate EntityManagerFactory and TransactionManager beans for each DataSource if you're working with JPA.
+```
 
-MySQL Configuration:
-java
-Copy code
+### Step 3: Configure EntityManagers and TransactionManagers
+
+You’ll need to configure separate `EntityManagerFactory` and `TransactionManager` beans for each `DataSource` if you're working with JPA.
+
+#### MySQL Configuration:
+
+```java
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
@@ -2825,9 +3173,11 @@ public class MysqlConfig {
         return new JpaTransactionManager(mysqlEntityManagerFactory);
     }
 }
-PostgreSQL Configuration:
-java
-Copy code
+```
+
+#### PostgreSQL Configuration:
+
+```java
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
@@ -2856,35 +3206,42 @@ public class PostgresqlConfig {
         return new JpaTransactionManager(postgresqlEntityManagerFactory);
     }
 }
-Step 4: Use the Appropriate Repository
+```
+
+### Step 4: Use the Appropriate Repository
+
 In your application, you will use the appropriate repositories that are linked to the correct databases.
 
-Repositories for MySQL:
+- Repositories for MySQL:
+  ```java
+  @Autowired
+  private UserRepository userRepository;  // MySQL repository
+  ```
 
-java
-Copy code
-@Autowired
-private UserRepository userRepository;  // MySQL repository
-Repositories for PostgreSQL:
+- Repositories for PostgreSQL:
+  ```java
+  @Autowired
+  private OrderRepository orderRepository;  // PostgreSQL repository
+  ```
 
-java
-Copy code
-@Autowired
-private OrderRepository orderRepository;  // PostgreSQL repository
-2. Handling Multiple Databases (Relational + NoSQL)
+### 2. **Handling Multiple Databases (Relational + NoSQL)**
+
 You can also connect to a combination of relational databases (e.g., MySQL) and NoSQL databases (e.g., MongoDB) in the same Spring Boot application.
 
-Example of Connecting to MongoDB and MySQL
-Add dependencies for MongoDB in pom.xml:
-xml
-Copy code
+#### Example of Connecting to MongoDB and MySQL
+
+1. Add dependencies for MongoDB in `pom.xml`:
+
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-mongodb</artifactId>
 </dependency>
-Configure MongoDB MongoTemplate:
-java
-Copy code
+```
+
+2. Configure MongoDB `MongoTemplate`:
+
+```java
 @Configuration
 public class MongoConfig {
 
@@ -2894,26 +3251,38 @@ public class MongoConfig {
         return new MongoTemplate(mongoClient, "myMongoDb");
     }
 }
+```
+
 Now you can use repositories for both MySQL (JPA) and MongoDB (Spring Data MongoDB) in the same application.
+
+### Summary
+
+Spring Boot makes it easy to connect to multiple databases within the same application. Whether you're connecting to two different relational databases or mixing relational with NoSQL, you can define multiple `DataSource` beans, configure entity managers and transaction managers for each data source, and manage your repositories accordingly.
+
+This capability allows for flexible and scalable designs, enabling an application to interact with various databases as required.
+
 
 
 ## Que 37. Stream APIs
 
+
 The Stream API, introduced in Java 8, is a powerful tool for processing sequences of elements in a functional style. It provides a high-level abstraction for performing operations like filtering, mapping, reducing, and collecting on data collections such as Lists, Sets, and Maps.
 
-Key Concepts of Stream API
-Stream: A sequence of elements that supports various operations to process data. Streams can be created from collections, arrays, or I/O channels.
-Intermediate Operations: Operations that transform the stream into another stream. These are lazy, meaning they are only executed when a terminal operation is invoked.
-Examples: filter(), map(), sorted(), distinct()
-Terminal Operations: Operations that produce a result or a side-effect. They trigger the processing of the stream pipeline.
-Examples: collect(), forEach(), reduce(), count()
-Pipelining: Streams support pipelining, which allows multiple operations to be chained together.
-Internal Iteration: Unlike external iteration (e.g., for loop), Streams manage the iteration for you.
-Example of Stream API
+### Key Concepts of Stream API
+
+1. **Stream**: A sequence of elements that supports various operations to process data. Streams can be created from collections, arrays, or I/O channels.
+2. **Intermediate Operations**: Operations that transform the stream into another stream. These are lazy, meaning they are only executed when a terminal operation is invoked.
+   - Examples: `filter()`, `map()`, `sorted()`, `distinct()`
+3. **Terminal Operations**: Operations that produce a result or a side-effect. They trigger the processing of the stream pipeline.
+   - Examples: `collect()`, `forEach()`, `reduce()`, `count()`
+4. **Pipelining**: Streams support pipelining, which allows multiple operations to be chained together.
+5. **Internal Iteration**: Unlike external iteration (e.g., `for` loop), Streams manage the iteration for you.
+
+### Example of Stream API
+
 Here’s a simple example that demonstrates the basic usage of Stream API:
 
-java
-Copy code
+```java
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -2931,138 +3300,157 @@ public class StreamExample {
         System.out.println(result);  // Output: [ALICE]
     }
 }
-Intermediate Operations
+```
+
+### Intermediate Operations
+
 These are operations that return a new stream, allowing further operations to be applied.
 
-map(): Transforms each element of the stream.
-java
-Copy code
-List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-List<Integer> squaredNumbers = numbers.stream()
-                                       .map(n -> n * n)
-                                       .collect(Collectors.toList());
-filter(): Filters elements based on a condition (predicate).
-java
-Copy code
-List<String> filteredNames = names.stream()
-                                  .filter(name -> name.length() > 3)
+- **`map()`**: Transforms each element of the stream.
+  ```java
+  List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+  List<Integer> squaredNumbers = numbers.stream()
+                                         .map(n -> n * n)
+                                         .collect(Collectors.toList());
+  ```
+- **`filter()`**: Filters elements based on a condition (predicate).
+  ```java
+  List<String> filteredNames = names.stream()
+                                    .filter(name -> name.length() > 3)
+                                    .collect(Collectors.toList());
+  ```
+- **`sorted()`**: Sorts the stream’s elements.
+  ```java
+  List<String> sortedNames = names.stream()
+                                  .sorted()
                                   .collect(Collectors.toList());
-sorted(): Sorts the stream’s elements.
-java
-Copy code
-List<String> sortedNames = names.stream()
-                                .sorted()
-                                .collect(Collectors.toList());
-distinct(): Removes duplicates from the stream.
-java
-Copy code
-List<Integer> distinctNumbers = numbers.stream()
-                                       .distinct()
-                                       .collect(Collectors.toList());
-Terminal Operations
+  ```
+- **`distinct()`**: Removes duplicates from the stream.
+  ```java
+  List<Integer> distinctNumbers = numbers.stream()
+                                         .distinct()
+                                         .collect(Collectors.toList());
+  ```
+
+### Terminal Operations
+
 These are operations that return a result or cause a side effect. Once a terminal operation is applied, the stream is considered consumed and cannot be reused.
 
-collect(): Collects the result of the stream into a collection or other data structure.
-java
-Copy code
-List<String> list = stream.collect(Collectors.toList());
-forEach(): Performs an action for each element of the stream.
-java
-Copy code
-names.stream().forEach(System.out::println);
-reduce(): Reduces the elements of the stream to a single value using a binary operator.
-java
-Copy code
-int sum = numbers.stream().reduce(0, (a, b) -> a + b);
-count(): Counts the number of elements in the stream.
-java
-Copy code
-long count = names.stream().count();
-Lazy Evaluation
+- **`collect()`**: Collects the result of the stream into a collection or other data structure.
+  ```java
+  List<String> list = stream.collect(Collectors.toList());
+  ```
+- **`forEach()`**: Performs an action for each element of the stream.
+  ```java
+  names.stream().forEach(System.out::println);
+  ```
+- **`reduce()`**: Reduces the elements of the stream to a single value using a binary operator.
+  ```java
+  int sum = numbers.stream().reduce(0, (a, b) -> a + b);
+  ```
+- **`count()`**: Counts the number of elements in the stream.
+  ```java
+  long count = names.stream().count();
+  ```
+
+### Lazy Evaluation
+
 Stream operations are lazy, meaning intermediate operations are not executed until a terminal operation is invoked. This allows for optimized execution and better performance.
 
 For example, even if you chain multiple intermediate operations, they won’t execute until the terminal operation is called.
 
-Stream Creation
+### Stream Creation
+
 You can create streams from various sources:
 
-From Collections:
-java
-Copy code
-List<String> list = Arrays.asList("a", "b", "c");
-Stream<String> stream = list.stream();
-From Arrays:
-java
-Copy code
-int[] array = {1, 2, 3, 4, 5};
-IntStream stream = Arrays.stream(array);
-From Values:
-java
-Copy code
-Stream<String> stream = Stream.of("a", "b", "c");
-From Files:
-java
-Copy code
-Stream<String> lines = Files.lines(Paths.get("file.txt"));
-Parallel Streams
-Streams can also be executed in parallel to take advantage of multi-core processors. This can be achieved by converting the stream into a parallel stream using parallelStream():
+- **From Collections**: 
+  ```java
+  List<String> list = Arrays.asList("a", "b", "c");
+  Stream<String> stream = list.stream();
+  ```
+- **From Arrays**:
+  ```java
+  int[] array = {1, 2, 3, 4, 5};
+  IntStream stream = Arrays.stream(array);
+  ```
+- **From Values**:
+  ```java
+  Stream<String> stream = Stream.of("a", "b", "c");
+  ```
+- **From Files**:
+  ```java
+  Stream<String> lines = Files.lines(Paths.get("file.txt"));
+  ```
 
-java
-Copy code
+### Parallel Streams
+
+Streams can also be executed in parallel to take advantage of multi-core processors. This can be achieved by converting the stream into a parallel stream using `parallelStream()`:
+
+```java
 List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 List<Integer> squares = numbers.parallelStream()
                                .map(n -> n * n)
                                .collect(Collectors.toList());
+```
+
 Parallel streams automatically divide the data into chunks and process them in parallel threads, potentially speeding up the processing of large datasets.
 
+### Summary
+
+The Stream API in Java is a powerful and flexible tool for data processing. It enables a more functional and declarative approach to handling collections, making code more readable and easier to maintain. Whether you’re filtering, mapping, sorting, or reducing, the Stream API provides a clean and efficient way to work with data in Java.
 
 ## Que 38. functional interface
 
-A functional interface in Java is an interface that contains exactly one abstract method. These interfaces can have multiple default or static methods, but they must have only one abstract method to qualify as a functional interface. They are used primarily to implement lambda expressions and method references, making them a crucial part of functional programming in Java.
 
-Key Characteristics of Functional Interfaces
-Single Abstract Method: A functional interface must have only one abstract method. This is the method that will be implemented by the lambda expression or method reference.
-Default and Static Methods: Functional interfaces can have any number of default or static methods. These methods can provide common functionality that can be shared across implementations.
-@FunctionalInterface Annotation: While not mandatory, it’s a good practice to annotate functional interfaces with @FunctionalInterface. This annotation helps to clearly indicate the intent and also provides compile-time checking to ensure that the interface meets the criteria of a functional interface.
-Examples of Functional Interfaces
-Using Built-in Functional Interfaces
-Java 8 introduced several built-in functional interfaces in the java.util.function package, such as:
+A **functional interface** in Java is an interface that contains exactly one abstract method. These interfaces can have multiple default or static methods, but they must have only one abstract method to qualify as a functional interface. They are used primarily to implement lambda expressions and method references, making them a crucial part of functional programming in Java.
 
-Predicate<T>: Represents a boolean-valued function of one argument.
+### Key Characteristics of Functional Interfaces
 
-java
-Copy code
-Predicate<String> isEmpty = str -> str.isEmpty();
-boolean result = isEmpty.test("");  // Returns true
-Function<T, R>: Represents a function that accepts one argument and produces a result.
+1. **Single Abstract Method**: A functional interface must have only one abstract method. This is the method that will be implemented by the lambda expression or method reference.
+2. **Default and Static Methods**: Functional interfaces can have any number of default or static methods. These methods can provide common functionality that can be shared across implementations.
+3. **@FunctionalInterface Annotation**: While not mandatory, it’s a good practice to annotate functional interfaces with `@FunctionalInterface`. This annotation helps to clearly indicate the intent and also provides compile-time checking to ensure that the interface meets the criteria of a functional interface.
 
-java
-Copy code
-Function<String, Integer> stringLength = str -> str.length();
-int length = stringLength.apply("Hello");  // Returns 5
-Consumer<T>: Represents an operation that accepts a single input argument and returns no result.
+### Examples of Functional Interfaces
 
-java
-Copy code
-Consumer<String> print = str -> System.out.println(str);
-print.accept("Hello, World!");  // Prints: Hello, World!
-Supplier<T>: Represents a supplier of results (no input).
+1. **Using Built-in Functional Interfaces**
 
-java
-Copy code
-Supplier<Double> randomValue = () -> Math.random();
-double value = randomValue.get();  // Returns a random double
-BiFunction<T, U, R>: Represents a function that accepts two arguments and produces a result.
+Java 8 introduced several built-in functional interfaces in the `java.util.function` package, such as:
 
-java
-Copy code
-BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
-int sum = add.apply(5, 10);  // Returns 15
-Creating a Custom Functional Interface
+- **`Predicate<T>`**: Represents a boolean-valued function of one argument.
+  ```java
+  Predicate<String> isEmpty = str -> str.isEmpty();
+  boolean result = isEmpty.test("");  // Returns true
+  ```
+
+- **`Function<T, R>`**: Represents a function that accepts one argument and produces a result.
+  ```java
+  Function<String, Integer> stringLength = str -> str.length();
+  int length = stringLength.apply("Hello");  // Returns 5
+  ```
+
+- **`Consumer<T>`**: Represents an operation that accepts a single input argument and returns no result.
+  ```java
+  Consumer<String> print = str -> System.out.println(str);
+  print.accept("Hello, World!");  // Prints: Hello, World!
+  ```
+
+- **`Supplier<T>`**: Represents a supplier of results (no input).
+  ```java
+  Supplier<Double> randomValue = () -> Math.random();
+  double value = randomValue.get();  // Returns a random double
+  ```
+
+- **`BiFunction<T, U, R>`**: Represents a function that accepts two arguments and produces a result.
+  ```java
+  BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
+  int sum = add.apply(5, 10);  // Returns 15
+  ```
+
+2. **Creating a Custom Functional Interface**
+
 Here’s an example of creating a custom functional interface:
 
-java
-Copy code
+```java
 @FunctionalInterface
 interface Greeting {
     void sayHello(String name);  // Single abstract method
@@ -3076,43 +3464,59 @@ public class FunctionalInterfaceExample {
         greeting.sayHello("Alice");  // Prints: Hello, Alice!
     }
 }
-Advantages of Functional Interfaces
-Simplified Syntax: They allow for a cleaner and more concise way to pass behavior as parameters using lambda expressions.
-Improved Code Readability: Using functional interfaces can make your code more readable and expressive by abstracting implementation details.
-Encourages Functional Programming: They facilitate a functional programming style, making it easier to write and manage code that deals with collections and streams.
-Common Uses
+```
+
+### Advantages of Functional Interfaces
+
+1. **Simplified Syntax**: They allow for a cleaner and more concise way to pass behavior as parameters using lambda expressions.
+2. **Improved Code Readability**: Using functional interfaces can make your code more readable and expressive by abstracting implementation details.
+3. **Encourages Functional Programming**: They facilitate a functional programming style, making it easier to write and manage code that deals with collections and streams.
+
+### Common Uses
+
 Functional interfaces are widely used in the following scenarios:
 
-Lambda Expressions: They are primarily used to define the implementation of a single method, allowing for cleaner syntax and easier code maintenance.
-Method References: Functional interfaces can be used as method references, enabling more concise and readable code.
-Streams API: Many operations in the Streams API utilize functional interfaces to process collections, such as filtering, mapping, and reducing.
+- **Lambda Expressions**: They are primarily used to define the implementation of a single method, allowing for cleaner syntax and easier code maintenance.
+- **Method References**: Functional interfaces can be used as method references, enabling more concise and readable code.
+- **Streams API**: Many operations in the Streams API utilize functional interfaces to process collections, such as filtering, mapping, and reducing.
+
+### Summary
+
+Functional interfaces are a fundamental concept in Java that supports functional programming paradigms. They allow developers to write cleaner, more expressive code using lambda expressions and method references. By defining single abstract methods, functional interfaces enable the abstraction of behavior, making it easier to work with collections and apply functional programming techniques effectively.
 
 
 ## Que 39. lambda expression
 
-A lambda expression in Java is a concise way to represent an anonymous function (a function without a name). It allows you to express instances of functional interfaces (interfaces with a single abstract method) in a more compact and readable form. Lambda expressions were introduced in Java 8 and are a key feature of the language, particularly in the context of functional programming and the Streams API.
 
-Syntax of Lambda Expressions
+A **lambda expression** in Java is a concise way to represent an anonymous function (a function without a name). It allows you to express instances of functional interfaces (interfaces with a single abstract method) in a more compact and readable form. Lambda expressions were introduced in Java 8 and are a key feature of the language, particularly in the context of functional programming and the Streams API.
+
+### Syntax of Lambda Expressions
+
 The basic syntax of a lambda expression is as follows:
 
-java
-Copy code
+```java
 (parameters) -> expression
+```
+
 or, if there are multiple statements:
 
-java
-Copy code
+```java
 (parameters) -> { statements; }
-Components of a Lambda Expression
-Parameters: The input parameters for the lambda expression. You can omit the type since it can be inferred by the compiler.
-Arrow Operator (->): Separates the parameter list from the body of the lambda expression.
-Body: The implementation of the lambda expression, which can be a single expression or a block of code.
-Examples of Lambda Expressions
-Using a Functional Interface
+```
+
+### Components of a Lambda Expression
+
+1. **Parameters**: The input parameters for the lambda expression. You can omit the type since it can be inferred by the compiler.
+2. **Arrow Operator (`->`)**: Separates the parameter list from the body of the lambda expression.
+3. **Body**: The implementation of the lambda expression, which can be a single expression or a block of code.
+
+### Examples of Lambda Expressions
+
+1. **Using a Functional Interface**
+
 Here's an example of using a lambda expression with a functional interface:
 
-java
-Copy code
+```java
 @FunctionalInterface
 interface MathOperation {
     int operate(int a, int b);
@@ -3128,11 +3532,13 @@ public class LambdaExample {
         System.out.println("Addition: " + result);
     }
 }
-Using Lambda Expressions with Collections
+```
+
+2. **Using Lambda Expressions with Collections**
+
 Lambda expressions are often used with collections to perform operations like filtering or transforming data. For example, using a lambda expression to filter a list:
 
-java
-Copy code
+```java
 import java.util.Arrays;
 import java.util.List;
 
@@ -3146,107 +3552,244 @@ public class LambdaWithCollections {
              .forEach(System.out::println);         // Method reference
     }
 }
-Advantages of Lambda Expressions
-Conciseness: They reduce boilerplate code, making it easier to express instances of functional interfaces in a compact form.
-Readability: They enhance code readability by allowing you to express behavior clearly and directly inline where it is used.
-Support for Functional Programming: They enable a functional programming style, allowing for operations on collections and data in a more expressive manner.
-Improved API Design: They facilitate the design of APIs that can accept behavior as parameters.
-Contextual Parameters and Type Inference
-Type Inference: You can omit the parameter types in a lambda expression since they can be inferred from the context. For example:
+```
 
-java
-Copy code
-// No need to specify types
-MathOperation multiplication = (a, b) -> a * b;  // Type inferred
-Single Parameter: If the lambda expression has a single parameter, you can omit the parentheses:
+### Advantages of Lambda Expressions
 
-java
-Copy code
-// Single parameter with parentheses omitted
-UnaryOperator<String> toUpperCase = str -> str.toUpperCase();
-Lambda Expressions with Method References
+1. **Conciseness**: They reduce boilerplate code, making it easier to express instances of functional interfaces in a compact form.
+2. **Readability**: They enhance code readability by allowing you to express behavior clearly and directly inline where it is used.
+3. **Support for Functional Programming**: They enable a functional programming style, allowing for operations on collections and data in a more expressive manner.
+4. **Improved API Design**: They facilitate the design of APIs that can accept behavior as parameters.
+
+### Contextual Parameters and Type Inference
+
+1. **Type Inference**: You can omit the parameter types in a lambda expression since they can be inferred from the context. For example:
+
+   ```java
+   // No need to specify types
+   MathOperation multiplication = (a, b) -> a * b;  // Type inferred
+   ```
+
+2. **Single Parameter**: If the lambda expression has a single parameter, you can omit the parentheses:
+
+   ```java
+   // Single parameter with parentheses omitted
+   UnaryOperator<String> toUpperCase = str -> str.toUpperCase();
+   ```
+
+### Lambda Expressions with Method References
+
 Lambda expressions can often be replaced with method references for improved readability. For example:
 
-java
-Copy code
+```java
 // Using a lambda expression
 names.forEach(name -> System.out.println(name));
 
 // Replaced with a method reference
 names.forEach(System.out::println);
+```
 
+### Summary
+
+Lambda expressions in Java provide a powerful way to write functional-style code. They enhance the expressiveness and conciseness of your code while allowing you to work effectively with functional interfaces, collections, and the Streams API. By simplifying the implementation of single-method interfaces, lambda expressions enable developers to write cleaner and more maintainable code.
 
 
 ## Que 40. give example of many to many relationship
 
-A many-to-many relationship occurs when one entity can have multiple relationships with another entity, and vice versa.
-Real-World Examples:
-Students and Courses
-One student can enroll in multiple courses.
-One course can have multiple students enrolled.
-Books and Authors
-One book can have multiple authors.
-One author can write multiple books.
-Employees and Projects
-One employee can work on multiple projects.
-One project can have multiple employees working on it.
-Movies and Actors
-One movie can have multiple actors.
-One actor can act in multiple movies.
-Products and Categories
-One product can belong to multiple categories.
-One category can have multiple products.
-Database Schema Example
-SQL
-CREATE TABLE students (
-  id INT PRIMARY KEY,
-  name VARCHAR(255)
-);
 
-CREATE TABLE courses (
-  id INT PRIMARY KEY,
-  name VARCHAR(255)
-);
+In a many-to-many relationship, multiple records in one table can relate to multiple records in another table. This is a common scenario in database design, and in Java Spring Boot, it can be implemented using JPA (Java Persistence API).
 
-CREATE TABLE student_courses (
-  student_id INT,
-  course_id INT,
-  PRIMARY KEY (student_id, course_id),
-  FOREIGN KEY (student_id) REFERENCES students(id),
-  FOREIGN KEY (course_id) REFERENCES courses(id)
-);
-Java Entity Relationship Example (JPA)
-Java
+### Example Scenario
+
+Let’s consider a simple example of a `Student` and `Course` relationship:
+
+- A **Student** can enroll in multiple **Courses**.
+- A **Course** can have multiple **Students** enrolled.
+
+To implement this in Java Spring Boot with JPA, you will typically need a join table to manage the many-to-many relationship.
+
+### Step-by-Step Implementation
+
+1. **Entity Classes**:
+   - Create the `Student` entity.
+   - Create the `Course` entity.
+   - Use a join table to manage the many-to-many relationship.
+
+2. **Join Table**: You can specify a join table in the entity relationships.
+
+#### 1. Student Entity
+
+```java
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
+@Table(name = "students")
 public class Student {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  private String name;
-  
-  @ManyToMany
-  @JoinTable(
-    name = "student_courses",
-    joinColumns = @JoinColumn(name = "student_id"),
-    inverseJoinColumns = @JoinColumn(name = "course_id")
-  )
-  private List<Course> courses;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @ManyToMany(mappedBy = "students")
+    private Set<Course> courses = new HashSet<>();
+
+    // Constructors, getters, and setters
+    public Student() {
+    }
+
+    public Student(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 }
+```
+
+#### 2. Course Entity
+
+```java
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "courses")
 public class Course {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  private String name;
-  
-  @ManyToMany(mappedBy = "courses")
-  private List<Student> students;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+
+    @ManyToMany
+    @JoinTable(
+        name = "student_course",
+        joinColumns = @JoinColumn(name = "course_id"),
+        inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private Set<Student> students = new HashSet<>();
+
+    // Constructors, getters, and setters
+    public Course() {
+    }
+
+    public Course(String title) {
+        this.title = title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
 }
-Key Concepts:
-Join Table: A separate table to store relationships.
-Foreign Keys: Establish relationships between tables.
-ManyToMany Annotation: Defines many-to-many relationship in JPA
+```
+
+### 3. Database Schema
+
+The above entities will generate three tables in the database:
+
+1. `students` (id, name)
+2. `courses` (id, title)
+3. `student_course` (student_id, course_id) - Join table to manage the many-to-many relationship.
+
+### 4. Saving Data
+
+You can create a service class to manage the data persistence, where you can add students to courses and vice versa.
+
+#### Example of Saving Data
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+@Service
+public class StudentCourseService {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
+
+    @Transactional
+    public void enrollStudentInCourse(Long studentId, Long courseId) {
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new RuntimeException("Student not found"));
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course not found"));
+
+        student.getCourses().add(course);
+        course.getStudents().add(student);
+
+        studentRepository.save(student);
+        courseRepository.save(course);
+    }
+}
+```
+
+### 5. Example Repositories
+
+Create repositories for `Student` and `Course`.
+
+```java
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StudentRepository extends JpaRepository<Student, Long> {
+}
+
+public interface CourseRepository extends JpaRepository<Course, Long> {
+}
+```
+
+### Summary
+
+In this example, we defined a many-to-many relationship between `Student` and `Course` using JPA in a Spring Boot application. The relationship is managed by a join table called `student_course`, allowing for the association of multiple students to multiple courses. This structure is efficient for querying and managing such relationships in a relational database.
 
 
 ## Que 41. JPA vs Hibernate
@@ -3310,8 +3853,303 @@ Session Management	Through EntityManager	Session and SessionFactory
 Conclusion
 In summary, JPA provides a standardized approach for ORM in Java, making it easier to develop database-agnostic applications. Hibernate, as a popular JPA implementation, adds a wealth of features and optimizations, making it suitable for more complex applications that require advanced functionality. When choosing between the two, consider the specific needs of your application, such as the required features, performance optimizations, and level of customization.
 
+## Que 42. When to use which type of dependancy injection
+
+In Spring, dependency injection (DI) is a core principle that allows you to manage the dependencies between different components of your application effectively. There are several ways to inject dependencies in Spring, including constructor injection, setter injection, and field injection. Below are the different methods along with examples:
+
+### 1. Constructor Injection
+Constructor injection involves providing the dependencies of a class through its constructor. This method is preferred for required dependencies because it makes the dependency explicit.
+
+**Example:**
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+class ServiceA {
+    public void performAction() {
+        System.out.println("ServiceA is performing an action.");
+    }
+}
+
+@Component
+class ServiceB {
+    private final ServiceA serviceA;
+
+    @Autowired // Marks the constructor for dependency injection
+    public ServiceB(ServiceA serviceA) {
+        this.serviceA = serviceA;
+    }
+
+    public void execute() {
+        serviceA.performAction();
+    }
+}
+```
+
+### 2. Setter Injection
+Setter injection involves providing the dependencies through setter methods after the object has been constructed. This method allows for optional dependencies.
+
+**Example:**
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+class ServiceC {
+    public void performAction() {
+        System.out.println("ServiceC is performing an action.");
+    }
+}
+
+@Component
+class ServiceD {
+    private ServiceC serviceC;
+
+    @Autowired // Marks the setter for dependency injection
+    public void setServiceC(ServiceC serviceC) {
+        this.serviceC = serviceC;
+    }
+
+    public void execute() {
+        serviceC.performAction();
+    }
+}
+```
+
+### 3. Field Injection
+Field injection directly injects dependencies into the fields of a class. This method is less preferred due to difficulties in testing and managing dependencies, but it is often used for its simplicity.
+
+**Example:**
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+class ServiceE {
+    public void performAction() {
+        System.out.println("ServiceE is performing an action.");
+    }
+}
+
+@Component
+class ServiceF {
+    @Autowired // Directly injects the dependency
+    private ServiceE serviceE;
+
+    public void execute() {
+        serviceE.performAction();
+    }
+}
+```
+
+### 4. Interface-based Injection
+In some cases, you can use interfaces to define setter methods for injection. This is useful when you want to enforce certain behaviors across different implementations.
+
+**Example:**
+```java
+interface ServiceG {
+    void performAction();
+}
+
+@Component
+class ServiceGImpl implements ServiceG {
+    public void performAction() {
+        System.out.println("ServiceGImpl is performing an action.");
+    }
+}
+
+@Component
+class ServiceH {
+    private ServiceG serviceG;
+
+    @Autowired
+    public void setServiceG(ServiceG serviceG) {
+        this.serviceG = serviceG;
+    }
+
+    public void execute() {
+        serviceG.performAction();
+    }
+}
+```
+
+### 5. Constructor Injection with Qualifiers
+When there are multiple beans of the same type, you can use the `@Qualifier` annotation to specify which bean to inject.
+
+**Example:**
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+class ServiceI {
+    public void performAction() {
+        System.out.println("ServiceI is performing an action.");
+    }
+}
+
+@Component
+class ServiceJ {
+    public void performAction() {
+        System.out.println("ServiceJ is performing an action.");
+    }
+}
+
+@Component
+class ServiceK {
+    private final ServiceI serviceI;
+
+    @Autowired
+    public ServiceK(@Qualifier("serviceI") ServiceI serviceI) {
+        this.serviceI = serviceI;
+    }
+
+    public void execute() {
+        serviceI.performAction();
+    }
+}
+```
+
+### 6. Configuration-based Injection
+You can also define beans and their dependencies using Java configuration classes. This allows you to create a more complex object graph.
+
+**Example:**
+```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+class AppConfig {
+    @Bean
+    public ServiceA serviceA() {
+        return new ServiceA();
+    }
+
+    @Bean
+    public ServiceB serviceB() {
+        return new ServiceB(serviceA()); // Injecting dependency
+    }
+}
+```
+
+### 7. Spring Profiles
+Using Spring Profiles, you can create different configurations for different environments (e.g., development, production) and inject beans accordingly.
+
+**Example:**
+```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+@Configuration
+public class ProfileConfig {
+    
+    @Bean
+    @Profile("dev")
+    public Service devService() {
+        return new DevService();
+    }
+
+    @Bean
+    @Profile("prod")
+    public Service prodService() {
+        return new ProdService();
+    }
+}
+```
+
+### Summary
+- **Constructor Injection**: Preferred for required dependencies; ensures that the dependency is provided during object creation.
+- **Setter Injection**: Allows for optional dependencies; can modify dependencies after object creation.
+- **Field Injection**: Simplifies dependency injection but is less preferred due to difficulties in testing.
+- **Interface-based Injection**: Enforces a contract for dependency injection.
+- **Configuration-based Injection**: Provides a way to define beans and their dependencies using Java configuration.
+- **Spring Profiles**: Enables different configurations for different environments, allowing selective injection of beans.
+
+Each method has its pros and cons, and the choice of which to use depends on the specific use case, coding style preferences, and requirements of the application.
 
 
 
+## Que 43. Upcasting only have super class methods
 
+This Java code demonstrates the concept of inheritance, method overriding, and polymorphism. Let's analyze the provided code step-by-step to understand its behavior and output.
 
+### Code Explanation
+
+1. **Class Definitions**:
+   - **Parent Class**: 
+     - Contains three methods: `walk()`, `run()`, and `sleep()`.
+     - `run()` method calls `walk()` method. Since `walk()` is not overridden in `Child`, it will execute `Parent`'s `walk()` method unless overridden.
+   
+   - **Child Class**:
+     - Inherits from `Parent`.
+     - Overrides the `walk()` and `run()` methods.
+     - In the overridden `run()` method, it first prints "Child run", then calls the superclass's `run()` method using `super.run()`, and finally calls its own `walk()` method.
+
+2. **Main Class**:
+   - In the `main` method:
+     - A `Parent` reference `p` is created and assigned an instance of `Child`.
+     - A `Child` reference `c` is cast from `p`.
+     - Calls `p.run()`, `c.sit()`, and `p.sleep()`.
+
+### Execution Steps
+
+1. **Call to `p.run()`**:
+   - The `run()` method in `Child` is invoked because of dynamic method dispatch (runtime polymorphism).
+   - Output: 
+     ```
+     Child run
+     ```
+   - Then `super.run()` is called, which invokes `run()` in the `Parent` class:
+     - Inside `Parent.run()`, it prints:
+     ```
+     Parent run
+     ```
+   - The `Parent.run()` method then calls `walk()`, which is overridden in `Child`, so `Child.walk()` is called:
+     ```
+     Child walk
+     ```
+
+   **Output so far**:
+   ```
+   Child run
+   Parent run
+   Child walk
+   ```
+
+2. **Call to `c.sit()`**:
+   - The `sit()` method from the `Child` class is called.
+   - Output: 
+     ```
+     Child sit
+     ```
+
+3. **Call to `p.sleep()`**:
+   - This calls the `sleep()` method from the `Parent` class, since there is no override in `Child`.
+   - Output:
+     ```
+     Parent sleep
+     ```
+
+### Final Output
+
+Combining all the outputs from the calls made, the final output of the program will be:
+```
+Child run
+Parent run
+Child walk
+Child sit
+Parent sleep
+```
+
+### Conclusion
+
+This code snippet effectively illustrates:
+- **Inheritance**: The `Child` class inherits from the `Parent` class.
+- **Method Overriding**: The `Child` class overrides the `walk()` and `run()` methods.
+- **Polymorphism**: The method called depends on the actual object type (the instance of `Child`), not the reference type (`Parent`).
+- **Casting**: The `Parent` reference is cast to `Child` to access methods specific to `Child`. 
+
+This example is useful for understanding how Java handles method overriding and dynamic binding in an inheritance hierarchy.
