@@ -1,90 +1,76 @@
 # Strings
 
-```java
-import java.io.*;
-import java.util.*;
+Java provides a range of commonly used `String` methods for various operations. Here are some popular ones:
 
-class Strings {
-	public static void main(String[] args) {
-		String s = "GeeksforGeeks";
-		// String s= new String ("GeeksforGeeks");
-	}
-}
-```
-## Returns the number of characters in the String.
-```java
-System.out.println("String length = " + s.length());// 13
-```
+1. **`.length()`**  
+   - Returns the length of the string.
+   - Example: `"hello".length()` → `5`
 
-## Returns the character at ith index.
-```java
-System.out.println("Character at 3rd position = "
-		+ s.charAt(3));// k
+2. **`.charAt(int index)`**  
+   - Returns the character at the specified index.
+   - Example: `"hello".charAt(1)` → `'e'`
 
-```
-## Return the substring from the ith index character to end of string
-```java
-System.out.println("Substring " + s.substring(3));// ksforGeeks
+3. **`.substring(int beginIndex, int endIndex)`**  
+   - Returns a substring from `beginIndex` to `endIndex - 1`.
+   - Example: `"hello".substring(1, 4)` → `"ell"`
 
-```
-## Returns the substring from i to j-1 index.
-```java
-System.out.println("Substring = " + s.substring(2, 5));// eks
-```
+4. **`.indexOf(String str)`**  
+   - Returns the index of the first occurrence of the specified substring.
+   - Example: `"hello".indexOf("l")` → `2`
 
-## Concatenates string2 to the end of string1.
-```java
-String s1 = "Geeks";
-String s2 = "forGeeks";
-System.out.println("Concatenated string = " +
-		s1.concat(s2));// GeeksforGeeks
-```
-## Returns the index within the string of the first occurrence of the specified string.
-```java
-String s4 = "Learn Share Learn";
-System.out.println("Index of Share " +
-		s4.indexOf("Share"));// 6
-```
-## Returns the index within the string of the first occurrence of the specified string, starting at the specified index.
-```java
-System.out.println("Index of a = " +
-		s4.indexOf('a', 3));// 8
-```
-## Checking equality of Strings
-```java
-Boolean out = "Geeks".equals("geeks");
-System.out.println("Checking Equality " + out);// false
-out = "Geeks".equals("Geeks");
-System.out.println("Checking Equality " + out);// true
+5. **`.lastIndexOf(String str)`**  
+   - Returns the index of the last occurrence of the specified substring.
+   - Example: `"hello".lastIndexOf("l")` → `3`
 
-out = "Geeks".equalsIgnoreCase("gEeks");
-System.out.println("Checking Equality " + out);// true
-```
-## If ASCII difference is zero then the two strings are similar
-```java
-int out1 = s1.compareTo(s2);
-System.out.println("the difference between ASCII value is=" + out1);// -31
-```
-## Converting cases
-```java
-String word1 = "GeeKyMe";
-System.out.println("Changing to lower Case " +
-		word1.toLowerCase());// geekyme
-```
-## Converting cases
-```java
-String word2 = "GeekyME";
-System.out.println("Changing to UPPER Case " +
-		word2.toUpperCase());// GEEKYME
-```
-## Trimming the word
-```java
-String word4 = " Learn Share Learn ";
-System.out.println("Trim the word " + word4.trim());
-```
-## Replacing characters
-```java
-String str1 = "feeksforfeeks";
-String str2 = "feeksforfeeks".replace('f', 'g');
-System.out.println("Replaced f with g -> " + str2);// geeksgorgeeks
-```
+6. **`.toUpperCase()`** and **`.toLowerCase()`**  
+   - Converts all characters to upper or lower case.
+   - Example: `"hello".toUpperCase()` → `"HELLO"`
+
+7. **`.trim()`**  
+   - Removes leading and trailing spaces.
+   - Example: `" hello ".trim()` → `"hello"`
+
+8. **`.replace(char oldChar, char newChar)`**  
+   - Replaces occurrences of `oldChar` with `newChar`.
+   - Example: `"hello".replace('l', 'y')` → `"heyyo"`
+
+9. **`.split(String regex)`**  
+   - Splits the string based on the specified regex and returns an array of substrings.
+   - Example: `"hello world".split(" ")` → `["hello", "world"]`
+
+10. **`.contains(CharSequence s)`**  
+    - Checks if the string contains the specified sequence.
+    - Example: `"hello".contains("ell")` → `true`
+
+11. **`.equals(Object anotherObject)`** and **`.equalsIgnoreCase(String anotherString)`**  
+    - Checks if two strings are equal, case-sensitive and case-insensitive.
+    - Example: `"hello".equals("hello")` → `true`
+    - Example: `"hello".equalsIgnoreCase("HELLO")` → `true`
+
+12. **`.startsWith(String prefix)`** and **`.endsWith(String suffix)`**  
+    - Checks if the string starts or ends with the specified prefix or suffix.
+    - Example: `"hello".startsWith("he")` → `true`
+    - Example: `"hello".endsWith("lo")` → `true`
+
+13. **`.compareTo(String anotherString)`** and **`.compareToIgnoreCase(String anotherString)`**  
+    - Compares two strings lexicographically.
+    - Example: `"apple".compareTo("banana")` → negative value (since `"apple"` comes before `"banana"`)
+
+14. **`.isEmpty()`** and **`.isBlank()`** (Java 11+)  
+    - Checks if the string is empty or contains only whitespace.
+    - Example: `"".isEmpty()` → `true`
+    - Example: `"   ".isBlank()` → `true`
+
+15. **`.repeat(int count)`** (Java 11+)  
+    - Repeats the string `count` times.
+    - Example: `"hello ".repeat(3)` → `"hello hello hello "`
+
+16. **`.matches(String regex)`**  
+    - Checks if the string matches a regular expression.
+    - Example: `"hello".matches(".*llo")` → `true`
+
+17. **`.concat(String world)`**  
+    - Concatenates string2 to the end of string1.
+    - Example: `"hello".concat(" world")` → `hello world`
+ 
+These methods can be combined to perform complex string manipulations, and they are essential for tasks involving text processing. Let me know if you’d like details on any specific function or examples for more advanced operations!
