@@ -14,7 +14,7 @@
         b. DriverMatchingStrategy (LeastTimeBased, RatingBased)
 
 
-### 1. **Functional Requirements**
+## 1. **Functional Requirements**
 
 - **User Management**: 
   - Allow users to sign up, log in, and manage profiles.
@@ -34,7 +34,7 @@
 - **Rating and Feedback**:
   - Riders and drivers can rate each other and provide feedback.
 
-### 2. **Non-Functional Requirements**
+## 2. **Non-Functional Requirements**
 
 - **Scalability**: The system should handle a high volume of users and transactions.
 - **Availability**: High uptime is essential to support real-time ride booking.
@@ -45,7 +45,186 @@
 
 ---
 
-### 3. **System Components**
+## 3. **System Components**
+
+To represent an Uber-like ride-hailing system, the UML class diagram will include key entities such as `User`, `Driver`, `Ride`, `Vehicle`, `Location`, and service classes to handle the core functionalities like booking, payments, and notifications.
+
+---
+
+### Key Classes
+
+1. **User**: Represents a customer who uses the app to book rides.
+2. **Driver**: Represents a driver registered with the app who provides rides.
+3. **Ride**: Represents a ride request made by a user, assigned to a driver.
+4. **Vehicle**: Represents a vehicle registered with a driver.
+5. **Location**: Represents the pickup and drop-off locations.
+6. **Payment**: Represents payment details for each ride.
+7. **Rating**: Represents ratings and feedback between users and drivers.
+8. **Service Classes**:
+   - **RideService**: Manages ride booking, ride status updates, and assignment.
+   - **PaymentService**: Handles payment processing and transactions.
+   - **NotificationService**: Manages notifications for ride status updates.
+   - **LocationService**: Manages location-based functionalities, such as finding nearby drivers.
+
+---
+
+### Class Diagram Design
+
+```plaintext
++-----------------------------------+
+|              User                 |
++-----------------------------------+
+| - userId: long                    |
+| - name: String                    |
+| - email: String                   |
+| - phoneNumber: String             |
+| - paymentMethods: List<Payment>   |
+| - currentLocation: Location       |
+|-----------------------------------|
+| + requestRide()                   |
+| + cancelRide()                    |
+| + rateDriver()                    |
++-----------------------------------+
+
+                     ▲
+                     |
+                     |
+   +------------------+-----------------+
+   |                                    |
+   |                                    |
++----------------+              +------------------+
+|    Passenger   |              |    Driver        |
++----------------+              +------------------+
+| - passengerId: long           | - driverId: long |
+| - rideHistory: List<Ride>     | - license: String|
+|                               | - vehicle: Vehicle |
+| + viewRideHistory()           | + updateLocation() |
+|                               | + acceptRide()     |
++-------------------------------+------------------+
+
++-----------------------------------+
+|             Ride                  |
++-----------------------------------+
+| - rideId: long                    |
+| - passenger: Passenger            |
+| - driver: Driver                  |
+| - pickupLocation: Location        |
+| - dropoffLocation: Location       |
+| - status: RideStatus              |
+| - fare: double                    |
+| - startTime: DateTime             |
+| - endTime: DateTime               |
+|-----------------------------------|
+| + startRide()                     |
+| + completeRide()                  |
+| + cancelRide()                    |
++-----------------------------------+
+
++-----------------------------------+
+|           Vehicle                 |
++-----------------------------------+
+| - vehicleId: long                 |
+| - licensePlate: String            |
+| - type: String                    |
+| - capacity: int                   |
+| - driver: Driver                  |
+|-----------------------------------|
+| + getDetails()                    |
+| + updateStatus()                  |
++-----------------------------------+
+
++-----------------------------------+
+|           Location                |
++-----------------------------------+
+| - latitude: double                |
+| - longitude: double               |
+|-----------------------------------|
+| + calculateDistance(to: Location) |
++-----------------------------------+
+
++-----------------------------------+
+|           Payment                 |
++-----------------------------------+
+| - paymentId: long                 |
+| - amount: double                  |
+| - paymentMethod: String           |
+| - status: PaymentStatus           |
+|-----------------------------------|
+| + processPayment()                |
+| + refund()                        |
++-----------------------------------+
+
++-----------------------------------+
+|           Rating                  |
++-----------------------------------+
+| - ratingId: long                  |
+| - user: User                      |
+| - driver: Driver                  |
+| - rating: int                     |
+| - feedback: String                |
+|-----------------------------------|
+| + submitRating()                  |
++-----------------------------------+
+
++-----------------------------------+
+|           RideService             |
++-----------------------------------+
+| + findDriverForRide()             |
+| + createRide()                    |
+| + updateRideStatus()              |
+| + calculateFare()                 |
++-----------------------------------+
+
++-----------------------------------+
+|         PaymentService            |
++-----------------------------------+
+| + initiatePayment()               |
+| + processRefund()                 |
+| + validatePayment()               |
++-----------------------------------+
+
++-----------------------------------+
+|       NotificationService         |
++-----------------------------------+
+| + sendRideStatusNotification()    |
+| + sendPaymentNotification()       |
+| + sendArrivalNotification()       |
++-----------------------------------+
+
++-----------------------------------+
+|         LocationService           |
++-----------------------------------+
+| + getNearbyDrivers()              |
+| + updateDriverLocation()          |
+| + calculateETA()                  |
++-----------------------------------+
+```
+
+---
+
+### Class Relationships and Descriptions
+
+- **User - Passenger and Driver**: `User` is a base class, with `Passenger` and `Driver` as subclasses. Passengers can request and view rides, while Drivers have additional permissions like accepting rides and updating their location.
+
+- **Ride**: Represents the ride request from a user, containing references to both the `Passenger` and `Driver`. It includes attributes for `pickupLocation`, `dropoffLocation`, `status`, `fare`, and timestamps.
+
+- **Vehicle**: Linked to a `Driver`, representing the vehicle information, such as `licensePlate`, `type`, and `capacity`.
+
+- **Location**: A utility class to represent geographical locations using latitude and longitude, with a method to calculate the distance between two locations.
+
+- **Payment**: Represents payment information for each ride. It includes the payment amount, method, and status (e.g., paid, pending).
+
+- **Rating**: Represents feedback exchanged between `User` and `Driver` after a ride is completed, storing rating and feedback information.
+
+### Service Classes
+
+1. **RideService**: Manages ride-related operations such as finding a nearby driver, creating and updating rides, and calculating fares.
+2. **PaymentService**: Manages payment processing, including initiating payments, processing refunds, and validating transactions.
+3. **NotificationService**: Sends notifications to users and drivers about ride status changes, payment updates, and driver arrival.
+4. **LocationService**: Manages location-based functionalities, such as fetching nearby drivers, updating driver locations, and calculating estimated arrival times.
+
+This class diagram captures the core functionalities and interactions of an Uber-like system. It supports modularity, allowing for independent development of services and components to handle various aspects like booking, payments, and notifications.
+
 
 #### a. **APIs**
 
@@ -94,7 +273,7 @@
 
 ---
 
-### 4. **Database Schema**
+## 4. **Database Schema**
 
 Here’s a simplified schema design:
 
@@ -160,7 +339,7 @@ Here’s a simplified schema design:
 
 ---
 
-### 5. **System Diagram**
+## 5. **System Diagram**
 
 The **system architecture** typically includes:
 
@@ -173,7 +352,7 @@ The **system architecture** typically includes:
 
 ---
 
-### 6. **Non-Functional Instruments**
+## 6. **Non-Functional Instruments**
 
 - **Load Balancers**: Distribute traffic among instances.
 - **Caching**: Use Redis to cache frequently accessed data, like driver locations.
@@ -195,13 +374,13 @@ For each service, I’ll cover these essentials:
 3. A basic Repository interface to interact with the database (assuming we’re using JPA).
 4. Entity classes to define database schemas.
 
-### Prerequisites
+## 7. Code Implementation
 
 To begin, set up a **Spring Boot** project for each service or as a single monolithic project (if you're not separating them into independent microservices). Include dependencies like `spring-boot-starter-web`, `spring-boot-starter-data-jpa`, `spring-boot-starter-security` (for user authentication), and `spring-boot-starter-validation` (for request validation).
 
 ---
 
-### 1. **User Management Service**
+## 1. **User Management Service**
 
 #### User Entity
 
@@ -492,3 +671,23 @@ public class PaymentController {
 ```
 
 Each of these service classes would include more complex logic and validations in a real application, such as handling driver-user matching, GPS tracking, security features, and error handling. This setup provides a foundational code structure for building out each microservice component in a larger, scalable system like Uber.
+
+## 7. Design Patterns Used
+
+For the Uber-like system's services, we can identify several key design patterns that enhance modularity, scalability, and maintainability:
+
+1. **Repository Pattern**: Used in the data access layer to separate database operations from the business logic. For instance, the `UserRepository`, `DriverRepository`, `RideRepository`, and `PaymentRepository` are all examples of this pattern, abstracting data access and making it easier to test the business logic without relying on an actual database.
+
+2. **Service Layer Pattern**: The `UserService`, `DriverService`, `RideService`, and `PaymentService` implement the service layer pattern to handle business logic in a centralized place. This encapsulates the business logic from controllers, making it easier to modify, test, and maintain.
+
+3. **Controller Pattern**: The system follows the RESTful Controller pattern by using `UserController`, `DriverController`, `RideController`, and `PaymentController` to handle incoming HTTP requests, separate from business logic, and delegate requests to appropriate services. This pattern is standard in RESTful APIs, ensuring a clear separation of concerns.
+
+4. **Factory Pattern (if extended)**: In a more complex version, the system could use a factory pattern to create objects like `Ride` or `Payment`, especially if there are multiple types or variations. This would provide a flexible way to instantiate objects based on input parameters.
+
+5. **State Pattern** (for Ride and Payment entities): Although not explicitly implemented here, the state pattern can manage the status of a ride (e.g., `requested`, `in-progress`, `completed`) and payment (e.g., `initiated`, `confirmed`). By creating different classes for each state, we could encapsulate the behavior for each status and make it easier to extend or change.
+
+6. **Dependency Injection (DI)**: This pattern, used through Spring’s `@Autowired`, promotes loose coupling. By injecting dependencies, we can replace service or repository implementations without modifying the dependent classes, making the system more adaptable and testable.
+
+7. **Singleton Pattern**: Spring manages services and repositories as singletons by default, ensuring only one instance of each service or repository is created per application context. This pattern optimizes memory usage and performance.
+
+8. **Transaction Management**: Though not explicitly coded here, Spring’s declarative transaction management would be beneficial, particularly for methods in the `RideService` and `PaymentService` to ensure data consistency.

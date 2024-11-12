@@ -598,6 +598,8 @@ For a production-ready implementation, consider:
 
 This setup provides a foundation that can be enhanced based on additional requirements.
 
+## Design Patterns Used
+
 For an IRCTC-like ticket booking system, several design patterns can enhance modularity, flexibility, and scalability. Here are some design patterns that could be applicable:
 
 ### 1. **Singleton Pattern**
@@ -667,6 +669,8 @@ For an IRCTC-like ticket booking system, several design patterns can enhance mod
      - Create an `SMSAdapter` or `PaymentAdapter` to wrap third-party API logic and adapt it to fit the existing internal service requirements.
 
 ---
+
+## Non-functional Requirements
 
 Using these patterns strategically can improve the maintainability, testability, and robustness of the booking system while allowing flexibility for future changes or feature additions.
 

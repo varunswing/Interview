@@ -273,3 +273,282 @@ CREATE TABLE Transaction (
 4. The user can view the list of currently borrowed books using **GET /api/users/{userId}/borrowed**.
 
 This implementation captures the basic functionalities of a library system. You can expand it with features like book reservations, overdue penalties, and more complex user roles (e.g., librarians).
+
+For a Library Management System (LMS), the non-functional requirements (NFRs) play a critical role in defining the system’s performance, scalability, security, and usability standards. These requirements impact the system's architecture and help ensure that the system is robust, maintainable, and scalable. Here’s a detailed breakdown of the key non-functional requirements to discuss in a low-level design (LLD) interview.
+
+---
+
+### 1. **Scalability**
+   - **Definition**: The system should handle an increasing number of users, books, and transactions as the library grows or if the system is deployed to multiple library branches.
+   - **Considerations**:
+     - Use scalable databases (e.g., sharded relational databases or NoSQL solutions like MongoDB for collections).
+     - Separate services for user management, catalog management, and transaction handling to allow independent scaling.
+     - Implement caching mechanisms (e.g., Redis or Memcached) for frequently accessed data like book details or user information.
+     - Implement load balancing for application servers to distribute incoming requests.
+
+### 2. **Performance and Responsiveness**
+   - **Definition**: The system should respond quickly to user interactions, with minimal latency in operations such as searching the catalog, checking out books, and viewing user history.
+   - **Considerations**:
+     - Maintain query optimization in the database to speed up search and retrieval operations.
+     - Use asynchronous processing for non-critical tasks, such as sending notifications or generating overdue reports.
+     - Establish response time SLAs for different user actions (e.g., catalog search within 500 ms, checkout operations under 2 seconds).
+
+### 3. **Availability and Reliability**
+   - **Definition**: The system should be highly available with minimal downtime, ensuring users can access the library catalog and manage transactions whenever needed.
+   - **Considerations**:
+     - Use database replication and clustering for high availability and failover support.
+     - Design a disaster recovery plan with backup and restore capabilities.
+     - Implement redundant servers and load balancing to avoid single points of failure.
+     - Use monitoring tools (e.g., Prometheus, Grafana) to track server health and get alerts on failures.
+
+### 4. **Data Consistency and Integrity**
+   - **Definition**: Ensure the accuracy and integrity of data, especially in concurrent transactions like book checkouts and returns.
+   - **Considerations**:
+     - Use ACID-compliant databases to maintain data consistency during transactions.
+     - Implement locking or optimistic concurrency controls to handle concurrent checkouts or reservations.
+     - Regularly validate and audit data for anomalies, especially for financial transactions or inventory status.
+
+### 5. **Security**
+   - **Definition**: Protect user data, transaction information, and the overall system from unauthorized access and threats.
+   - **Considerations**:
+     - Implement secure authentication (e.g., OAuth 2.0) and authorization (role-based access control).
+     - Encrypt sensitive data, including user credentials and payment information.
+     - Use HTTPS for data in transit and ensure secure storage of any sensitive data.
+     - Apply auditing and logging mechanisms for monitoring access and identifying potential security breaches.
+     - Regularly update the system to address any vulnerabilities.
+
+### 6. **Usability and Accessibility**
+   - **Definition**: Provide an intuitive and accessible interface for users, including patrons, librarians, and administrators.
+   - **Considerations**:
+     - Design an intuitive user interface for easy navigation, especially for catalog browsing and account management.
+     - Ensure the system is accessible per WCAG (Web Content Accessibility Guidelines) to accommodate users with disabilities.
+     - Provide search, filter, and sorting options for quick access to books and resources.
+     - Use consistent design and terminology across the application.
+
+### 7. **Maintainability and Modularity**
+   - **Definition**: The system should be modular and easy to maintain, with clear separations for different functionalities to facilitate updates, bug fixes, and future enhancements.
+   - **Considerations**:
+     - Implement a modular design with services dedicated to core domains: User Service, Catalog Service, Transaction Service, etc.
+     - Use clean coding practices and document the codebase for future developers.
+     - Use CI/CD pipelines for regular deployments and automated testing.
+     - Use version control (e.g., Git) for source code and ensure dependency management is in place.
+
+### 8. **Extensibility**
+   - **Definition**: The system should be designed to accommodate new features or modules as requirements evolve, like adding a digital lending option or integrating with external systems.
+   - **Considerations**:
+     - Use a microservices architecture to allow easy addition of new services.
+     - Adopt a plugin-based design for modules that can be enabled or disabled independently.
+     - Use APIs for external integrations, allowing the LMS to interface with other systems (e.g., third-party book databases or an e-book lending platform).
+
+### 9. **Audit and Logging**
+   - **Definition**: Track key system events to allow troubleshooting, performance tuning, and audit trails for sensitive operations.
+   - **Considerations**:
+     - Log all critical actions (e.g., checkouts, returns, user registrations) for traceability.
+     - Maintain audit logs for data changes and security-related events.
+     - Use log management tools (e.g., ELK Stack) for efficient searching and monitoring of logs.
+
+### 10. **Compliance**
+   - **Definition**: Ensure the system adheres to applicable legal and regulatory standards, especially concerning data privacy and accessibility.
+   - **Considerations**:
+     - Comply with GDPR or other data privacy regulations for user data handling.
+     - Ensure accessibility compliance as per ADA and WCAG for public libraries.
+     - Store data in a compliant way, with options for users to view, modify, or delete personal data.
+
+### 11. **Fault Tolerance and Error Handling**
+   - **Definition**: The system should handle failures gracefully without significant user impact.
+   - **Considerations**:
+     - Use circuit breakers and retries for external service calls to handle temporary failures.
+     - Implement clear error messages for end-users and detailed logging for developers.
+     - Use redundancy for core components and adopt rollback mechanisms in case of system issues.
+
+### 12. **Localization and Internationalization**
+   - **Definition**: The system should support multiple languages and regional formats if used across different regions.
+   - **Considerations**:
+     - Use resource bundles for text content to support multiple languages.
+     - Design the interface to adjust for different formats (e.g., date, time, currency).
+     - Allow configuration of regional settings for libraries in different locations.
+
+---
+
+These non-functional requirements shape the overall architecture, technology stack, and design patterns used in the Library Management System. Emphasizing these aspects in an LLD interview will demonstrate a comprehensive understanding of how to build a robust, scalable, and maintainable system.
+
+Here’s a UML class diagram for a Library Management System (LMS), detailing the main entities, relationships, and service classes. This system includes classes for managing users, books, borrowing transactions, and notifications.
+
+### Key Classes
+
+1. **User**: Represents members and staff who use the library system.
+2. **Book**: Represents books available in the library.
+3. **BookItem**: Represents individual copies of a book.
+4. **Librarian**: A type of `User` with additional permissions for managing books and records.
+5. **Transaction**: Represents a book borrowing or return action.
+6. **Notification**: Represents notifications for users regarding book due dates or fines.
+7. **Library**: Represents the overall library with collections of books and registered users.
+8. **Services**:
+   - **UserService**: Manages users (members and staff).
+   - **CatalogService**: Manages books and search operations.
+   - **TransactionService**: Manages borrowing and returning books.
+   - **NotificationService**: Handles notifications for overdue books and fines.
+   
+---
+
+### Class Diagram Design
+
+```plaintext
++-----------------------------------+
+|              User                 |
++-----------------------------------+
+| - userId: long                    |
+| - name: String                    |
+| - email: String                   |
+| - phoneNumber: String             |
+| - address: String                 |
+| - isMember: Boolean               |
+|-----------------------------------|
+| + register()                      |
+| + login()                         |
+| + viewBorrowedBooks()             |
++-----------------------------------+
+
+                     ▲
+                     |
+                     |
+   +------------------+-----------------+
+   |                                    |
+   |                                    |
++----------------+              +------------------+
+|    Member      |              |    Librarian     |
++----------------+              +------------------+
+| - membershipId: long          | + addBook()      |
+| - membershipExpiry: Date      | + removeBook()   |
+|-------------------------------| + manageUsers()  |
+| + renewMembership()           |                  |
++-------------------------------+------------------+
+
++-----------------------------------+
+|              Book                 |
++-----------------------------------+
+| - ISBN: String                    |
+| - title: String                   |
+| - author: String                  |
+| - publisher: String               |
+| - genre: String                   |
+| - language: String                |
+|-----------------------------------|
+| + getDetails()                    |
++-----------------------------------+
+
+                      |
+                      |
+                      |
++-----------------------------------+
+|            BookItem               |
++-----------------------------------+
+| - barcode: String                 |
+| - isAvailable: Boolean            |
+| - shelfLocation: String           |
+| - dueDate: Date                   |
+| - isReserved: Boolean             |
+|-----------------------------------|
+| + borrow()                        |
+| + returnBook()                    |
++-----------------------------------+
+
++-----------------------------------+
+|           Transaction             |
++-----------------------------------+
+| - transactionId: long             |
+| - user: User                      |
+| - bookItem: BookItem              |
+| - issueDate: Date                 |
+| - dueDate: Date                   |
+| - returnDate: Date                |
+| - fine: double                    |
+|-----------------------------------|
+| + issueBook()                     |
+| + returnBook()                    |
+| + calculateFine()                 |
++-----------------------------------+
+
++-----------------------------------+
+|          Notification             |
++-----------------------------------+
+| - notificationId: long            |
+| - user: User                      |
+| - message: String                 |
+| - createdAt: Date                 |
+| - isRead: Boolean                 |
+|-----------------------------------|
+| + sendNotification()              |
+| + markAsRead()                    |
++-----------------------------------+
+
++-----------------------------------+
+|             Library               |
++-----------------------------------+
+| - libraryId: long                 |
+| - name: String                    |
+| - address: String                 |
+| - books: List<BookItem>           |
+| - users: List<User>               |
+|-----------------------------------|
+| + addBook()                       |
+| + removeBook()                    |
+| + registerUser()                  |
++-----------------------------------+
+
++-----------------------------------+
+|          CatalogService           |
++-----------------------------------+
+| + searchBookByTitle()             |
+| + searchBookByAuthor()            |
+| + searchBookByISBN()              |
+| + viewAvailableBooks()            |
++-----------------------------------+
+
++-----------------------------------+
+|          UserService              |
++-----------------------------------+
+| + registerUser()                  |
+| + authenticateUser()              |
+| + viewBorrowedBooks()             |
++-----------------------------------+
+
++-----------------------------------+
+|       TransactionService          |
++-----------------------------------+
+| + issueBook()                     |
+| + returnBook()                    |
+| + calculateFine()                 |
++-----------------------------------+
+
++-----------------------------------+
+|       NotificationService         |
++-----------------------------------+
+| + sendDueDateReminder()           |
+| + sendFineNotification()          |
+| + sendReservationAlert()          |
++-----------------------------------+
+```
+
+---
+
+### Class Relationships and Descriptions
+
+- **User - Member and Librarian**: `User` is a parent class, with `Member` and `Librarian` as subclasses. Members are library patrons, and Librarians have additional methods to manage books and users.
+  
+- **Book - BookItem**: Each `Book` can have multiple `BookItem` instances representing individual copies, with attributes like `barcode`, `shelfLocation`, and `isAvailable`.
+
+- **Transaction**: Records actions for book issues and returns, linked to a `User` and a specific `BookItem`. It includes methods to `issueBook`, `returnBook`, and `calculateFine`.
+
+- **Notification**: Generates and sends reminders for overdue books, fines, and other alerts, linked to a `User`.
+
+- **Library**: Represents the entire library entity, holding collections of `BookItem` and `User` lists, and methods for adding/removing books and users.
+
+### Service Classes
+
+1. **CatalogService**: Provides methods for searching and retrieving books based on criteria like title, author, and ISBN.
+2. **UserService**: Manages user registration, authentication, and user-specific actions such as viewing borrowed books.
+3. **TransactionService**: Manages book borrowing and returning, including fine calculation for overdue books.
+4. **NotificationService**: Sends various types of notifications to users about due dates, fines, and reserved books.
+
+This class diagram offers a high-level representation of the Library Management System's core components, their responsibilities, and interactions. Each service class handles specific business logic for the entities, which allows for modular development, scalability, and easier maintenance.

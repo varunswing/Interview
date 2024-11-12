@@ -51,6 +51,144 @@ We'll use Java for the class implementations and SQL for the database schema.
 
 We'll define classes for each component with their respective attributes and methods.
 
++-------------------+
+|      User         |
++-------------------+
+| - userId: String  |
+| - name: String    |
+| - email: String   |
+| - password: String|
++-------------------+
+| + register()      |
+| + login()         |
+| + viewCart()      |
+| + placeOrder()    |
++-------------------+
+
++-------------------+
+|     Product       |
++-------------------+
+| - productId: String|
+| - name: String     |
+| - description: String |
+| - price: Double    |
++-------------------+
+| + viewDetails()    |
+| + getPrice()       |
++-------------------+
+
++-------------------+
+|    Inventory      |
++-------------------+
+| - productId: String|
+| - quantity: Integer|
++-------------------+
+| + checkAvailability()|
+| + updateQuantity()   |
++-------------------+
+
++-------------------+
+|    FlashSale      |
++-------------------+
+| - saleId: String   |
+| - productId: String|
+| - discount: Double |
+| - startTime: DateTime |
+| - endTime: DateTime   |
++-------------------+
+| + startSale()      |
+| + endSale()        |
+| + isActive()       |
++-------------------+
+
++-------------------+
+|      Cart         |
++-------------------+
+| - cartId: String   |
+| - userId: String   |
+| - items: List<Product> |
++-------------------+
+| + addItem()        |
+| + removeItem()     |
+| + viewCart()       |
++-------------------+
+
++-------------------+
+|      Order        |
++-------------------+
+| - orderId: String  |
+| - userId: String   |
+| - items: List<Product> |
+| - totalAmount: Double |
+| - status: String   |
++-------------------+
+| + createOrder()    |
+| + confirmOrder()   |
++-------------------+
+
++-------------------+
+|     Payment       |
++-------------------+
+| - paymentId: String |
+| - orderId: String   |
+| - amount: Double    |
+| - status: String    |
++-------------------+
+| + processPayment()  |
+| + confirmPayment()  |
++-------------------+
+
++-------------------+
+|   UserService     |
++-------------------+
+| + registerUser()   |
+| + loginUser()      |
+| + getUserCart()    |
++-------------------+
+
++-------------------+
+| ProductService    |
++-------------------+
+| + getProductDetails() |
+| + listProducts()      |
++-------------------+
+
++-------------------+
+| InventoryService  |
++-------------------+
+| + checkInventory()|
+| + reduceInventory() |
++-------------------+
+
++-------------------+
+| FlashSaleService  |
++-------------------+
+| + configureSale() |
+| + validateSale()  |
+| + getActiveSales() |
++-------------------+
+
++-------------------+
+|    CartService    |
++-------------------+
+| + addToCart()     |
+| + removeFromCart()|
++-------------------+
+
++-------------------+
+|   OrderService    |
++-------------------+
+| + createOrder()   |
+| + confirmOrder()  |
++-------------------+
+
++-------------------+
+|  PaymentService   |
++-------------------+
+| + initiatePayment() |
+| + confirmPayment()  |
++-------------------+
+
 ### 2.1. User
 ```java
 public class User {
