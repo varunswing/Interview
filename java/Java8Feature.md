@@ -28,7 +28,7 @@ List<String> list = Arrays.asList("apple", "banana", "cherry");
 list.forEach(item -> System.out.println(item));
 ```
 
-2. Stream API
+## 2. Stream API
 The Stream API allows you to process sequences of elements, such as collections, in a functional style. It supports operations like filtering, mapping, and reducing.
 
 ```java
@@ -39,7 +39,7 @@ int sum = numbers.stream()
 System.out.println("Sum of even numbers: " + sum);
 ```
 
-3. Optional Class
+## 3. Optional Class
 The Optional class is a container that may or may not contain a non-null value. It is used to avoid NullPointerException and to express the possibility of absence of a value explicitly.
 
 ```java
@@ -47,7 +47,7 @@ Optional<String> optional = Optional.of("Hello");
 optional.ifPresent(System.out::println);
 ```
 
-4. java.time Package (JSR-310)
+## ## 4. java.time Package (JSR-310)
 The java.time package provides a comprehensive API for date and time manipulation, including classes like LocalDate, LocalTime, LocalDateTime, and ZonedDateTime.
 
 ```java
@@ -57,7 +57,7 @@ Period age = Period.between(birthday, today);
 System.out.println("Age: " + age.getYears());
 ```
 
-5. Base64 Encoding and Decoding
+## 5. Base64 Encoding and Decoding
 Java 8 provides a new utility class for Base64 encoding and decoding.
 
 ```java
@@ -76,7 +76,7 @@ public class Main {
 }
 ```
 
-6. Functional Interfaces
+## 6. Functional Interfaces
 Functional interfaces are interfaces with a single abstract method, and they can be implemented using lambda expressions. Java 8 includes several built-in functional interfaces in the java.util.function package.
 
 ```java
@@ -88,7 +88,7 @@ MyFunctionalInterface instance = () -> System.out.println("Lambda expression");
 instance.myMethod();
 ```
 
-7. Method References
+## 7. Method References
 Method references provide a way to refer to methods without invoking them. They are compact and easy-to-read lambda expressions for methods.
 
 ```java
@@ -96,7 +96,7 @@ List<String> list = Arrays.asList("apple", "banana", "cherry");
 list.forEach(System.out::println);
 ```
 
-8. New Date and Time API
+## 8. New Date and Time API
 The new date and time API is thread-safe and more comprehensive compared to the old java.util.Date and java.util.Calendar classes.
 
 ```java
@@ -104,7 +104,7 @@ LocalDateTime now = LocalDateTime.now();
 System.out.println("Current Date and Time: " + now);
 ```
 
-9. Parallel Array Sorting
+## 9. Parallel Array Sorting
 Java 8 introduced a new method for parallel sorting of arrays.
 
 ```java
@@ -119,7 +119,7 @@ public class Main {
 }
 ```
 
-10. Default Methods in Interfaces
+## 10. Default Methods in Interfaces
 Interfaces can now have default methods, which provide default implementations. This helps in extending interfaces without breaking existing implementations.
 
 ```java
@@ -130,7 +130,7 @@ interface MyInterface {
 }
 ```
 
-11. Collectors class
+## 11. Collectors class
 The Collectors class in the Stream API provides various methods to collect stream elements into collections like lists, sets, or maps.
 
 ```java
@@ -141,7 +141,7 @@ List<String> filteredList = list.stream()
 System.out.println(filteredList);
 ```
 
-12. Nashorn JavaScript Engine
+## 12. Nashorn JavaScript Engine
 Java 8 includes a new JavaScript engine called Nashorn, which allows you to run JavaScript code directly on the Java Virtual Machine (JVM).
 
 ```java

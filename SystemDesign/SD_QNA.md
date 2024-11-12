@@ -1,3 +1,10 @@
+# System Design Practice
+
+[Machine Coding Practice](https://workat.tech/machine-coding)
+[Educative IO Cheatsheets](https://www.educative.io/cheatsheets)
+[Awesome System Design Resources](https://github.com/ashishps1/awesome-system-design-resources)
+
+
 ### How do you write SOLID code?
 
 **Ans:** 

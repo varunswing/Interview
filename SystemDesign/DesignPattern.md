@@ -1,6 +1,6 @@
 # Design Pattern
 
-## Creational Patterns
+## Creational Patterns   (First we create an object)
 
 **Purpose:** These patterns deal with object creation mechanisms, trying to create objects in a manner suitable for the situation. The emphasis is on how objects are created while hiding the instantiation logic.
 **Goal:** To make the system independent of how its objects are created, composed, and represented.
@@ -247,12 +247,12 @@ public class PrototypePatternDemo {
 }
 ```
 
-## Structural Patterns
+## Structural Patterns   (After creating we define structures)
 
 **Purpose:** These patterns deal with class and object composition. They are concerned with how classes and objects can be composed to form larger structures.
 **Goal:** To ensure that objects and classes can be organized and combined to form flexible, efficient, and scalable structures.
 
-### Adapter
+### Adapter.     (Nuts bolts, chargers, etc, Make a class adapt other by adding a layer)
 * Expanded Definition: The Adapter pattern allows incompatible interfaces to work together by converting one interface into another that the client expects. This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces.
 * Detailed Analogy: Think of a universal charger adapter that allows you to plug your electronic device into different types of electrical sockets around the world.
 Additional Code Example:
@@ -699,7 +699,7 @@ RealInternet: Represents the real object that performs the actual connection to 
 ProxyInternet: Acts as a proxy to control access to the real internet connection. It checks if the requested server is in the list of banned sites before allowing the connection.
 
 
-## Behavioral Patterns
+## Behavioral Pattern     (At Last we define behavior)
 
 **Purpose:** These patterns are concerned with communication between objects. They focus on how objects interact and how responsibility is divided among them.
 **Goal:** To help define how objects should communicate, increase flexibility in carrying out communication, and ensure good object collaboration.
@@ -979,7 +979,7 @@ public class MediatorPatternDemo {
 }
 ```
 
-### Observer
+### Observer  (Also called Pub/Sub, i.e. youtube subs notifications)
 * Expanded Definition: The Observer pattern defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
 * Detailed Analogy: Think of subscribing to a newsletter. When new content is published, subscribers are notified and receive updates automatically.
 Additional Code Example:
@@ -1116,7 +1116,7 @@ public class StatePatternDemo {
 }
 ```
 
-### Strategy
+### Strategy.      (Open/Closed Principle, i.e. sorting)
 * Expanded Definition: The Strategy pattern defines a family of algorithms, encapsulates each algorithm, and makes them interchangeable. It lets the algorithm vary independently from clients that use it.
 * Detailed Analogy: Think of sorting algorithms. You can use different strategies (algorithms) like bubble sort, quicksort, or merge sort depending on the context (size of data, performance requirements).
 Additional Code Example:

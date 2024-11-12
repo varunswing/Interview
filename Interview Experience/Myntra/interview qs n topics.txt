@@ -1,0 +1,39 @@
+1. https://walkccc.me/LeetCode/problems/124/#__tabbed_1_2
+
+2. https://www.geeksforgeeks.org/print-all-possible-paths-from-top-left-to-bottom-right-of-a-mxn-matrix/
+   https://www.geeksforgeeks.org/shortest-path-in-a-binary-maze/
+
+3. https://leetcode.com/discuss/interview-question/124998/design-a-data-structure-that-supports-insert-delete-search-and-getrandom-in-constant-time
+https://www.geeksforgeeks.org/design-a-data-structure-that-supports-insert-delete-search-and-getrandom-in-constant-time/
+
+4. https://interviewing.io/questions/reverse-nodes-in-k-group
+
+5. https://prepfortech.io/leetcode-solutions/wiggle-sort
+
+6. https://www.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1
+
+https://www.geeksforgeeks.org/add-1-number-represented-linked-list/
+
+7.https://leetcode.com/discuss/interview-question/algorithms/124582/given-two-lists-of-intervals-return-the-intervals-that-overlap-between-the-two-lists
+
+https://www.geeksforgeeks.org/merging-intervals/
+
+https://www.geeksforgeeks.org/find-a-pair-of-overlapping-intervals-from-a-given-set/
+
+8. https://www.geeksforgeeks.org/maximum-consecutive-repeating-character-string/
+
+9. https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/
+
+10. https://www.geeksforgeeks.org/detect-cycle-undirected-graph/
+
+11. https://walkccc.me/LeetCode/problems/324/#__tabbed_1_2
+
+12. https://walkccc.me/LeetCode/problems/117/#__tabbed_1_2
+
+13. https://www.geeksforgeeks.org/functional-vs-non-functional-requirements/
+
+14. https://www.geeksforgeeks.org/api-design-trends/#what-is-api-design
+
+https://www.geeksforgeeks.org/best-coding-practices-for-rest-api-design/
+
+https://chatgpt.com/c/670d099f-e8bc-8002-b740-460afe28be1d

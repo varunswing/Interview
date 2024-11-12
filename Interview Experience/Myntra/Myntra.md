@@ -9,7 +9,7 @@ word break 2
 
 house robber 2
 median on stream 
-jump game 2
+jump game 2 (farthest + end)
 
 
 
