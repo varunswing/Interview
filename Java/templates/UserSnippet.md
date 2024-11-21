@@ -1,3 +1,4 @@
+```json
 {
 	/*
     Place your snippets for java here. Each snippet is defined under a snippet name and has a prefix,
@@ -225,3 +226,4 @@
 		"description": "basic template"
 	}
 }
+```
