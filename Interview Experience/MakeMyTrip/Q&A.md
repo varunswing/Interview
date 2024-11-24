@@ -187,3 +187,104 @@ Be cautious:** Kafka’s performance may degrade if you have too many partitions
 Max Consumers per Group = Number of Partitions in the Topic.
 Extra Consumers (more than partitions) will remain idle but can help with fault tolerance.
 For more scaling, consider increasing the number of partitions or using multiple consumer groups.
+
+## Que 5. Print natural numbers, two threads one should print odd another should print even part, it should first print odd then even like from 1 to 10.
+
+To solve this problem, we can use two threads, one for printing odd numbers and another for printing even numbers. We need synchronization to ensure that the odd thread prints first, followed by the even thread, in a controlled alternating manner.
+
+We can achieve this using the `wait()` and `notify()` methods in Java for inter-thread communication. Here’s how it works:
+
+1. The odd thread prints an odd number, then signals the even thread to print the next even number.
+2. The even thread prints an even number, then signals the odd thread to continue with the next odd number.
+
+Here’s the Java code for this solution:
+
+```java
+class NumberPrinter {
+    private final int limit; // Limit up to which numbers should be printed
+    private boolean oddTurn = true; // Flag to alternate between odd and even printing
+
+    public NumberPrinter(int limit) {
+        this.limit = limit;
+    }
+
+    // Method for the odd thread to print numbers
+    public synchronized void printOdd() throws InterruptedException {
+        for (int i = 1; i <= limit; i += 2) {
+            // Wait until it's the odd thread's turn
+            while (!oddTurn) {
+                wait();
+            }
+            System.out.print(i + " "); // Print the odd number
+            oddTurn = false; // Set the turn to even
+            notify(); // Notify the even thread
+        }
+    }
+
+    // Method for the even thread to print numbers
+    public synchronized void printEven() throws InterruptedException {
+        for (int i = 2; i <= limit; i += 2) {
+            // Wait until it's the even thread's turn
+            while (oddTurn) {
+                wait();
+            }
+            System.out.print(i + " "); // Print the even number
+            oddTurn = true; // Set the turn to odd
+            notify(); // Notify the odd thread
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int limit = 10; // Print natural numbers up to this limit
+        NumberPrinter numberPrinter = new NumberPrinter(limit);
+
+        // Create the odd thread
+        Thread oddThread = new Thread(() -> {
+            try {
+                numberPrinter.printOdd();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        // Create the even thread
+        Thread evenThread = new Thread(() -> {
+            try {
+                numberPrinter.printEven();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        // Start the threads
+        oddThread.start();
+        evenThread.start();
+    }
+}
+```
+
+### Explanation
+
+1. **Shared `NumberPrinter` Class**:
+   - `limit`: Specifies the upper limit of numbers to print.
+   - `oddTurn`: A boolean flag to indicate whether it’s the odd thread’s turn or the even thread’s turn.
+
+2. **printOdd() and printEven()**:
+   - Both methods are synchronized to ensure that only one thread can access them at a time.
+   - `printOdd()` prints odd numbers up to the limit. After printing, it sets `oddTurn` to `false` and calls `notify()` to wake up the even thread.
+   - `printEven()` prints even numbers up to the limit. After printing, it sets `oddTurn` to `true` and calls `notify()` to wake up the odd thread.
+
+3. **Thread Creation and Execution**:
+   - Two threads are created, one for `printOdd()` and another for `printEven()`.
+   - Starting these threads will interleave odd and even number printing.
+
+### Output
+
+For `limit = 10`, the output will be:
+```
+1 2 3 4 5 6 7 8 9 10 
+```
+
+This approach ensures that the numbers are printed in the correct alternating sequence.
