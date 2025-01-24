@@ -1,4 +1,4 @@
-# Technical Interview at VoldMoney
+# Technical Interview at VoltMoney
 
 ## Ways to optimize db queries
 
