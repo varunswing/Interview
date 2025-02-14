@@ -205,11 +205,62 @@ go 1.21
 | `go fmt ./...` | Formats Go code according to Go style. |
 | `go vet ./...` | Reports potential issues in Go code. |
 
+## **8 `grpcurl -plaintext 127.0.0.1:8073 list`**
+### **📌 Purpose**: Shows a list of all registered gRPC services running on your server (127.0.0.1:8073).
+
+### **🔹 Syntax**
+```sh
+grpcurl -plaintext  <host:port> list
+```
+
+### **🔹 Example**
+```sh
+grpcurl -plaintext 127.0.0.1:8073 list
+```
+
+This output shows a **list of all registered gRPC services** running on your server (`127.0.0.1:8073`):
+
+1. **`grpc.health.v1.Health`** → Health check service (standard gRPC health checking).
+2. **`grpc.reflection.v1alpha.ServerReflection`** → Allows tools like `grpcurl` to discover services dynamically.
+3. **`protomodel.HybridSearchService`** → A custom gRPC service for handling hybrid search.
+4. **`reviewProto.ReviewService`** → A service related to reviews.
+5. **`searchProto.GetHotelMetaData`** → Likely fetches metadata about hotels.
+6. **`searchProto.QcSearch`** → Possibly a search service related to "QC".
+7. **`searchProto.SearchService`** → Another search-related service.
+
+
+## **9 `grpcurl -plaintext 127.0.0.1:8073 describe searchProto.SearchService`**
+
+### **📌 Purpose**: To see available RPC methods in searchProto.SearchService.
+
+### **🔹 Syntax**
+```sh
+grpcurl -plaintext  <host:port> describe <servicename>
+```
+
+### **🔹 Example**
+```sh
+grpcurl -plaintext 127.0.0.1:8073 describe searchProto.SearchService
+```
+
+This output shows a **available RPC methods in searchProto.SearchService** running on your server (`127.0.0.1:8073`):
+
+```sh
+searchProto.SearchService is a service:
+service SearchService {
+  rpc HybridSearch ( .searchProto.SearchRequest ) returns ( .searchProto.SearchResponse );
+  rpc HybridSearchStream ( .searchProto.SearchRequest ) returns ( stream .searchProto.SearchResponse );
+  rpc Search ( .searchProto.SearchRequest ) returns ( .searchProto.SearchResponse );
+  rpc SearchStream ( .searchProto.SearchRequest ) returns ( stream .searchProto.SearchResponse );
+}
+```sh
+
+
 ---
 
-## **🚀 Summary**
-| Command | Purpose |
-|---------|---------|
+## **🔹 Other Useful `go` Commands**
+| Command | Description |
+|---------|------------|
 | `go build -v` | Compiles Go programs and shows package names. |
 | `go mod vendor -v` | Moves dependencies to a `vendor/` folder. |
 | `go env` | Displays Go environment variables. |
@@ -217,3 +268,13 @@ go 1.21
 | `go clean -cache` | Clears only the **compiled cache**. |
 | `go mod tidy` | Removes unused dependencies. |
 | `go mod init <module>` | Initializes a **new Go module**. |
+| `grpcurl -plaintext 127.0.0.1:8073 list` | Shows a list of all registered gRPC services running on your server |
+| `grpcurl -plaintext 127.0.0.1:8073 describe searchProto.SearchService` | Shows available RPC methods in searchProto.SearchService
+| `go get <package>` | Downloads and installs a Go package. |
+| `go list -m all` | Lists all installed Go modules. |
+| `go mod edit -replace old=new` | Replaces a dependency with a local version. |
+| `go test ./...` | Runs all tests in the project. |
+| `go fmt ./...` | Formats Go code according to Go style. |
+| `go vet ./...` | Reports potential issues in Go code. |
+
+---
