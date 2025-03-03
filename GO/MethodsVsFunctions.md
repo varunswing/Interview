@@ -104,3 +104,62 @@ func main() {
 | ✅ Independent | ✅ Tied to a type |
 | ✅ Can be called anywhere | ✅ Called on a struct instance |
 | ❌ Cannot modify struct fields | ✅ Can modify struct (with `*receiver`) |
+
+## Here are different types of function prototypes in Go:
+
+### **Basic Function**
+```go
+func functionName()
+```
+(No parameters, no return value)
+
+### **Function with Parameters**
+```go
+func functionName(param1 int, param2 string)
+```
+(Takes an `int` and a `string` as input)
+
+### **Function with Return Value**
+```go
+func functionName() int
+```
+(Returns an `int`)
+
+### **Function with Multiple Return Values**
+```go
+func functionName() (int, string, error)
+```
+(Returns an `int`, a `string`, and an `error`)
+
+### **Function with a Struct Receiver (Method)**
+```go
+func (s *StructName) functionName(param int) string
+```
+(Method bound to `StructName`, takes an `int`, returns a `string`)
+
+### **Function with Variadic Parameters**
+```go
+func functionName(values ...int)
+```
+(Accepts a variable number of `int` values)
+
+### **Anonymous Function**
+```go
+func() {
+    fmt.Println("Hello, Go!")
+}()
+```
+(Self-executing function with no name)
+
+### **Higher-Order Function (Function as Parameter)**
+```go
+func functionName(callback func(int) string) 
+```
+(Takes a function as an argument)
+
+### **Function Returning Another Function**
+```go
+func functionName() func(int) string
+```
+(Returns a function that takes an `int` and returns a `string`)
+
