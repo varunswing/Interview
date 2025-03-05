@@ -188,7 +188,31 @@ Each subfolder follows a modular approach to separate concerns.
 
 ---
 
+Here’s a table summarizing the Go project folders and their purposes:  
+
+| **Folder Name**       | **Purpose** | **Example Files / Functionality** |
+|----------------------|------------|----------------------------------|
+| `controllers/`       | Handles API requests and responses. | `hotelController.go`: Manages hotel-related APIs. |
+| `converter/`        | Converts data between different formats. | Converts API responses to internal models. |
+| `dao/`              | Manages database interactions. | `hotelDAO.go`: Fetches hotel details from the database. |
+| `dataStore/`        | Handles caching and storage interactions. | `hotelDataStore.go`: Uses Redis/Aerospike for caching. |
+| `errors/`           | Defines custom error messages and codes. | `errors.go`: Contains `ErrHotelNotFound`. |
+| `externalservice/`  | Manages external API calls. | `hotelAPI.go`: Calls third-party hotel data providers. |
+| `formatter/`        | Formats data for API responses. | Converts raw DB results to JSON response. |
+| `handler/`          | Implements business logic. | Applies filters, transformations, and data aggregation. |
+| `helper/`           | Provides utility functions. | `dateHelper.go`: Functions for date formatting. |
+| `interceptors/`     | Middleware for request modification and logging. | Logs API requests before reaching controllers. |
+| `internalservice/`  | Contains reusable internal service logic. | Validates hotel availability across APIs. |
+| `kafkaproducer/`    | Handles Kafka message publishing. | Sends hotel booking events to Kafka. |
+| `models/`          | Defines data structures (structs). | `hotelModel.go`: Defines `Hotel` struct with `Name`, `Price`, etc. |
+| `routers/`         | Defines API endpoints and routing. | Maps `/hotels` to `hotelController.GetHotels`. |
+| `setups/`          | Initializes services like DB, cache, and logging. | `setup.go`: Initializes Redis, DB, and configurations. |
+| `translator/`      | Handles language translations. | Converts API responses into multiple languages. |
+| `utils/`           | Contains general-purpose utilities. | `stringUtils.go`: Functions for string operations. |
+| `validator/`       | Validates API request parameters. | Checks if hotel search queries have valid input. |
+
 ## **📌 Conclusion**
+
 This **Go backend project** follows a **well-structured, modular approach**. Each folder is responsible for **specific functionality**, making the code **scalable & maintainable**.
 
-Would you like a deeper dive into any specific module? 🚀
+---
