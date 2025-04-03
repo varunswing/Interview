@@ -202,6 +202,7 @@ go 1.21
 | `go list -m all` | Lists all installed Go modules. |
 | `go mod edit -replace old=new` | Replaces a dependency with a local version. |
 | `go test ./...` | Runs all tests in the project. |
+| `go test -cover ./...` | Runs all tests with coverage |
 | `go fmt ./...` | Formats Go code according to Go style. |
 | `go vet ./...` | Reports potential issues in Go code. |
 
@@ -274,6 +275,7 @@ service SearchService {
 | `go list -m all` | Lists all installed Go modules. |
 | `go mod edit -replace old=new` | Replaces a dependency with a local version. |
 | `go test ./...` | Runs all tests in the project. |
+| `go test -cover ./...` | Runs all tests with coverage |
 | `go fmt ./...` | Formats Go code according to Go style. |
 | `go vet ./...` | Reports potential issues in Go code. |
 
