@@ -1,4 +1,4 @@
-Sure — let's go deep but stay clear and structured:  
+Let's go deep but stay clear and structured:  
 
 ---
 
