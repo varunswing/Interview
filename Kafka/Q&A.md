@@ -3830,5 +3830,3 @@ order.events
 - **CDC topics** are useful when you need **real-time database synchronization**.
 - **Event-driven topics** are best for **microservices communication**.
 - **Choose the topic type** based on **your business needs**.
-
-Would you like a **detailed Kafka setup with CDC topics**, or a hands-on **Kafka Connect example?** 🚀
