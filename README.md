@@ -1,16 +1,25 @@
-# All about My Java Backend Interview Preparation through MD files
+# Java Backend Interview Preparation Notes
 
-## Topic covered
+## 📚 Topics Covered
 
-* DSA
-* Java
-* Spring Boot
-* MySql
-* System Design
-* LLD
-* HLD
-* RoadMaps
-* Interview Experience
+- Data Structures & Algorithms (DSA)
+- Java (Core + Advanced)
+- Spring Boot
+- MySQL
+- System Design
+- Low-Level Design (LLD)
+- High-Level Design (HLD)
+- Roadmaps
+- Interview Experiences
 
- 
-> To know how to create markdown language files visit : [Learn MarkDown](https://www.geeksforgeeks.org/what-is-readme-md-file/)
+## ✅ Things to Revise
+
+- Practice 10 LLD questions
+- Common Design Patterns
+- Key topics from resume
+- AWS, Cloud Fundamentals
+- System Design Concepts
+
+---
+
+> 🔗 [Learn Markdown Syntax](https://www.geeksforgeeks.org/what-is-readme-md-file/)
